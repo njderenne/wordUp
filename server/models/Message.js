@@ -23,7 +23,7 @@ const messageSchema = new Schema(
             type: String,
             required: true
         },
-        receiver: {
+        channel: {
             type: String,
             required: true
         }
