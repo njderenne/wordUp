@@ -18,6 +18,14 @@ const messageSchema = new Schema(
         email: {
             type: String,
             required: true
+        },
+        sender: {
+            type: String,
+            required: true
+        },
+        channel: {
+            type: String,
+            required: true
         }
     }
 )

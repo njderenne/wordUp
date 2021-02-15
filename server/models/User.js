@@ -30,6 +30,12 @@ const userSchema = new Schema(
         type: Schema.Types.ObjectId,
         ref: 'User'
       }
+    ],
+    channels: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Channel'
+      }
     ]
   },
   {

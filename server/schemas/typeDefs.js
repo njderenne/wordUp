@@ -7,6 +7,7 @@ const typeDefs = gql`
         lastName: String
         email: String
         friends: [User]
+        channels: [Channel]
     }
 
     type Message {
@@ -14,6 +15,13 @@ const typeDefs = gql`
         messageText: String
         createdAt: String
         email: String
+    }
+
+    type Channel {
+        _id: ID!
+        name: String
+        createdAt: String
+        createdBy: [User]
     }
     
     type Auth {
@@ -25,6 +33,7 @@ const typeDefs = gql`
         me: User
         user: User
         users: [User]
+        channels: [Channel]
     }
 
     type Mutation {
