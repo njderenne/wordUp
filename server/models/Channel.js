@@ -14,9 +14,15 @@ const channelSchema = new Schema(
             get: timestamp => dateFormat(timestamp)
         },
         createdBy: {
-            type: Schema.Types.ObjectId,
-            ref: 'User'
-        }
+            type: String,
+            required: true
+        },
+        participants: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'User'
+            }
+        ]
     }
 );
 
