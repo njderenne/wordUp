@@ -1,5 +1,5 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Message } = require('../models');
+const { User, Message, Channel } = require('../models');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
@@ -17,12 +17,19 @@ const resolvers = {
           return User.find()
               .select('-__v -password')
               .populate('friends')
-              .populate('thoughts');
+              .populate('channels');
+        },
+        channels: async () => {
+            return Channel.find()
+                .select('-__v -password');
+
         },
         me: async (parent, args, context) => {
             if (context.user) {
               const userData = await User.findOne({ _id: context.user._id })
-                .select('-__v -password');
+                .select('-__v -password')
+                .populate('friends')
+                .populate('channels');
           
               return userData;
             }

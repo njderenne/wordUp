@@ -20,7 +20,7 @@ const typeDefs = gql`
     type Channel {
         _id: ID!
         name: String
-        createdAt: Date
+        createdAt: String
         createdBy: [User]
     }
     
