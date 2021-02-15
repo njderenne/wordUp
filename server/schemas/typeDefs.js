@@ -6,6 +6,14 @@ const typeDefs = gql`
         firstName: String
         lastName: String
         email: String
+        friends: [User]
+    }
+
+    type Message {
+        _id: ID
+        messageText: String
+        createdAt: String
+        email: String
     }
     
     type Auth {
@@ -21,6 +29,8 @@ const typeDefs = gql`
     type Mutation {
         addUser(firstName: String!, lastName: String!, email: String!, password: String!): Auth
         login(email: String!, password: String!): Auth
+        addFriend(friendId: ID!): User
+        addMessage(messageText: String!): Message
     }
 `;
 
