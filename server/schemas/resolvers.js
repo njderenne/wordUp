@@ -82,6 +82,13 @@ const resolvers = {
           }
       
           throw new AuthenticationError('You need to be logged in!');
+        },
+        addChannel: async (parent, args, context) => {
+            if(context.user) {
+                const channel = await Channel.create({ ...args, createdBy: context.user.email });
+                return channel
+            }
+            throw new AuthenticationError('You need to be logged in!');
         }
     }
 };
