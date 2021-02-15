@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 const dateFormat = require('../utils/dateFormat');
+const messageSchema = require('./Message');
 
 const channelSchema = new Schema(
     {
@@ -22,7 +23,8 @@ const channelSchema = new Schema(
                 type: Schema.Types.ObjectId,
                 ref: 'User'
             }
-        ]
+        ],
+        messages: [messageSchema]
     }
 );
 

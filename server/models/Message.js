@@ -22,14 +22,14 @@ const messageSchema = new Schema(
         sender: {
             type: String,
             required: true
-        },
-        channel: {
-            type: String,
-            required: true
         }
+        // channel: {
+        //     type: String,
+        //     required: true
+        // }
     }
 )
 
-const Message = mongoose.model('Message', messageSchema);
+//const Message = mongoose.model('Message', messageSchema);
 
-module.exports = Message;
+module.exports = messageSchema;
