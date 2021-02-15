@@ -1,4 +1,5 @@
 const { AuthenticationError } = require('apollo-server-express');
+const { user } = require('../config/connection');
 const { User, Message, Channel } = require('../models');
 const { signToken } = require('../utils/auth');
 
@@ -82,6 +83,24 @@ const resolvers = {
           }
       
           throw new AuthenticationError('You need to be logged in!');
+        },
+        addChannel: async (parent, args, context) => {
+            if(context.user) {
+                const channel = await Channel.create({ ...args, createdBy: context.user.email, participants: context.user._id });
+                return channel
+            }
+            throw new AuthenticationError('You need to be logged in!');
+        },
+        addParticipant: async (parent, args, context) => {
+            if(context.user) {
+                const updatedChannel = await Channel.findByIdAndUpdate(
+                    {_id: args._id},
+                    { $addToSet: { participants: args.participants } },
+                    { new: true }
+                );
+                return updatedChannel;
+            }
+            throw new AuthenticationError('You need to be logged in!');
         }
     }
 };
