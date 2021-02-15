@@ -4,6 +4,7 @@ import { ApolloProvider } from '@apollo/react-hooks';
 import ApolloClient from 'apollo-boost';
 
 import Login from './pages/Login';
+import Signup from './pages/Signup';
 
 const client = new ApolloClient({
   request: (operation) => {
