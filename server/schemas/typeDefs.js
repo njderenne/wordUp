@@ -33,9 +33,10 @@ const typeDefs = gql`
 
     type Query {
         me: User
-        user: User
+        user(email: String): User
         users: [User]
         channels: [Channel]
+        channel: Channel
     }
 
     type Mutation {
@@ -44,7 +45,7 @@ const typeDefs = gql`
         addFriend(friendId: ID!): User
         addMessage(messageText: String, channelId: String): Channel
         addChannel(name: String!): Channel
-        addParticipant(_id: String, participants: String): Channel
+        addParticipant(_id: String, participants: ID): Channel
         changeChannelName(name: String, channelId: String): Channel
     }
 `;

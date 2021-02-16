@@ -36,7 +36,12 @@ const resolvers = {
             }
           
             throw new AuthenticationError('Not logged in');
-          }
+        },
+        channel: async (parent, { channelId }, context) => {
+            if(context.user) {
+                return Channel.findOne({ _id: channelId });
+            }
+        }
     },
     Mutation: {
         addUser: async (parent, args) => {
@@ -89,6 +94,12 @@ const resolvers = {
         addChannel: async (parent, args, context) => {
             if(context.user) {
                 const channel = await Channel.create({ ...args, createdBy: context.user.email, participants: context.user._id });
+                
+                const updatedUser = await User.findByIdAndUpdate(
+                    { _id: context.user._id },
+                    { $addToSet: { channels: channel._id } },
+                    { new: true }
+                );
                 return channel
             }
             throw new AuthenticationError('You need to be logged in!');
@@ -99,6 +110,11 @@ const resolvers = {
                     {_id: args._id},
                     { $addToSet: { participants: args.participants } },
                     { new: true }
+                );
+                const updatedUser = await User.findByIdAndUpdate(
+                    { _id: args.participants },
+                    { $addToSet: { channels: args._id } },
+                    { new: true}
                 );
                 return updatedChannel;
             }
