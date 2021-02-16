@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 const dateFormat = require('../utils/dateFormat');
 const { Schema } = mongoose;
-const bcrypt = require('bcrypt');
 
 const messageSchema = new Schema(
     {
@@ -23,13 +22,7 @@ const messageSchema = new Schema(
             type: String,
             required: true
         }
-        // channel: {
-        //     type: String,
-        //     required: true
-        // }
     }
 )
-
-//const Message = mongoose.model('Message', messageSchema);
 
 module.exports = messageSchema;

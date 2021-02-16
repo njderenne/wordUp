@@ -1,5 +1,4 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { user } = require('../config/connection');
 const { User, Message, Channel } = require('../models');
 const { signToken } = require('../utils/auth');
 
@@ -107,7 +106,7 @@ const resolvers = {
         addParticipant: async (parent, args, context) => {
             if(context.user) {
                 const updatedChannel = await Channel.findByIdAndUpdate(
-                    {_id: args._id},
+                    {_id: args.channelId},
                     { $addToSet: { participants: args.participants } },
                     { new: true }
                 );

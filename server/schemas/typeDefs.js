@@ -11,14 +11,15 @@ const typeDefs = gql`
     }
 
     type Message {
-        _id: String
+        _id: ID
         messageText: String
         createdAt: String
         email: String
+        sender: [User]
     }
 
     type Channel {
-        _id: String
+        _id: ID
         name: String
         createdAt: String
         createdBy: String
@@ -43,10 +44,11 @@ const typeDefs = gql`
         addUser(firstName: String!, lastName: String!, email: String!, password: String!): Auth
         login(email: String!, password: String!): Auth
         addFriend(friendId: ID!): User
-        addMessage(messageText: String, channelId: String): Channel
+        addMessage(messageText: String, channelId: ID): Channel
+        deleteMessage(messageId: ID channelId: ID): Channel
         addChannel(name: String!): Channel
-        addParticipant(_id: String, participants: ID): Channel
-        changeChannelName(name: String, channelId: String): Channel
+        addParticipant(channelId: ID, participants: ID): Channel
+        changeChannelName(name: String, channelId: ID): Channel
     }
 `;
 
