@@ -46,10 +46,10 @@ function Signup(props) {
                         <input type="email" name="email" placeholder="Email" onChange={handleChange} className="focus:ring-indigo-500 focus: border-indigo-500 mx-auto mb-1.5 flex-1 block w-5/6 rounded sm:text-sm border-gray-300" />
                     </div>
                     <div>
-                        <input type="text" name="password" placeholder="Password" onChange={handleChange} className="focus:ring-indigo-500 focus: border-indigo-500 mx-auto mb-1.5 flex-1 block w-5/6 rounded sm:text-sm border-gray-300" />
+                        <input type="password" name="password" placeholder="Password" onChange={handleChange} className="focus:ring-indigo-500 focus: border-indigo-500 mx-auto mb-1.5 flex-1 block w-5/6 rounded sm:text-sm border-gray-300" />
                     </div>
                     <div>
-                        <input type="text" name="rePassword" placeholder="Confirm Password" onChange={handleChange} className="focus:ring-indigo-500 focus: border-indigo-500 mx-auto mb-1.5 flex-1 block w-5/6 rounded sm:text-sm border-gray-300" />
+                        <input type="password" name="rePassword" placeholder="Confirm Password" onChange={handleChange} className="focus:ring-indigo-500 focus: border-indigo-500 mx-auto mb-1.5 flex-1 block w-5/6 rounded sm:text-sm border-gray-300" />
                     </div>
                     <button type="submit" className="w-10/12 mx-auto flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10">Sign Up!</button>
                 </div>

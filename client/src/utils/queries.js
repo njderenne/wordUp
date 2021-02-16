@@ -61,3 +61,24 @@ export const QUERY_USER = gql`
         }
     }
 `;
+
+// export const QUERY_CHANNELS = gql`
+//     query channels{
+//             channels{
+//                 _id
+//                 name
+//                 participants{
+//                     _id
+//                     firstName
+//                     lastName
+//                 }
+//                 messages{
+//                     _id
+//                     messageText
+//                     createdAt
+//                     email
+//                 }
+//             }
+//         }
+// `;
+
