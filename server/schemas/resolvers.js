@@ -103,6 +103,17 @@ const resolvers = {
                 return updatedChannel;
             }
             throw new AuthenticationError('You need to be logged in!');
+        },
+        changeChannelName: async (parent, { name, channelId }, context) => {
+            if (context.user) {
+                const updatedChannel = await Channel.findByIdAndUpdate(
+                    { _id: channelId },
+                    { name: name },
+                    { new: true }
+                );
+                return updatedChannel;
+            }
+            throw new AuthenticationError('You need to be logged in!');
         }
     }
 };

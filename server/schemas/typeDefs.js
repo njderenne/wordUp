@@ -45,6 +45,7 @@ const typeDefs = gql`
         addMessage(messageText: String, channelId: String): Channel
         addChannel(name: String!): Channel
         addParticipant(_id: String, participants: String): Channel
+        changeChannelName(name: String, channelId: String): Channel
     }
 `;
 
