@@ -112,7 +112,7 @@ const resolvers = {
                 );
                 const updatedUser = await User.findByIdAndUpdate(
                     { _id: args.participants },
-                    { $addToSet: { channels: args._id } },
+                    { $addToSet: { channels: args.channelId } },
                     { new: true}
                 );
                 return updatedChannel;
