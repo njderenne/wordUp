@@ -83,8 +83,19 @@ const resolvers = {
             if(context.user) {
                 const updatedChannel = await Channel.findByIdAndUpdate(
                     { _id: channelId },
-                    { $push: { messages: { messageText, email: context.user.email } } },
+                    { $push: { messages: { messageText, email: context.user.email, sender: context.user.firstName} } },
                     { new: true }
+                );
+                return updatedChannel;
+            }
+            throw new AuthenticationError('You need to be logged in!');
+        },
+        deleteMessage: async (parent, { channelId, messageId }, context) => {
+            if(context.user) {
+                const updatedChannel = await Channel.findOneAndUpdate(
+                    {_id: channelId },
+                    { $pull: { messages: { _id: messageId } } },
+                    { new: true}
                 );
                 return updatedChannel;
             }
@@ -92,7 +103,9 @@ const resolvers = {
         },
         addChannel: async (parent, args, context) => {
             if(context.user) {
-                const channel = await Channel.create({ ...args, createdBy: context.user.email, participants: context.user._id });
+                const {firstName, lastName} = context.user;
+                const fullName = `${firstName} ${lastName}`;
+                const channel = await Channel.create({ ...args, createdBy: fullName, participants: context.user._id });
                 
                 const updatedUser = await User.findByIdAndUpdate(
                     { _id: context.user._id },
