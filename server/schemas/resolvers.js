@@ -93,7 +93,7 @@ const resolvers = {
         deleteMessage: async (parent, { channelId, messageId }, context) => {
             if(context.user) {
                 const updatedChannel = await Channel.findOneAndUpdate(
-                    {_id: channelId },
+                    { _id: channelId },
                     { $pull: { messages: { _id: messageId } } },
                     { new: true}
                 );
@@ -113,6 +113,14 @@ const resolvers = {
                     { new: true }
                 );
                 return channel
+            }
+            throw new AuthenticationError('You need to be logged in!');
+        },
+        removeChannel: async (parent, { channelId }, context) => {
+            if(context.user) {
+                const channel = await Channel.findOneAndDelete({_id: channelId});
+                
+                return channel;
             }
             throw new AuthenticationError('You need to be logged in!');
         },

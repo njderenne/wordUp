@@ -47,6 +47,7 @@ const typeDefs = gql`
         addMessage(messageText: String!, channelId: ID!): Channel
         deleteMessage(messageId: ID!, channelId: ID!): Channel
         addChannel(name: String!): Channel
+        removeChannel(channelId: ID!): Channel
         addParticipant(channelId: ID!, participants: ID!): Channel
         changeChannelName(name: String!, channelId: ID!): Channel
     }
