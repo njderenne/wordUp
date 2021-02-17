@@ -36,13 +36,11 @@ function Sidebar() {
                     <p className="text-lg font-bold text-gray-900">Ben Kohlman, Andy Harris</p>
                 </div>
             </div>
-            <div className="absolute bottom-0 border-t-4 border-black">
-                <div className="flex">
-                    <img src="../../../public/avatar.png" default />
-                    <p>Test User One</p>
-                </div>
-                <div>
-                    <p>Status: Online</p>
+            <div className="fixed container bottom-0 w-full border-t-4 border-black p-6">
+                <div className="mx-auto justify-center">
+                    <img className="float-right" src="../../../public/avatar.png" default />
+                    <p className="text-lg font-bold text-gray-900">Test User One</p>
+                    <p className="text-lg font-bold text-gray-900">Status: Online</p>
                 </div>
             </div>
         </div>
