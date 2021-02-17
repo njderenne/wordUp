@@ -4,19 +4,19 @@ import React, { useEffect } from 'react';
 
 function Conversation() {
     return (
-        <div className="">
+        <div className="h-screen grid grid-flow-row grid-rows-6">
             <div>
-                <p>
+                <p className="block m-2 p-2 text-xl font-semibold rounded-full bg-gray-200 w-max items-center justify-center">
                     Hey, what's up?
                 </p>
-                <p>
+                <p className="block m-2 p-2 text-xl font-semibold rounded-full bg-purple-600 items-center justify-center">
                     Playing some P5R, just about to fight the last boss. Gonna platinum this game!
                 </p>
             </div>
             <div>
-                <div className="flex object-none object-bottom">
+                <div className="m-2 flex fixed bottom-0 w-8/12">
                     <input className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border-2 border-black rounded-md" />
-                    <button>
+                    <button className="rounded-lg bg-green-500 border-black border-2 w-auto text-xl font-semibold p-2">
                         Send
                     </button>
                 </div>
