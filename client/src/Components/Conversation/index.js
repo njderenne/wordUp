@@ -1,8 +1,32 @@
-import React, { useEffect } from 'react';
-// import { useQuery } from '@apollo/react-hooks';
-// import { useStoreContext } from '../../utils/GlobalState';
+import React, { useState } from 'react';
+import { useMutation } from '@apollo/react-hooks';
+import { ADD_CHANNEL, ADD_MESSAGE } from '../../utils/mutations';
 
 function Conversation() {
+    const [convoState, setConvoState] = useState({ createdBy: '', messageText: '', createdAt: '' })
+    const [addMessage] = useMutation(ADD_MESSAGE);
+
+    const handleMessageSubmit = async event => {
+        event.preventDefault();
+        const mutationResponse = addMessage({
+            variables: {
+                createdBy: convoState.createdBy, messageText: convoState.messageText, createdAt: convoState.createdAt
+            }
+        });
+        const display = mutationResponse.data.addMessage;
+        console.log(display);
+        console.log(useState);
+    };
+
+    const handleChange = event => {
+        const { name, value } = event.target;
+        setConvoState({
+            ...convoState,
+            [name]: value
+        });
+    };
+
+
     return (
         <div>
             <div>
@@ -15,7 +39,7 @@ function Conversation() {
             </div>
             <div>
                 <div className="flex object-none object-bottom">
-                    <input className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border-2 border-black rounded-md" />
+                    <input name="messageText" onChange={handleChange} className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border-2 border-black rounded-md" />
                     <button>
                         Send
                     </button>
