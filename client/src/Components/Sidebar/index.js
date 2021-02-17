@@ -1,6 +1,30 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useQuery } from '@apollo/react-hooks';
+import { QUERY_CHANNELS } from '../../utils/queries';
+import { useStoreContext } from '../../utils/GlobalState';
+import { UPDATE_CHANNEL } from '../../utils/actions';
+
 
 function Sidebar() {
+    // const [state, dispatch] = useStoreContext();
+    // const { channels } = state;
+    const { loading, data } = useQuery(QUERY_CHANNELS);
+    let channels;
+
+    if(data) {
+        channels = data.channels
+    } 
+
+    // useEffect(() => {
+    //     if (data) {
+    //         dispatch({
+    //             type: UPDATE_CHANNEL,
+    //             channels: data.channels
+    //         });
+
+    //     } 
+    // })
+
     return (
         <div className="bg-yellow-200 bg-transparent relative">
             <div className="border-b-4 border-black">

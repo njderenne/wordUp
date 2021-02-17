@@ -1,11 +1,11 @@
 import { useReducer } from 'react';
 import {
-    SELECT_CHANNEL
+    UPDATE_CHANNEL
 } from './actions';
 
 export const reducer = (state, action) => {
     switch (action.type) {
-        case SELECT_CHANNEL:
+        case UPDATE_CHANNEL:
             return {
                 ...state,
                 channels: [...action.channels]
