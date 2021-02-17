@@ -2,7 +2,7 @@ import React from 'react';
 
 function Sidebar() {
     return (
-        <div classname="bg-yellow-200 bg-transparent relative">
+        <div className="bg-yellow-200 bg-transparent relative">
             <div className="border-b-4 border-black">
                 <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Conversations</h2>
             </div>

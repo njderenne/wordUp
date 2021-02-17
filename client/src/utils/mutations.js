@@ -23,7 +23,7 @@ export const ADD_USER = gql`
     `;
 
 export const ADD_MESSAGE = gql`
-    mutation addMessage($channelId: String, $messageText: String) {
+    mutation addMessage($channelId: ID!, $messageText: String!) {
         addMessage(channelId: $channelId, messageText: $messageText) {
             _id
             name
@@ -61,7 +61,7 @@ export const ADD_FRIEND = gql`
     `;
 
 export const ADD_PARTICIPANT = gql` 
-    mutation addParticipant($channelId: ID, $participants: ID) {
+    mutation addParticipant($channelId: ID!, $participants: ID!) {
         addParticipant(channelId: $channelId, participants: $participants) {
             _id
             name

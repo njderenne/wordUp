@@ -1,7 +1,7 @@
 import React, { createContext, useContext } from 'react';
 import { useChatReducer } from './reducers';
-const ChatContext = createContext();
-const { Provider } = ChatContext;
+const StoreContext = createContext();
+const { Provider } = StoreContext;
 
 
 const ChannelProvider = ({ value = [], ...props}) => {
@@ -14,5 +14,8 @@ const ChannelProvider = ({ value = [], ...props}) => {
     
 };
 
-const useChatReducer
+const useStoreContext = () => {
+    return useContext(StoreContext);
+};
 
+export { ChannelProvider, useStoreContext };
