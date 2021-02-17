@@ -6,6 +6,7 @@ import ApolloClient from 'apollo-boost';
 import Dashboard from './pages/Dashboard';
 import Login from './pages/Login';
 import Signup from "./pages/Signup";
+import { ChannelProvider } from "./utils/GlobalState";
 
 const client = new ApolloClient({
   request: (operation) => {
@@ -23,11 +24,13 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <Router>
-        <Switch>
-          <Route exact path="/" component={Signup} />
-          <Route exact path="/login" component={Login} />
-          <Route exact path="/dashboard" component={Dashboard} />
-        </Switch>
+        <ChannelProvider>
+          <Switch>
+            <Route exact path="/" component={Signup} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/dashboard" component={Dashboard} />
+          </Switch>
+        </ChannelProvider>
       </Router>
     </ApolloProvider>
   );
