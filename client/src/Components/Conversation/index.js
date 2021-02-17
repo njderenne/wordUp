@@ -4,7 +4,7 @@ import React, { useEffect } from 'react';
 
 function Conversation() {
     return (
-        <div>
+        <div className="">
             <div>
                 <p>
                     Hey, what's up?
