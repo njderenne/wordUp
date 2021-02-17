@@ -11,7 +11,7 @@ function Conversation() {
         console.log("start of message submit");
         const mutationResponse = addMessage({
             variables: {
-                createdBy: convoState.createdBy, messageText: convoState.messageText, channelId: "602c9b5d28bfe1469c1d68a8"
+                createdBy: convoState.createdBy, messageText: convoState.messageText, channelsId: "602c9b5d28bfe1469c1d68a8"
             }
         });
        

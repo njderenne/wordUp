@@ -8,7 +8,7 @@ import { UPDATE_CHANNEL } from '../../utils/actions';
 function Sidebar() {
     const [state, dispatch] = useStoreContext();
     // const { channels } = state;
-    const { loading, data } = useQuery(QUERY_CHANNELS);
+    const { loading, data } = useQuery(QUERY_ME);
     // const { userData } = useQuery(QUERY_ME);
     let channels;
 
