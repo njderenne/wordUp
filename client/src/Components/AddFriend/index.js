@@ -1,25 +1,27 @@
-import React from 'react';
-import { useLazyQuery } from '@apollo/react-hooks';
-import Auth from '../../utils/auth';
+import React, { useEffect } from 'react';
+import { useQuery } from '@apollo/react-hooks';
+import { useStoreContext } from '../../utils/GlobalState'
 import { TOGGLE_FRIENDS, GET_FRIENDS } from '../../utils/actions';
-import { QUERY_USERS } from '../../utils/queries';
+import { QUERY_USER } from '../../utils/queries';
+import { idbPromise } from '../../utils/helpers'
 
 function AddFriend() {
     const [state, dispatch] = useStoreContext();
 
-    const { loading, data } = useQuery(QUERY_USERS)
+    const { loading, data } = useQuery(QUERY_USER)
 
     useEffect(() => {
         if(data) {
             dispatch({
                 type: GET_FRIENDS,
-                friends: data.friends
+                friends: data.user.friends
             });
-            data.friends.forEach((friend) => {
-                idbPromise('firneds', 'put', friend);
+            console.log(`Line 19: ${JSON.stringify(data)}`)
+            data.user.friends.forEach((friend) => {
+                idbPromise('friends', 'put', friend);
             })
         }     else if(!loading) {
-            idbPromise('channels', 'get').then((friends) => {
+            idbPromise('friends', 'get').then((friends) => {
                 dispatch({
                     type: GET_FRIENDS,
                     friends: friends
@@ -28,15 +30,16 @@ function AddFriend() {
         }
     }, [data, loading, dispatch]);
 
+
     return(
         <div>
             <div>
-                {state.friends.map(friend => (
-                    <p>{friend.firstName} {friend.lastName}</p>
-                ))}
+            {state.friends.map(friend => (
+                <p>{friend.firstName} {friend.lastName}</p>
+                 ))}
             </div>
         </div>
     )
 }
 
-export default AddFriend
+export default AddFriend;

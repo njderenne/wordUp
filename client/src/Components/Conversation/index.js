@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/react-hooks';
 import { ADD_CHANNEL, ADD_MESSAGE } from '../../utils/mutations';
+import AddFriend from '../AddFriend'
 
 function Conversation() {
     const [convoState, setConvoState] = useState({ createdBy: '', messageText: '', channelId: '' })
@@ -45,7 +46,7 @@ function Conversation() {
                         Send
                     </button>
                     <button className="rounded-lg bg-green-500 border-black border-2 w-auto text-xl font-semibold p-2">
-                        Add Friend
+                        <AddFriend />
                     </button>
                 </div>
             </div>
