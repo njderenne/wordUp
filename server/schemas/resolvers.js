@@ -4,6 +4,7 @@ const { User, Message, Channel } = require('../models');
 const { signToken } = require('../utils/auth');
 const pubsub = new PubSub();
 const MESSAGE_ADDED = 'MESSAGE_ADDED';
+const CHANNEL_ADDED = 'CHANNEL_ADDED';
 
 const resolvers = {
     Query: {
@@ -133,6 +134,8 @@ const resolvers = {
                 const fullName = `${firstName} ${lastName}`;
                 const channel = await Channel.create({ ...args, createdBy: fullName, participants: context.user._id });
 
+                await pubsub.publish(CHANNEL_ADDED, {channelAdded: channel } );
+
                 const updatedUser = await User.findByIdAndUpdate(
                     { _id: context.user._id },
                     { $addToSet: { channels: channel._id } },
@@ -201,6 +204,12 @@ const resolvers = {
             //need to verify functionality prior to adding { withFilter }
             subscribe: () => pubsub.asyncIterator([MESSAGE_ADDED])
         },
+        channelAdded: {
+            //this is getting data from the addChannel mutation above
+            //this should refresh with every sent message regardless of associated channel
+            //need to verify functionality prior to adding { withFilter }
+            subscribe: () => pubsub.asyncIterator([CHANNEL_ADDED])
+        }
     }
 };
 
