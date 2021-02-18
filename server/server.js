@@ -11,6 +11,16 @@ const app = express();
 const server = new ApolloServer({
   typeDefs,
   resolvers,
+  subscriptions: {
+      //is path required to be '/subscriptions'?
+      path: '/subscriptions',
+      onConnect: (connectionParams, webSocket, context) => {
+          console.log('Client connected');
+      },
+      onDisconnect: (webSocket, context) => {
+          console.log('Client disconnected')
+      },
+  },
   context: authMiddleware
 });
 
