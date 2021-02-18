@@ -41,9 +41,11 @@ function Conversation() {
             <div>
                 <div className="m-2 flex fixed bottom-0 w-8/12">
                     <input name="messageText" onChange={handleChange} className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border-2 border-black rounded-md" />
-                    <input name="createdBy" onChange={handleChange} className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border-2 border-black rounded-md" />
                     <button type="submit" onClick={handleMessageSubmit} className="rounded-lg bg-green-500 border-black border-2 w-auto text-xl font-semibold p-2">
                         Send
+                    </button>
+                    <button className="rounded-lg bg-green-500 border-black border-2 w-auto text-xl font-semibold p-2">
+                        Add Friend
                     </button>
                 </div>
             </div>

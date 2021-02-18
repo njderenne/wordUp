@@ -3,34 +3,32 @@ import { useQuery } from '@apollo/react-hooks';
 import { QUERY_USER, QUERY_CHANNELS, QUERY_ME } from '../../utils/queries';
 import { useStoreContext } from '../../utils/GlobalState';
 import { UPDATE_CHANNEL } from '../../utils/actions';
+import { idbPromise } from '../../utils/helpers';
 
 
 function Sidebar() {
     const [state, dispatch] = useStoreContext();
-    // const { channels } = state;
-    const { loading, data } = useQuery(QUERY_ME);
-    // const { userData } = useQuery(QUERY_ME);
-    let channels;
 
-    if(data) {
-        channels = data?.me
-    } 
-    else if (loading){
-        return <h2>loading</h2>
-    }
-    
-    console.log(data);
-    // console.log(userData);
+    const { loading, data } = useQuery(QUERY_CHANNELS);
 
-    // useEffect(() => {
-    //     if (data) {
-    //         dispatch({
-    //             type: UPDATE_CHANNEL,
-    //             channels: data.channels
-    //         });
-
-    //     } 
-    // })
+    useEffect(() => {
+        if(data) {
+            dispatch({
+                type: UPDATE_CHANNEL,
+                channels: data.channels
+            });
+            data.channels.forEach((channel) => {
+                idbPromise('channels', 'put', channel);
+            });
+        } else if (!loading) {
+            idbPromise('channels', 'get').then((channels) => {
+                dispatch({
+                    type: UPDATE_CHANNEL,
+                    channels: channels
+                });
+            });
+        }
+    }, [data, loading, dispatch]);
 
     return (
         <div className="bg-yellow-200 bg-transparent relative">
@@ -42,11 +40,11 @@ function Sidebar() {
                      + New Conversation
                 </button>
             </div>
-            {channels.map((name) => (
+            {state.channels.map(channel => (
             <div className="grid mx-auto justify-center grid-flow-row">
                 <div className="flex hover:bg-yellow-400 my-1">
                     <img src="../../../public/avatar.png" />
-                    <p className="text-lg font-bold text-gray-900">{name}</p>
+                    <p className="text-lg font-bold text-gray-900">{channel.name}</p>
                 </div>
             </div>
             ))}
