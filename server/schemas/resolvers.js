@@ -1,7 +1,9 @@
-const { AuthenticationError, PubSub } = require('apollo-server-express');
+const { PubSub } = require('apollo-server');
+const { AuthenticationError } = require('apollo-server-express');
 const { User, Message, Channel } = require('../models');
 const { signToken } = require('../utils/auth');
 const pubsub = new PubSub();
+const MESSAGE_ADDED = 'MESSAGE_ADDED';
 
 const resolvers = {
     Query: {
@@ -85,10 +87,9 @@ const resolvers = {
                 const updatedChannel = await Channel.findByIdAndUpdate(
                     { _id: channelId },
                     { $push: { messages: { messageText, email: context.user.email, sender: context.user.firstName} } },
-                    { new: true }
+                    { new: true },
                 );
-                console.log('right before call subscribe');
-                pubsub.publish('MESSAGE_ADDED', {messageAdded: { channelId: updatedChannel._id, messageText: messageText } } );
+                await pubsub.publish(MESSAGE_ADDED, {messageAdded: updatedChannel } );
                 return updatedChannel;
             }
             throw new AuthenticationError('You need to be logged in!');
@@ -160,10 +161,7 @@ const resolvers = {
             //this is getting data from the addMessage mutation above
             //this should refresh with every sent message regardless of associated channel
             //need to verify functionality prior to adding { withFilter }
-            subscribe: () => {
-                console.log('entered subscribe');
-                pubsub.asyncIterator(['MESSAGE_ADDED'])
-            }
+            subscribe: () => pubsub.asyncIterator([MESSAGE_ADDED])
         },
     }
 };
