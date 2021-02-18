@@ -74,6 +74,11 @@ const resolvers = {
               { $addToSet: { friends: friendId } },
               { new: true }
             );
+            const updatedFriend = await User.findOneAndUpdate(
+                { _id: friendId },
+                { $addToSet: { friends: { _id: context.user._id } } },
+                { new: true }
+              );
 
             return updatedUser;
           }
