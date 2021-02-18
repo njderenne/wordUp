@@ -51,6 +51,11 @@ const typeDefs = gql`
         addParticipant(channelId: ID!, participants: ID!): Channel
         changeChannelName(name: String!, channelId: ID!): Channel
     }
+
+    type Subscription {
+        messageAdded(channelId: ID!, messageText: String!): Channel
+        channelAdded(channelId: ID!): User
+    }
 `;
 
 module.exports = typeDefs;

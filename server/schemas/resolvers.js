@@ -1,6 +1,7 @@
-const { AuthenticationError } = require('apollo-server-express');
+const { AuthenticationError, PubSub } = require('apollo-server-express');
 const { User, Message, Channel } = require('../models');
 const { signToken } = require('../utils/auth');
+const pubsub = new PubSub();
 
 const resolvers = {
     Query: {
@@ -86,6 +87,8 @@ const resolvers = {
                     { $push: { messages: { messageText, email: context.user.email, sender: context.user.firstName} } },
                     { new: true }
                 );
+                console.log('right before call subscribe');
+                pubsub.publish('MESSAGE_ADDED', {messageAdded: { channelId: updatedChannel._id, messageText: messageText } } );
                 return updatedChannel;
             }
             throw new AuthenticationError('You need to be logged in!');
@@ -151,6 +154,17 @@ const resolvers = {
             }
             throw new AuthenticationError('You need to be logged in!');
         }
+    },
+    Subscription: {
+        messageAdded: {
+            //this is getting data from the addMessage mutation above
+            //this should refresh with every sent message regardless of associated channel
+            //need to verify functionality prior to adding { withFilter }
+            subscribe: () => {
+                console.log('entered subscribe');
+                pubsub.asyncIterator(['MESSAGE_ADDED'])
+            }
+        },
     }
 };
 
