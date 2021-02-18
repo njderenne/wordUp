@@ -85,6 +85,11 @@ const resolvers = {
 
           throw new AuthenticationError('You need to be logged in!');
         },
+        removeFriend: async (parent, { friendId }, context) => {
+            if (context.user) {
+
+            }
+        },
         addMessage: async (parent, { channelId, messageText }, context) => {
             if(context.user) {
                 const updatedChannel = await Channel.findByIdAndUpdate(
@@ -147,6 +152,11 @@ const resolvers = {
                 return updatedChannel;
             }
             throw new AuthenticationError('You need to be logged in!');
+        },
+        removeParticipant: async (parent, args, context) => {
+            if (context.user) {
+                
+            }
         },
         changeChannelName: async (parent, { name, channelId }, context) => {
             if (context.user) {
