@@ -32,8 +32,8 @@ export const QUERY_ME = gql`
 `;
 
 export const QUERY_USER = gql`
-    query user($email: String) {
-        user(email: $email) {
+    query {
+        user {
             _id
             firstName
             lastName
@@ -63,22 +63,23 @@ export const QUERY_USER = gql`
 `;
 
 export const QUERY_CHANNELS = gql`
-    query channels($channelId: ID) {            
-        channels(channelId: $channelId) {
-                _id
-                name
-                participants{
-                    _id 
-                    firstName
-                    lastName
-                }
-                messages{
-                    _id
-                    messageText
-                    createdAt
-                    email
-                }
+    query {
+        channels {
+            _id
+            name
+            participants{
+                _id 
+                firstName
+                lastName
             }
+            messages{
+                _id
+                messageText
+                createdAt
+                email
+            }
+            
         }
+    }            
 `;
 

@@ -2,6 +2,7 @@
   "name": "wordup",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:3001/",
   "dependencies": {
     "@apollo/react-hooks": "^4.0.0",
     "@craco/craco": "^6.1.1",

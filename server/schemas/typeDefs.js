@@ -34,7 +34,7 @@ const typeDefs = gql`
 
     type Query {
         me: User
-        user(email: String): User
+        user: User
         users: [User]
         channels: [Channel]
         channel: Channel
@@ -44,12 +44,19 @@ const typeDefs = gql`
         addUser(firstName: String!, lastName: String!, email: String!, password: String!): Auth
         login(email: String!, password: String!): Auth
         addFriend(friendId: ID!): User
+        removeFriend(friendId: ID!): User
         addMessage(messageText: String!, channelId: ID!): Channel
         deleteMessage(messageId: ID!, channelId: ID!): Channel
         addChannel(name: String!): Channel
         removeChannel(channelId: ID!): Channel
         addParticipant(channelId: ID!, participants: ID!): Channel
+        removeParticipant(channelId: ID!, participants: ID!): Channel
         changeChannelName(name: String!, channelId: ID!): Channel
+    }
+
+    type Subscription {
+        messageAdded(channelId: ID): Channel
+        channelAdded(userId: ID): Channel
     }
 `;
 
