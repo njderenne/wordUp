@@ -9,8 +9,10 @@ const ChannelProvider = ({ value = [], ...props}) => {
         channels: [],
         friends: [],
         loggedUser: '',
-        onlineStatus: ''
-    })
+        onlineStatus: '',
+        firstName: '',
+        lastName: ''
+        })
     console.log(state);
     return <Provider value={[state, dispatch]} {...props} />;
     

@@ -2,22 +2,23 @@ import React, { useEffect, useState } from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import { QUERY_USER, QUERY_CHANNELS, QUERY_ME } from '../../utils/queries';
 import { useStoreContext } from '../../utils/GlobalState';
-import { UPDATE_CHANNEL } from '../../utils/actions';
+import { UPDATE_CHANNEL, GET_USER } from '../../utils/actions';
 import { idbPromise } from '../../utils/helpers';
+import Auth from '../../utils/auth'
 
 
 function Sidebar() {
     const [state, dispatch] = useStoreContext();
 
-    const { loading, data } = useQuery(QUERY_CHANNELS);
+    const { loading, data } = useQuery(QUERY_USER);
 
     useEffect(() => {
         if(data) {
             dispatch({
                 type: UPDATE_CHANNEL,
-                channels: data.channels
+                channels: data.user.channels
             });
-            data.channels.forEach((channel) => {
+            data.user.channels.forEach((channel) => {
                 idbPromise('channels', 'put', channel);
             });
         } else if (!loading) {
@@ -29,6 +30,16 @@ function Sidebar() {
             });
         }
     }, [data, loading, dispatch]);
+
+    useEffect(() => {
+        if(data) {
+            // dispatch({
+            //     type: GET_USER,
+            //     firstName: data.user.firstName,
+            //     lastName: data.user.lastName
+            // })
+        }
+    })
 
     return (
         <div className="bg-yellow-200 bg-transparent relative">
@@ -50,15 +61,12 @@ function Sidebar() {
             ))}
             <div className="fixed container bottom-0 w-full border-t-4 border-black p-6 grid grid-cols-2">
                 <div className="col-auto">
-                    <img className="" src="../../../public/avatar.png" default />
-                    <p className="text-lg font-bold text-gray-900">Test User</p>
+                    <p className="text-lg font-bold text-gray-900">{state.firstName} {state.lastName}</p>
                     <p className="text-lg font-bold text-gray-900">Status: Online</p>
+                    <a href="/" onClick={() => Auth.logout()} className="text-lg font-bold text-gray-900">Logout</a>
                 </div>
-                <div className="col-auto">
-                    <p>
-                        Logout
-                    </p>
-                </div>
+
+
             </div>
         </div>
     )

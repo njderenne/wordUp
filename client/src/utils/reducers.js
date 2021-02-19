@@ -1,7 +1,8 @@
 import { useReducer } from 'react';
 import {
     UPDATE_CHANNEL,
-    GET_FRIENDS
+    GET_FRIENDS,
+    GET_USER
 } from './actions';
 
 export const reducer = (state, action) => {
@@ -15,6 +16,12 @@ export const reducer = (state, action) => {
             return {
                 ...state,
                 friends: [...action.friends]
+            }
+        case GET_USER:
+            return {
+                ...state,
+                firstName: action.firstName, 
+                lastName: action.lastName
             }
 
         default:

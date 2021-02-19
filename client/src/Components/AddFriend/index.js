@@ -16,7 +16,7 @@ function AddFriend() {
                 type: GET_FRIENDS,
                 friends: data.user.friends
             });
-            console.log(`Line 19: ${JSON.stringify(data)}`)
+            console.log(`AddFriend Component ${JSON.stringify(data.user)}`)
             data.user.friends.forEach((friend) => {
                 idbPromise('friends', 'put', friend);
             })
