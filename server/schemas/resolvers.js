@@ -1,4 +1,4 @@
-const { PubSub } = require('apollo-server');
+const { PubSub, withFilter } = require('apollo-server');
 const { AuthenticationError } = require('apollo-server-express');
 const { User, Message, Channel } = require('../models');
 const { signToken } = require('../utils/auth');
@@ -202,13 +202,23 @@ const resolvers = {
             //this is getting data from the addMessage mutation above
             //this should refresh with every sent message regardless of associated channel
             //need to verify functionality prior to adding { withFilter }
-            subscribe: () => pubsub.asyncIterator([MESSAGE_ADDED])
+            subscribe: withFilter (
+                () => pubsub.asyncIterator([MESSAGE_ADDED]),
+                    (payload, variables) => {
+                        return (String(payload.messageAdded._id) === variables.channelId);
+                    }
+            )
         },
         channelAdded: {
             //this is getting data from the addChannel mutation above
             //this should refresh with every sent message regardless of associated channel
             //need to verify functionality prior to adding { withFilter }
-            subscribe: () => pubsub.asyncIterator([CHANNEL_ADDED])
+            subscribe: withFilter (
+                () => pubsub.asyncIterator([CHANNEL_ADDED]),
+                    (payload, variables) => {
+                        return (String(payload.channelAdded.participants[0]) === variables.userId);
+                    }
+            )
         }
     }
 };
