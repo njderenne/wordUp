@@ -55,7 +55,7 @@ function Sidebar() {
             <div className="grid mx-auto justify-center grid-flow-row">
                 <div className="flex hover:bg-yellow-400 my-1">
                     <img src="../../../public/avatar.png" />
-                    <p className="text-lg font-bold text-gray-900">{channel.name}</p>
+                    <p className="text-lg font-bold text-gray-900" key={channel._id}>{channel.name}</p>
                 </div>
             </div>
             ))}

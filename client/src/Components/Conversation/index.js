@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/react-hooks';
 import { ADD_CHANNEL, ADD_MESSAGE } from '../../utils/mutations';
+import { QUERY_CHANNELS} from '../../utils/queries';
 import AddFriend from '../AddFriend'
 
 function Conversation() {
@@ -12,14 +13,15 @@ function Conversation() {
         console.log("start of message submit");
         const mutationResponse = addMessage({
             variables: {
-                createdBy: convoState.createdBy, messageText: convoState.messageText, channelId: "602c9b5d28bfe1469c1d68a8"
+                createdBy: convoState.createdBy, messageText: convoState.messageText, channelId: "602fec40e4390f32ac60d0aa"
             }
         });
        
         console.log(mutationResponse);
+        addMessage({messageText:""});
        
     };
-
+//////////////////////////////////////
     const handleChange = event => {
         const { name, value } = event.target;
         setConvoState({
@@ -27,7 +29,28 @@ function Conversation() {
             [name]: value
         });
     };
+/////////////////////////////////////
 
+    const MessagesContainer = () => {
+        <Query query={QUERY_CHANNELS}>
+            {({ data, loading, error, messageSubscribe }) => {
+                if (!data) {
+                    return null;
+                }
+                if (loading) {
+                    return <span>Loading...</span>
+                }
+                if (error) {
+                    return <p>Something went wrong.</p>
+                }
+
+                return (<MessageList 
+                    messages={data.channelId.messages}
+                    subscribeToMore = {subscribeToMore}
+                    />);
+            }}
+        </Query>
+    };
 
     return (
         <div className="h-screen grid grid-flow-row grid-rows-6">
