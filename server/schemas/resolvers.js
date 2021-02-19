@@ -1,7 +1,10 @@
-const { AuthenticationError, PubSub } = require('apollo-server-express');
+const { PubSub, withFilter } = require('apollo-server');
+const { AuthenticationError } = require('apollo-server-express');
 const { User, Message, Channel } = require('../models');
 const { signToken } = require('../utils/auth');
 const pubsub = new PubSub();
+const MESSAGE_ADDED = 'MESSAGE_ADDED';
+const CHANNEL_ADDED = 'CHANNEL_ADDED';
 
 const resolvers = {
     Query: {
@@ -108,11 +111,10 @@ const resolvers = {
             if (context.user) {
                 const updatedChannel = await Channel.findByIdAndUpdate(
                     { _id: channelId },
-                    { $push: { messages: { messageText, email: context.user.email, sender: context.user.firstName } } },
-                    { new: true }
+                    { $push: { messages: { messageText, email: context.user.email, sender: context.user.firstName} } },
+                    { new: true },
                 );
-                console.log('right before call subscribe');
-                pubsub.publish('MESSAGE_ADDED', { messageAdded: { channelId: updatedChannel._id, messageText: messageText } });
+                await pubsub.publish(MESSAGE_ADDED, {messageAdded: updatedChannel } );
                 return updatedChannel;
             }
             throw new AuthenticationError('You need to be logged in!');
@@ -133,6 +135,8 @@ const resolvers = {
                 const { firstName, lastName } = context.user;
                 const fullName = `${firstName} ${lastName}`;
                 const channel = await Channel.create({ ...args, createdBy: fullName, participants: context.user._id });
+
+                await pubsub.publish(CHANNEL_ADDED, {channelAdded: channel } );
 
                 const updatedUser = await User.findByIdAndUpdate(
                     { _id: context.user._id },
@@ -200,11 +204,24 @@ const resolvers = {
             //this is getting data from the addMessage mutation above
             //this should refresh with every sent message regardless of associated channel
             //need to verify functionality prior to adding { withFilter }
-            subscribe: () => {
-                console.log('entered subscribe');
-                pubsub.asyncIterator(['MESSAGE_ADDED'])
-            }
+            subscribe: withFilter (
+                () => pubsub.asyncIterator([MESSAGE_ADDED]),
+                    (payload, variables) => {
+                        return (String(payload.messageAdded._id) === variables.channelId);
+                    }
+            )
         },
+        channelAdded: {
+            //this is getting data from the addChannel mutation above
+            //this should refresh with every sent message regardless of associated channel
+            //need to verify functionality prior to adding { withFilter }
+            subscribe: withFilter (
+                () => pubsub.asyncIterator([CHANNEL_ADDED]),
+                    (payload, variables) => {
+                        return (String(payload.channelAdded.participants[0]) === variables.userId);
+                    }
+            )
+        }
     }
 };
 
