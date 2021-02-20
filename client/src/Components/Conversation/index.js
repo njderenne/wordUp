@@ -10,6 +10,7 @@ import Auth from '../../utils/auth';
 
 function Conversation() {
     const [state, dispatch] = useStoreContext();
+    const [messageField, setMessage] = useState('');
     const {currentChat} = state;
     const {loading, data} = useQuery(QUERY_CHANNEL, {
         variables: {
@@ -38,22 +39,22 @@ function Conversation() {
         }
     }, [data, loading, dispatch]);
 
-    // console.log(state)
-    // console.log(Auth.getProfile());
     const userData = Auth.getProfile();
-
-    // console.log("this is user data", userData.data.email);
-    // console.log("this is state data", state.messages[0].email);
 
     const handleMessageSubmit = async event => {
         event.preventDefault();
-        //console.log("start of message submit");
-        const mutationResponse = addMessage({
-            variables: {
-                createdBy: convoState.createdBy, messageText: convoState.messageText,
-                channelId: currentChat
-            }
-        });
+        try {
+            await addMessage({
+                variables: {
+                    createdBy: convoState.createdBy, messageText: convoState.messageText,
+                    channelId: currentChat
+                }
+            });
+            setMessage('');
+            
+        } catch (e) {
+            console.error(e);
+        }
     };
     const handleChange = event => {
         const { name, value } = event.target;
@@ -61,6 +62,7 @@ function Conversation() {
             ...convoState,
             [name]: value
         });
+        setMessage(event.target.value);
     };
 
     return (
@@ -82,7 +84,7 @@ function Conversation() {
             </div>
             <div>
                 <div className="m-2 flex fixed bottom-0 w-8/12">
-                    <input name="messageText" onChange={handleChange} className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border-2 border-black rounded-md" />
+                    <input name="messageText" value={messageField} onChange={handleChange} className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border-2 border-black rounded-md" />
                     <button type="submit" onClick={handleMessageSubmit} className="rounded-lg bg-green-500 border-black border-2 w-auto text-xl font-semibold p-2">
                         Send
                     </button>
