@@ -110,9 +110,8 @@ function Conversation() {
                     <button type="submit" onClick={handleMessageSubmit} className="rounded-lg bg-green-500 border-black border-2 w-auto text-xl font-semibold p-2">
                         Send
                     </button>
-                    <button className="rounded-lg bg-green-500 border-black border-2 w-auto text-xl font-semibold p-2">
-                        <AddFriend />
-                    </button>
+                    <AddFriend />
+
                 </div>
             </div>
         </div>

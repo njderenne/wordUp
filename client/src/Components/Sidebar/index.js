@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { useQuery } from '@apollo/react-hooks';
-import { QUERY_USER, QUERY_CHANNELS, QUERY_ME } from '../../utils/queries';
+import { useQuery, useMutation } from '@apollo/react-hooks';
+import { QUERY_USER } from '../../utils/queries';
+import { ADD_CHANNEL } from '../../utils/mutations'
 import { useStoreContext } from '../../utils/GlobalState';
-import { UPDATE_CHANNEL, GET_USER } from '../../utils/actions';
+import { UPDATE_CHANNEL, GET_USER, TOGGLE_CHAT } from '../../utils/actions';
 import { idbPromise } from '../../utils/helpers';
 import Auth from '../../utils/auth'
 
@@ -10,7 +11,19 @@ import Auth from '../../utils/auth'
 function Sidebar() {
     const [state, dispatch] = useStoreContext();
 
+    const [addChat, { error }] = useMutation(ADD_CHANNEL) 
+
     const { loading, data } = useQuery(QUERY_USER);
+
+    const newConversation = async event => {
+        event.preventDefault();
+        try {
+
+        } catch (e) {
+            console.log(e)
+        }
+        console.log("Conversation Added")
+    }
 
     useEffect(() => {
         if(data) {
@@ -31,15 +44,9 @@ function Sidebar() {
         }
     }, [data, loading, dispatch]);
 
-    useEffect(() => {
-        if(data) {
-            // dispatch({
-            //     type: GET_USER,
-            //     firstName: data.user.firstName,
-            //     lastName: data.user.lastName
-            // })
-        }
-    })
+    function selectChat(id) {
+        dispatch({ type: TOGGLE_CHAT, currentChat: id });
+    }
 
     function getChannelId(id) {
         console.log("channel function");
@@ -52,13 +59,18 @@ function Sidebar() {
                 <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Conversations</h2>
             </div>
             <div className="">
-                <button className="w-10/12 mx-auto my-3 flex items-center justify-center px-8 border border-transparent text-base font-medium rounded-md text-white bg-green-500 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10">
+                <button onClick={newConversation} className="w-10/12 mx-auto my-3 flex items-center justify-center px-8 border border-transparent text-base font-medium rounded-md text-white bg-green-500 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10">
                      + New Conversation
                 </button>
             </div>
             {state.channels.map(channel => (
+<<<<<<< HEAD
             <div onClick={()=>{getChannelId(channel._id)}} key={channel._id} className="grid mx-auto justify-center grid-flow-row">
                 <div className="flex hover:bg-yellow-400 my-1">
+=======
+            <div className="grid mx-auto justify-center grid-flow-row">
+                <div onClick={() => {selectChat(channel._id)}} className="flex hover:bg-yellow-400 my-1">
+>>>>>>> a7d8749742e672db4854fe010ec053dd85ac689a
                     <img src="../../../public/avatar.png" />
                     <p className="text-lg font-bold text-gray-900" >{channel.name}</p>
                 </div>

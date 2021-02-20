@@ -2,7 +2,9 @@ import { useReducer } from 'react';
 import {
     UPDATE_CHANNEL,
     GET_FRIENDS,
-    GET_USER
+    GET_USER,
+    TOGGLE_FRIENDS,
+    TOGGLE_CHAT
 } from './actions';
 
 export const reducer = (state, action) => {
@@ -22,6 +24,16 @@ export const reducer = (state, action) => {
                 ...state,
                 firstName: action.firstName, 
                 lastName: action.lastName
+            }
+        case TOGGLE_FRIENDS:
+            return {
+                ...state,
+                friendsListOpen: !state.friendsListOpen
+            }
+        case TOGGLE_CHAT:
+            return {
+                ...state,
+                currentChat:  action.currentChat
             }
 
         default:
