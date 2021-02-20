@@ -44,8 +44,13 @@ const resolvers = {
         },
         channel: async (parent, { channelId }, context) => {
             if (context.user) {
-                return Channel.findOne({ _id: channelId });
+                const channel = await Channel.findById({ _id: channelId })
+                .populate('participants')
+                .populate('messages');
+
+                return channel;
             }
+            throw new AuthenticationError('Not logged in');
         }
     },
     Mutation: {

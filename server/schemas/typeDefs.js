@@ -37,7 +37,7 @@ const typeDefs = gql`
         user: User
         users: [User]
         channels: [Channel]
-        channel: Channel
+        channel(channelId: ID!): Channel
     }
 
     type Mutation {
