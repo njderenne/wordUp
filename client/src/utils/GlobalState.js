@@ -7,6 +7,7 @@ const { Provider } = StoreContext;
 const ChannelProvider = ({ value = [], ...props}) => {
     const [state, dispatch] = useChatReducer({
         channels: [],
+        messages: [],
         friends: [],
         loggedUser: '',
         currentChat: '',
@@ -14,7 +15,7 @@ const ChannelProvider = ({ value = [], ...props}) => {
         lastName: '',
         friendsListOpen: false
         })
-    console.log(state);
+    //console.log(state);
     return <Provider value={[state, dispatch]} {...props} />;
     
 };

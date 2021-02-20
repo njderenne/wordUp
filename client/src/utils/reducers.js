@@ -4,7 +4,8 @@ import {
     GET_FRIENDS,
     GET_USER,
     TOGGLE_FRIENDS,
-    TOGGLE_CHAT
+    TOGGLE_CHAT,
+    UPDATE_MESSAGES
 } from './actions';
 
 export const reducer = (state, action) => {
@@ -13,7 +14,12 @@ export const reducer = (state, action) => {
             return {
                 ...state,
                 channels: [...action.channels]
-            };
+            }
+        case UPDATE_MESSAGES:
+            return {
+                ...state,
+                messages: [...action.messages]
+            }
         case GET_FRIENDS:
             return {
                 ...state,
