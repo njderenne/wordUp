@@ -10,7 +10,7 @@ function Conversation() {
     const [state, dispatch] = useStoreContext();
     const {loading, data} = useQuery(QUERY_CHANNEL, {
         variables: {
-            channelId: "602ae6c1338b054c74f509fc"
+            channelId: "60301e27d76972653ceef23c"
         }
     });
     const [addMessage] = useMutation(ADD_MESSAGE);
@@ -46,7 +46,7 @@ function Conversation() {
         const mutationResponse = addMessage({
             variables: {
                 createdBy: convoState.createdBy, messageText: convoState.messageText,
-                channelId: "602ae6c1338b054c74f509fc"
+                channelId: "60301e27d76972653ceef23c"
             }
         });
     };
