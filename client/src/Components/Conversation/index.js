@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { useMutation, useQuery } from '@apollo/react-hooks';
+import { useMutation, useQuery, useSubscription } from '@apollo/react-hooks';
 import { ADD_CHANNEL, ADD_MESSAGE } from '../../utils/mutations';
 import { QUERY_CHANNEL} from '../../utils/queries';
+import { MESSAGE_SUBSCRIPTION } from '../../utils/subscriptions';
 import AddFriend from '../AddFriend';
 import { useStoreContext } from '../../utils/GlobalState';
 import { UPDATE_MESSAGES } from '../../utils/actions';
@@ -12,13 +13,20 @@ function Conversation() {
     const [state, dispatch] = useStoreContext();
     const [messageField, setMessage] = useState('');
     const {currentChat} = state;
-    const {loading, data} = useQuery(QUERY_CHANNEL, {
+    const {loading, data, subscribeToMore} = useQuery(QUERY_CHANNEL, {
         variables: {
             channelId: currentChat
         }
     });
+    
+    // const {
+    //     data: { messageAdded },
+    //     loading 
+    // } = useSubscription(MESSAGE_SUBSCRIPTION, { variables: { channelId: currentChat } });
+
     const [addMessage] = useMutation(ADD_MESSAGE);
     const [convoState, setConvoState] = useState({ createdBy: '', messageText: '', channelId: '' })
+    
     useEffect(() => {
         if (data) {
             dispatch({
@@ -37,7 +45,25 @@ function Conversation() {
                 })
             })
         }
-    }, [data, loading, dispatch]);
+        // Error throwing from this line down
+        let unsubscribe = subscribeToMore ({
+            document: MESSAGE_SUBSCRIPTION,
+            variables: { channelId: currentChat },
+            updateQuery: (prev, { subscriptionData }) => {
+                if(!subscriptionData.data) return prev;
+                const newFeedItem = subscriptionData.data.messageAdded;
+                return Object.assign({}, prev, {
+                    channel: {
+                        messages: [newFeedItem, ...prev.channel.messages]
+                    }
+                })
+            }
+        });
+        return () => {
+            unsubscribe();
+        };
+        // TO HERE
+    }, [data, loading, dispatch, subscribeToMore]);
 
     const userData = Auth.getProfile();
 
