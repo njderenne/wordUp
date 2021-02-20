@@ -60,7 +60,7 @@ function Sidebar() {
             </div>
             {state.channels.map(channel => (
             <div className="grid mx-auto justify-center grid-flow-row">
-                <div onClick={() => {selectChat(channel._id)}} className="flex hover:bg-yellow-400 my-1">
+                <div onClick={() => {selectChat(channel._id)}} key={channel._id} className="flex hover:bg-yellow-400 my-1">
                     <img src="../../../public/avatar.png" />
                     <p className="text-lg font-bold text-gray-900">{channel.name}</p>
                 </div>
