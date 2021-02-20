@@ -96,14 +96,20 @@ function Conversation() {
             <div>
             {/* {loading ? (<p>loading...</p>) : ( */}
                     {(state.messages.map(message => (
-                        <div className="flex" key={message._id}>
-                            {userData.data.email != message.email ? (
-                            <p className="block m-2 p-2 text-xl font-semibold rounded-full bg-gray-200 w-max items-center justify-center">
-                                {message.messageText}
-                            </p> ) : (
-                            <p className="block m-2 p-2 text-xl font-semibold rounded-full bg-purple-600 items-center justify-center text-right w-max justify-self-end">
-                                {message.messageText}
-                            </p> )}
+                        <div key={message._id} className="flex">
+                            {userData.data.email === message.email ? (
+                                <div className="object-right">
+                                    <p className="block m-2 p-2 text-xl font-semibold rounded-full bg-gray-200 w-max items-center justify-center object-right">
+                                        {message.messageText}
+                                    </p>
+                                </div> 
+                            ) : (
+                                <div className="">
+                                    <p className="block m-2 p-2 text-xl text-gray-100 font-semibold rounded-full bg-purple-600 items-center justify-center text-right w-max justify-self-end">
+                                        {message.messageText}
+                                    </p>
+                                </div>
+                            )}
                         </div>
                     ))
             )}
