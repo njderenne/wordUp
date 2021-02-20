@@ -10,9 +10,10 @@ import Auth from '../../utils/auth';
 
 function Conversation() {
     const [state, dispatch] = useStoreContext();
+    const {currentChat} = state;
     const {loading, data} = useQuery(QUERY_CHANNEL, {
         variables: {
-            channelId: "60301e27d76972653ceef23c"
+            channelId: currentChat
         }
     });
     const [addMessage] = useMutation(ADD_MESSAGE);
@@ -23,30 +24,26 @@ function Conversation() {
                 type: UPDATE_MESSAGES,
                 messages: data.channel.messages
             });
-            //
-            // need to set up the indexDB then add this back --------------------------------
-            //
-            // data.channel.messages.forEach((message) => {
-            //     idbPromise('messages', 'put', message)
-            // });
+            data.channel.messages.forEach((message) => {
+                idbPromise('messages', 'put', message)
+            });
         } 
-        //  else if (!loading) {
-        //     idbPromise('messages', 'get').then((messages) => {
-        //         dispatch({
-        //             type: UPDATE_MESSAGES,
-        //             messages: messages
-        //         })
-        //     })
-        // }
+         else if (!loading) {
+            idbPromise('messages', 'get').then((messages) => {
+                dispatch({
+                    type: UPDATE_MESSAGES,
+                    messages: messages
+                })
+            })
+        }
     }, [data, loading, dispatch]);
 
-    console.log(state)
-    console.log(Auth.getProfile());
+    // console.log(state)
+    // console.log(Auth.getProfile());
     const userData = Auth.getProfile();
 
-    console.log("this is user data", userData.data.email);
-    console.log("this is state data", state.messages[0].email);
-
+    // console.log("this is user data", userData.data.email);
+    // console.log("this is state data", state.messages[0].email);
 
     const handleMessageSubmit = async event => {
         event.preventDefault();
@@ -54,7 +51,7 @@ function Conversation() {
         const mutationResponse = addMessage({
             variables: {
                 createdBy: convoState.createdBy, messageText: convoState.messageText,
-                channelId: "60301e27d76972653ceef23c"
+                channelId: currentChat
             }
         });
     };
@@ -67,14 +64,18 @@ function Conversation() {
     };
 
     return (
-        <div className="h-screen grid grid-flow-row grid-rows-6">
+        <div>
             <div>
-            {loading ? (<p>loading...</p>) : (
-                    state.messages.map(message => (
-                        <div key={message._id}>
+            {/* {loading ? (<p>loading...</p>) : ( */}
+                    {(state.messages.map(message => (
+                        <div className="flex" key={message._id}>
+                            {userData.data.email != message.email ? (
                             <p className="block m-2 p-2 text-xl font-semibold rounded-full bg-gray-200 w-max items-center justify-center">
                                 {message.messageText}
-                            </p>
+                            </p> ) : (
+                            <p className="block m-2 p-2 text-xl font-semibold rounded-full bg-purple-600 items-center justify-center text-right w-max justify-self-end">
+                                {message.messageText}
+                            </p> )}
                         </div>
                     ))
             )}

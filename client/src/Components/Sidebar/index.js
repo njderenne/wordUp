@@ -63,14 +63,14 @@ function Sidebar() {
                      + New Conversation
                 </button>
             </div>
-            {state.channels.map(channel => (
             <div className="grid mx-auto justify-center grid-flow-row">
+            {state.channels.map(channel => (
                 <div onClick={() => {selectChat(channel._id)}} key={channel._id} className="flex hover:bg-yellow-400 my-1">
-                    <img src="../../../public/avatar.png" />
+                    <img src="../../assets/avatar.png" />
                     <p className="text-lg font-bold text-gray-900" >{channel.name}</p>
                 </div>
-            </div>
             ))}
+            </div>
             <div className="fixed container bottom-0 w-full border-t-4 border-black p-6 grid grid-cols-2">
                 <div className="col-auto">
                     <p className="text-lg font-bold text-gray-900">{state.firstName} {state.lastName}</p>

@@ -5,7 +5,8 @@ export function idbPromise(storeName, method, object) {
     request.onupgradeneeded = function (e) {
       const db = request.result;
       db.createObjectStore('channels', { keyPath: '_id' });
-      db.createObjectStore('friends', { keyPath: '_id'})
+      db.createObjectStore('friends', { keyPath: '_id'});
+      db.createObjectStore('messages', { keyPath: '_id'});
     };
 
     request.onerror = function (e) {
