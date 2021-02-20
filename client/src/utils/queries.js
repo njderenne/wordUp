@@ -83,3 +83,22 @@ export const QUERY_CHANNELS = gql`
     }            
 `;
 
+export const QUERY_CHANNEL = gql`
+    query($channelId: ID!){
+        channel(channelId: $channelId){
+            _id
+            name
+            createdAt
+            createdBy
+            participants{
+                _id
+                firstName
+                lastName
+            }
+            messages {
+                _id
+                messageText
+            }
+        }
+    }     
+`;
