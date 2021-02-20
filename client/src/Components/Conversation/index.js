@@ -19,7 +19,7 @@ function Conversation() {
    
     useEffect(() => {
         if (data) {
-            const channelMessages = data.channel.messages;
+            // const channelMessages = data.channel.messages;
             console.log("data", channelMessages);
         }
     }, [data, loading]);
