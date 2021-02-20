@@ -53,9 +53,6 @@ function Signup(props) {
                     </div>
                     <button type="submit" className="w-10/12 mx-auto flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10">Sign Up!</button>
                 </div>
-                <p className="mx-auto text-center">Do you already have an account?
-                    <Link to="/login"> Click here to login!</Link>
-                </p>
             </form>
 
         </div>

@@ -55,6 +55,9 @@ function Login(props) {
                     }
                     <button type="submit" className="w-10/12 mx-auto flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10">Login</button>
                 </div>
+                <p className="mx-auto text-center">Don't have an account yet?
+                    <Link to="/signup"> Click here to sign up!</Link>
+                </p>
             </form>
         </div>
 
