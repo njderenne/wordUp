@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useQuery, useMutation } from '@apollo/react-hooks';
+import { useQuery, useMutation } from '@apollo/client';
 import { useStoreContext } from '../../utils/GlobalState'
 import { TOGGLE_FRIENDS, GET_FRIENDS } from '../../utils/actions';
 import { ADD_PARTICIPANT } from '../../utils/mutations';

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useMutation, useQuery, useSubscription } from '@apollo/react-hooks';
+import { useMutation, useQuery, useSubscription } from '@apollo/client';
 import { ADD_CHANNEL, ADD_MESSAGE } from '../../utils/mutations';
 import { QUERY_CHANNEL} from '../../utils/queries';
 import { MESSAGE_SUBSCRIPTION } from '../../utils/subscriptions';

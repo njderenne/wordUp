@@ -1,33 +1,43 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { ApolloProvider } from '@apollo/react-hooks';
+import { ApolloClient, InMemoryCache, ApolloProvider, HttpLink, split, ApolloLink } from '@apollo/client';
+import { getMainDefinition } from '@apollo/client/utilities';
+import { WebSocketLink } from '@apollo/client/link/ws';
+
+
+// import { ApolloLink } from 'apollo-link';
+// import { ApolloProvider } from '@apollo/react-hooks';
 //import ApolloClient from 'apollo-boost';
-import { ApolloClient, InMemoryCache } from '@apollo/client';
-import { getMainDefinition } from 'apollo-utilities';
-import { ApolloLink, split } from 'apollo-link';
-import { HttpLink } from 'apollo-link-http';
-import { WebSocketLink } from 'apollo-link-ws';
+// import { HttpLink } from 'apollo-link-http';
 //import { InMemoryCache } from 'apollo-cache-inmemory';
 import Dashboard from './pages/Dashboard';
 import Login from './pages/Login';
 import Signup from "./pages/Signup";
 import { ChannelProvider } from "./utils/GlobalState";
-import Auth from './utils/auth';
+import Auth from "./utils/auth";
+
+if(Auth.loggedIn) {
+  console.log(Auth.getProfile());
+  console.log(localStorage.getItem('id_token'))
+}
+
 const httpLink = new HttpLink({
   uri: 'http://localhost:3001/graphql',
   headers: {
     authorization: localStorage.getItem('id_token')
-  },
+  }
 });
+
 const wsLink = new WebSocketLink({
   uri: `ws://localhost:3001/graphql`,
   options: {
     reconnect: true,
     connectionParams: {
-      authToken: Auth.getProfile(localStorage.getItem('id_token')),
-    },
+      authToken: localStorage.getItem('id_token')
+    }
   },
 });
+
 const terminatingLink = split(
   ({ query }) => {
     const { kind, operation } = getMainDefinition(query);
@@ -38,7 +48,9 @@ const terminatingLink = split(
   wsLink,
   httpLink,
 );
+
 const link = ApolloLink.from([terminatingLink]);
+
 // const cache = new InMemoryCache();
 // const client = new ApolloClient({
 //   request: (operation) => {
@@ -53,7 +65,8 @@ const link = ApolloLink.from([terminatingLink]);
 //   cache,
 // });
 const client = new ApolloClient({
-  // uri: 'http://localhost:3001/graphql',
+  // link,
+  uri: 'http://localhost:3001/graphql',
   cache: new InMemoryCache(),
   headers: {
     authorization: localStorage.getItem('id_token')
