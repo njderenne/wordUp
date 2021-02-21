@@ -1,38 +1,38 @@
-import gql from 'graphql-tag';
+import { gql } from '@apollo/client';
 
-export const QUERY_ME = gql`
-    {
-        me {
-            _id
-            firstName
-            lastName
-            email
-            friends{
-                _id
-                firstName
-                lastName
-            }
-            channels{
-                _id
-                name
-                participants{
-                    _id
-                    firstName
-                    lastName
-                }
-                messages{
-                    _id
-                    messageText
-                    createdAt
-                    email
-                }
-            }
-        }
-    }
-`;
+// export const QUERY_ME = gql`
+//     {
+//         me {
+//             _id
+//             firstName
+//             lastName
+//             email
+//             friends{
+//                 _id
+//                 firstName
+//                 lastName
+//             }
+//             channels{
+//                 _id
+//                 name
+//                 participants{
+//                     _id
+//                     firstName
+//                     lastName
+//                 }
+//                 messages{
+//                     _id
+//                     messageText
+//                     createdAt
+//                     email
+//                 }
+//             }
+//         }
+//     }
+// `;
 
 export const QUERY_USER = gql`
-    query {
+    query GetUser{
         user {
             _id
             firstName
@@ -63,7 +63,7 @@ export const QUERY_USER = gql`
 `;
 
 export const QUERY_CHANNELS = gql`
-    query {
+    query GetChannels{
         channels {
             _id
             name
@@ -84,7 +84,7 @@ export const QUERY_CHANNELS = gql`
 `;
 
 export const QUERY_CHANNEL = gql`
-    query channel ($channelId: ID!) {
+    query GetChannel ($channelId: ID!) {
         channel(channelId: $channelId) {
             _id
             name
