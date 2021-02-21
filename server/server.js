@@ -46,6 +46,14 @@ db.once('open', () => {
         execute,
         subscribe,
         schema: schema,
+        subscriptions: {
+          onConnect: (connectionParams, WebSocket, context) => {
+            console.log('Client connected');
+          },
+          onDisconnect: (webSocket, context) => {
+            console.log('Disconnected!')
+          },
+        }
     }, {
     server: ws,
     path: '/graphql',

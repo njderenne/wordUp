@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useQuery, useMutation } from '@apollo/react-hooks';
+import { useQuery, useMutation } from '@apollo/client';
 import { QUERY_USER } from '../../utils/queries';
 import { ADD_CHANNEL } from '../../utils/mutations'
 import { useStoreContext } from '../../utils/GlobalState';
