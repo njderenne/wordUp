@@ -5,6 +5,8 @@ const { signToken } = require('../utils/auth');
 const pubsub = new PubSub();
 const MESSAGE_ADDED = 'MESSAGE_ADDED';
 const CHANNEL_ADDED = 'CHANNEL_ADDED';
+const subscribers = [];
+const onMessageUpdates = (fn) => subscribers.push(fn);
 
 const resolvers = {
     Query: {
@@ -113,7 +115,7 @@ const resolvers = {
             throw new AuthenticationError('You need to be logged in!');
         },
         addMessage: async (parent, { channelId, messageText }, context) => {
-            console.log(context.user);
+            // console.log(context.user);
             if (context.user) {
                 const updatedChannel = await Channel.findByIdAndUpdate(
                     { _id: channelId },
@@ -209,7 +211,17 @@ const resolvers = {
         messageAdded: {
 
             subscribe: withFilter (
-                () => pubsub.asyncIterator([MESSAGE_ADDED]),
+                // async (parent, args, {pubsub}) => {
+                //     const channel = await Channel.findById({ _id: args.channelId });
+                //     console.log(channel.messageId)
+                //     onMessageUpdates(() => pubsub.publish(channel, { channel }));
+                //     setTimeout(() => pubsub.publish(channel, { channel }), 0);
+                //     return pubsub.asyncIterator([MESSAGE_ADDED]),
+                //         (payload, variables) => {
+                //             return (String(payload.messageAdded._id) === variables.channelId);
+                //         }
+                // }
+                pubsub.asyncIterator([MESSAGE_ADDED]),
                     (payload, variables) => {
                         return (String(payload.messageAdded._id) === variables.channelId);
                     }
