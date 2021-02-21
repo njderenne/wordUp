@@ -18,14 +18,13 @@ function Conversation() {
             channelId: currentChat
         }
     });
-    
     // const {
     //     data: { messageAdded },
     //     loading 
     // } = useSubscription(MESSAGE_SUBSCRIPTION, { variables: { channelId: currentChat } });
 
     const [addMessage] = useMutation(ADD_MESSAGE);
-    const [convoState, setConvoState] = useState({ createdBy: '', messageText: '', channelId: '' })
+    const [convoState, setConvoState] = useState()
     
     useEffect(() => {
         if (data) {
@@ -46,22 +45,22 @@ function Conversation() {
             })
         }
         // Error throwing from this line down
-        let unsubscribe = subscribeToMore ({
-            document: MESSAGE_SUBSCRIPTION,
-            variables: { channelId: currentChat },
-            updateQuery: (prev, { subscriptionData }) => {
-                if(!subscriptionData.data) return prev;
-                const newFeedItem = subscriptionData.data.messageAdded;
-                return Object.assign({}, prev, {
-                    channel: {
-                        messages: [newFeedItem, ...prev.channel.messages]
-                    }
-                })
-            }
-        });
-        return () => {
-            unsubscribe();
-        };
+        // let unsubscribe = subscribeToMore ({
+        //     document: MESSAGE_SUBSCRIPTION,
+        //     variables: { channelId: currentChat },
+        //     updateQuery: (prev, { subscriptionData }) => {
+        //         if(!subscriptionData.data) return prev;
+        //         const newFeedItem = subscriptionData.data.messageAdded;
+        //         return Object.assign({}, prev, {
+        //             channel: {
+        //                 messages: [newFeedItem, ...prev.channel.messages]
+        //             }
+        //         })
+        //     }
+        // });
+        // return () => {
+        //     unsubscribe();
+        // };
         // TO HERE
     }, [data, loading, dispatch, subscribeToMore]);
 
