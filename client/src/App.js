@@ -16,29 +16,37 @@ import Login from './pages/Login';
 import Signup from "./pages/Signup";
 import { ChannelProvider } from "./utils/GlobalState";
 
-// const httpLink = new HttpLink({
-//   uri: 'http://localhost:3001/graphql',
-// });
+import Auth from './utils/auth';
 
-// const wsLink = new WebSocketLink({
-//   uri: `ws://localhost:3001/graphql`,
-//   options: {
-//     reconnect: true,
-//   },
-// });
+const httpLink = new HttpLink({
+  uri: 'http://localhost:3001/graphql',
+  headers: {
+    authorization: localStorage.getItem('id_token')
+  },
+});
 
-// const terminatingLink = split(
-//   ({ query }) => {
-//     const { kind, operation } = getMainDefinition(query);
-//     return (
-//       kind === 'OperationDefinition' && operation === 'subscription'
-//     );
-//   },
-//   wsLink,
-//   httpLink,
-// );
+const wsLink = new WebSocketLink({
+  uri: `ws://localhost:3001/graphql`,
+  options: {
+    reconnect: true,
+    connectionParams: {
+      authToken: Auth.getProfile(localStorage.getItem('id_token')),
+    },
+  },
+});
 
-// const link = ApolloLink.from([terminatingLink]);
+const terminatingLink = split(
+  ({ query }) => {
+    const { kind, operation } = getMainDefinition(query);
+    return (
+      kind === 'OperationDefinition' && operation === 'subscription'
+    );
+  },
+  wsLink,
+  httpLink,
+);
+
+const link = ApolloLink.from([terminatingLink]);
 
 // const cache = new InMemoryCache();
 
@@ -58,11 +66,12 @@ import { ChannelProvider } from "./utils/GlobalState";
 
 
 const client = new ApolloClient({
-  uri: 'http://localhost:3001/graphql',
+  // uri: 'http://localhost:3001/graphql',
   cache: new InMemoryCache(),
   headers: {
     authorization: localStorage.getItem('id_token')
-  }
+  },
+  link
 })
 
 
