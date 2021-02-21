@@ -7,8 +7,6 @@ export const MESSAGE_SUBSCRIPTION = gql`
             messages {
                 _id
                 messageText
-                firstName
-                lastName
             }
         }
     }
