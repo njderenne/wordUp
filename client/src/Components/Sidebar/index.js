@@ -3,6 +3,7 @@ import { useQuery, useMutation } from '@apollo/client';
 import { QUERY_USER } from '../../utils/queries';
 import { ADD_CHANNEL } from '../../utils/mutations'
 import { useStoreContext } from '../../utils/GlobalState';
+import AddChat from '../AddChat';
 import { UPDATE_CHANNEL, GET_USER, TOGGLE_CHAT } from '../../utils/actions';
 import { idbPromise } from '../../utils/helpers';
 import Auth from '../../utils/auth'
@@ -59,11 +60,7 @@ function Sidebar() {
             <div className="border-b-4 border-black">
                 <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Conversations</h2>
             </div>
-            <div className="">
-                <button onClick={newConversation} className="w-10/12 mx-auto my-3 flex items-center justify-center px-8 border border-transparent text-base font-medium rounded-md text-white bg-green-500 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10">
-                     + New Conversation
-                </button>
-            </div>
+            <AddChat />
             <div className="grid mx-auto justify-center grid-flow-row">
             {state.channels.map(channel => (
                 <div onClick={() => {selectChat(channel._id)}} key={channel._id} className="flex hover:bg-yellow-400 my-1">

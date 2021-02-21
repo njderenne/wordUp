@@ -11,6 +11,8 @@ function AddFriend() {
     const [addParticipant] = useMutation(ADD_PARTICIPANT)
     const { loading, data } = useQuery(QUERY_USER)
 
+    let tempFriendArray = []
+
     useEffect(() => {
         if (data) {
             dispatch({
@@ -32,13 +34,26 @@ function AddFriend() {
 
     const handleAddSubmit = async event => {
         event.preventDefault();
-        //const addedFriend = state.friends.find((list) => list._id === )
-        const mutationResponse = await addParticipant({
-            variables: {
-                channelId: { channelId: state.currentChat },
-                participants: { participants: state.friends._id }
-            }
-        })
+        try {
+            for(let i = 0; i < tempFriendArray.length; i++) {
+                console.log(tempFriendArray[i])
+            addParticipant({
+                variables: {
+                    channelId: state.currentChat,
+                    participants: tempFriendArray[i]
+                }
+            });
+            console.log("added")
+        }
+        } catch (e) {
+            console.error(e)
+        }
+        console.log(tempFriendArray)
+    }
+
+    function clickHandler(friend) {
+        tempFriendArray.push(friend)
+        
     }
 
     function toggleFriendsList() {
@@ -74,7 +89,7 @@ function AddFriend() {
                                 </h3>
                                 <div className="mt-2">
                                     {state.friends.map(friend => (
-                                        <p className="text-sm text-gray-500">{friend.firstName} {friend.lastName}</p>
+                                        <p onClick={() => {clickHandler(friend._id)}} key={friend._id} className="text-sm text-gray-500">{friend.firstName} {friend.lastName}</p>
                                     ))}
                                 </div>
                             </div>
