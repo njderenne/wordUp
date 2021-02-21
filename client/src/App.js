@@ -14,6 +14,8 @@ import Login from './pages/Login';
 import Signup from "./pages/Signup";
 import { ChannelProvider } from "./utils/GlobalState";
 
+import SubTest from './pages/subtest';
+
 const httpLink = new HttpLink({
   uri: 'http://localhost:3001/graphql',
 });
@@ -64,6 +66,7 @@ function App() {
             <Route exact path="/" component={Login} />
             <Route exact path="/signup" component={Signup} />
             <Route exact path="/dashboard" component={Dashboard} />
+            <Route exact path="subtest" component={SubTest}/>
           </Switch>
         </ChannelProvider>
       </Router>
