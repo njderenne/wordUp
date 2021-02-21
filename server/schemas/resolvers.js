@@ -206,9 +206,7 @@ const resolvers = {
     },
     Subscription: {
         messageAdded: {
-            //this is getting data from the addMessage mutation above
-            //this should refresh with every sent message regardless of associated channel
-            //need to verify functionality prior to adding { withFilter }
+
             subscribe: withFilter (
                 () => pubsub.asyncIterator([MESSAGE_ADDED]),
                     (payload, variables) => {
@@ -217,9 +215,7 @@ const resolvers = {
             )
         },
         channelAdded: {
-            //this is getting data from the addChannel mutation above
-            //this should refresh with every sent message regardless of associated channel
-            //need to verify functionality prior to adding { withFilter }
+
             subscribe: withFilter (
                 () => pubsub.asyncIterator([CHANNEL_ADDED]),
                     (payload, variables) => {

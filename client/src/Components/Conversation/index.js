@@ -96,10 +96,10 @@ function Conversation() {
             <div>
             {/* {loading ? (<p>loading...</p>) : ( */}
                     {(state.messages.map(message => (
-                        <div key={message._id} className="flex">
+                        <div key={message._id} className="grid">
                             {userData.data.email === message.email ? (
-                                <div className="object-right">
-                                    <p className="block m-2 p-2 text-xl font-semibold rounded-full bg-gray-200 w-max items-center justify-center object-right">
+                                <div className="grid justify-items-end">
+                                    <p className="block m-2 p-2 text-xl font-semibold rounded-full bg-gray-200 w-max justify-items-end object-right">
                                         {message.messageText}
                                     </p>
                                 </div> 
