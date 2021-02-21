@@ -17,8 +17,6 @@ import Signup from "./pages/Signup";
 import { ChannelProvider } from "./utils/GlobalState";
 import Auth from "./utils/auth";
 
-import Auth from './utils/auth';
-
 const httpLink = new HttpLink({
   uri: 'http://localhost:3001/graphql',
   headers: {
