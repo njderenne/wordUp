@@ -5,7 +5,7 @@ import AddFriend from '../AddFriend'
 
 function MessageBar() {
 
-    const [convoState, setConvoState] = useState({ createdBy: '', messageText: '', channelId: '' })
+    const [convoState, setConvoState] = useState()
     const [addMessage] = useMutation(ADD_MESSAGE);
 
     const handleMessageSubmit = async event => {
