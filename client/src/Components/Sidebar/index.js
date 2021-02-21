@@ -46,6 +46,7 @@ function Sidebar() {
 
     function selectChat(id) {
         dispatch({ type: TOGGLE_CHAT, currentChat: id });
+        //console.log(id)
     }
 
     function getChannelId(id) {

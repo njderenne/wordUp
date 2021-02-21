@@ -32,6 +32,7 @@ function AddFriend() {
 
     const handleAddSubmit = async event => {
         event.preventDefault();
+        //const addedFriend = state.friends.find((list) => list._id === )
         const mutationResponse = await addParticipant({
             variables: {
                 channelId: { channelId: state.currentChat },

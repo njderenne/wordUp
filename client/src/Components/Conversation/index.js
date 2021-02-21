@@ -18,14 +18,13 @@ function Conversation() {
             channelId: currentChat
         }
     });
-    
     // const {
     //     data: { messageAdded },
     //     loading 
     // } = useSubscription(MESSAGE_SUBSCRIPTION, { variables: { channelId: currentChat } });
 
     const [addMessage] = useMutation(ADD_MESSAGE);
-    const [convoState, setConvoState] = useState({ createdBy: '', messageText: '', channelId: '' })
+    const [convoState, setConvoState] = useState()
     
     useEffect(() => {
         if (data) {
@@ -46,22 +45,22 @@ function Conversation() {
             })
         }
         // Error throwing from this line down
-        let unsubscribe = subscribeToMore ({
-            document: MESSAGE_SUBSCRIPTION,
-            variables: { channelId: currentChat },
-            updateQuery: (prev, { subscriptionData }) => {
-                if(!subscriptionData.data) return prev;
-                const newFeedItem = subscriptionData.data.messageAdded;
-                return Object.assign({}, prev, {
-                    channel: {
-                        messages: [newFeedItem, ...prev.channel.messages]
-                    }
-                })
-            }
-        });
-        return () => {
-            unsubscribe();
-        };
+        // let unsubscribe = subscribeToMore ({
+        //     document: MESSAGE_SUBSCRIPTION,
+        //     variables: { channelId: currentChat },
+        //     updateQuery: (prev, { subscriptionData }) => {
+        //         if(!subscriptionData.data) return prev;
+        //         const newFeedItem = subscriptionData.data.messageAdded;
+        //         return Object.assign({}, prev, {
+        //             channel: {
+        //                 messages: [newFeedItem, ...prev.channel.messages]
+        //             }
+        //         })
+        //     }
+        // });
+        // return () => {
+        //     unsubscribe();
+        // };
         // TO HERE
     }, [data, loading, dispatch, subscribeToMore]);
 
@@ -98,14 +97,14 @@ function Conversation() {
                     {(state.messages.map(message => (
                         <div key={message._id} className="grid">
                             {userData.data.email === message.email ? (
-                                <div className="grid justify-items-end">
-                                    <p className="block m-2 p-2 text-xl font-semibold rounded-full bg-gray-200 w-max justify-items-end object-right">
+                                <div className="grid flex flex-wrap justify-items-end">
+                                    <p className="flex flex-wrap m-2 p-2 text-xl font-semibold rounded-full bg-gray-200 justify-items-end text-center object-right">
                                         {message.messageText}
                                     </p>
                                 </div> 
                             ) : (
                                 <div className="">
-                                    <p className="block m-2 p-2 text-xl text-gray-100 font-semibold rounded-full bg-purple-600 items-center justify-center text-right w-max justify-self-end">
+                                    <p className="flex flex-wrap m-2 p-2 text-xl text-gray-100 font-semibold rounded-full bg-purple-600 items-center justify-center text-right justify-self-end">
                                         {message.messageText}
                                     </p>
                                 </div>
