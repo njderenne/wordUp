@@ -14,12 +14,12 @@ import Dashboard from './pages/Dashboard';
 import Login from './pages/Login';
 import Signup from "./pages/Signup";
 import { ChannelProvider } from "./utils/GlobalState";
-import Auth from "./utils/auth";
+// import Auth from "./utils/auth";
 
-if(Auth.loggedIn) {
-  console.log(Auth.getProfile());
-  console.log(localStorage.getItem('id_token'))
-}
+// if(Auth.loggedIn) {
+//   console.log(Auth.getProfile());
+//   console.log(localStorage.getItem('id_token'))
+// }
 
 const httpLink = new HttpLink({
   uri: 'http://localhost:3001/graphql',
@@ -37,6 +37,16 @@ const wsLink = new WebSocketLink({
     }
   },
 });
+
+// const link = new WebSocketLink({
+//   uri: `ws://localhost:3001/graphql`,
+//   options: {
+//     reconnect: true,
+//     connectionParams: {
+//       authToken: localStorage.getItem('id_token')
+//     }
+//   },
+// });
 
 const terminatingLink = split(
   ({ query }) => {
@@ -65,8 +75,8 @@ const link = ApolloLink.from([terminatingLink]);
 //   cache,
 // });
 const client = new ApolloClient({
-  // link,
-  uri: 'http://localhost:3001/graphql',
+  link,
+  // uri: 'http://localhost:3001/graphql',
   cache: new InMemoryCache(),
   headers: {
     authorization: localStorage.getItem('id_token')
