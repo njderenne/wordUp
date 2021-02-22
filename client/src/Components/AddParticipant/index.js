@@ -6,10 +6,12 @@ import { ADD_PARTICIPANT } from '../../utils/mutations';
 import { QUERY_USER } from '../../utils/queries';
 import { idbPromise } from '../../utils/helpers'
 
-function AddFriend() {
+function AddParticipant() {
     const [state, dispatch] = useStoreContext();
     const [addParticipant] = useMutation(ADD_PARTICIPANT)
     const { loading, data } = useQuery(QUERY_USER)
+
+    let tempFriendArray = []
 
     useEffect(() => {
         if (data) {
@@ -32,12 +34,24 @@ function AddFriend() {
 
     const handleAddSubmit = async event => {
         event.preventDefault();
-        const mutationResponse = await addParticipant({
-            variables: {
-                channelId: { channelId: state.currentChat },
-                participants: { participants: state.friends._id }
-            }
-        })
+        try {
+            for(let i = 0; i < tempFriendArray.length; i++) {
+            addParticipant({
+                variables: {
+                    channelId: state.currentChat,
+                    participants: tempFriendArray[i]
+                }
+            });
+            console.log("added")
+        }
+        } catch (e) {
+            console.error(e)
+        }
+    }
+
+    function clickHandler(friend) {
+        tempFriendArray.push(friend)
+        
     }
 
     function toggleFriendsList() {
@@ -61,7 +75,6 @@ function AddFriend() {
                     <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
                 </div>
 
-
                 <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
 
                 <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full" role="dialog" aria-modal="true" aria-labelledby="modal-headline">
@@ -73,7 +86,7 @@ function AddFriend() {
                                 </h3>
                                 <div className="mt-2">
                                     {state.friends.map(friend => (
-                                        <p className="text-sm text-gray-500">{friend.firstName} {friend.lastName}</p>
+                                        <p onClick={() => {clickHandler(friend._id)}} key={friend._id} className="text-sm text-gray-500">{friend.firstName} {friend.lastName}</p>
                                     ))}
                                 </div>
                             </div>
@@ -93,4 +106,4 @@ function AddFriend() {
     )
 }
 
-export default AddFriend;
+export default AddParticipant;

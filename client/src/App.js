@@ -10,7 +10,6 @@ import { WebSocketLink } from '@apollo/client/link/ws';
 //import ApolloClient from 'apollo-boost';
 // import { HttpLink } from 'apollo-link-http';
 //import { InMemoryCache } from 'apollo-cache-inmemory';
-
 import Dashboard from './pages/Dashboard';
 import Login from './pages/Login';
 import Signup from "./pages/Signup";
@@ -63,8 +62,6 @@ const terminatingLink = split(
 const link = ApolloLink.from([terminatingLink]);
 
 // const cache = new InMemoryCache();
-
-
 // const client = new ApolloClient({
 //   request: (operation) => {
 //     const token = localStorage.getItem('id_token')
@@ -77,20 +74,15 @@ const link = ApolloLink.from([terminatingLink]);
 //   link,
 //   cache,
 // });
-
-
 const client = new ApolloClient({
   link,
   // uri: 'http://localhost:3001/graphql',
   cache: new InMemoryCache(),
   headers: {
     authorization: localStorage.getItem('id_token')
-  }
+  },
+  link
 })
-
-
-
-
 function App() {
   return (
     <ApolloProvider client={client}>
@@ -106,5 +98,4 @@ function App() {
     </ApolloProvider>
   );
 }
-
 export default App;

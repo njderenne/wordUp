@@ -3,7 +3,7 @@ import { useMutation, useQuery, useSubscription } from '@apollo/client';
 import { ADD_CHANNEL, ADD_MESSAGE } from '../../utils/mutations';
 import { QUERY_CHANNEL} from '../../utils/queries';
 import { MESSAGE_SUBSCRIPTION } from '../../utils/subscriptions';
-import AddFriend from '../AddFriend';
+import AddParticipant from '../AddParticipant';
 import { useStoreContext } from '../../utils/GlobalState';
 import { UPDATE_MESSAGES } from '../../utils/actions';
 import { idbPromise } from '../../utils/helpers';
@@ -38,10 +38,10 @@ function Conversation() {
         } 
          else if (!loading) {
             idbPromise('messages', 'get').then((messages) => {
-                dispatch({
-                    type: UPDATE_MESSAGES,
-                    messages: messages
-                })
+                // dispatch({
+                //     type: UPDATE_MESSAGES,
+                //     messages: messages
+                // })
             })
         }
         // Error throwing from this line down
@@ -97,14 +97,14 @@ function Conversation() {
                     {(state.messages.map(message => (
                         <div key={message._id} className="grid">
                             {userData.data.email === message.email ? (
-                                <div className="grid justify-items-end">
-                                    <p className="block m-2 p-2 text-xl font-semibold rounded-full bg-gray-200 w-max justify-items-end object-right">
+                                <div className="grid flex flex-wrap justify-items-end">
+                                    <p className="flex flex-wrap m-2 p-2 text-xl font-semibold rounded-full bg-gray-200 justify-items-end text-center object-right">
                                         {message.messageText}
                                     </p>
                                 </div> 
                             ) : (
                                 <div className="">
-                                    <p className="block m-2 p-2 text-xl text-gray-100 font-semibold rounded-full bg-purple-600 items-center justify-center text-right w-max justify-self-end">
+                                    <p className="flex flex-wrap m-2 p-2 text-xl text-gray-100 font-semibold rounded-full bg-purple-600 items-center justify-center text-right justify-self-end">
                                         {message.messageText}
                                     </p>
                                 </div>
@@ -120,7 +120,7 @@ function Conversation() {
                         Send
                     </button>
                     <div>
-                        <AddFriend />
+                        <AddParticipant />
                     </div>
                 </div>
             </div>
