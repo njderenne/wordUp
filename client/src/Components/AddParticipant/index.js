@@ -6,7 +6,7 @@ import { ADD_PARTICIPANT } from '../../utils/mutations';
 import { QUERY_USER } from '../../utils/queries';
 import { idbPromise } from '../../utils/helpers'
 
-function AddFriend() {
+function AddParticipant() {
     const [state, dispatch] = useStoreContext();
     const [addParticipant] = useMutation(ADD_PARTICIPANT)
     const { loading, data } = useQuery(QUERY_USER)
@@ -36,7 +36,6 @@ function AddFriend() {
         event.preventDefault();
         try {
             for(let i = 0; i < tempFriendArray.length; i++) {
-                console.log(tempFriendArray[i])
             addParticipant({
                 variables: {
                     channelId: state.currentChat,
@@ -48,7 +47,6 @@ function AddFriend() {
         } catch (e) {
             console.error(e)
         }
-        console.log(tempFriendArray)
     }
 
     function clickHandler(friend) {
@@ -76,7 +74,6 @@ function AddFriend() {
                 <div className="fixed inset-0 transition-opacity" aria-hidden="true">
                     <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
                 </div>
-
 
                 <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
 
@@ -109,4 +106,4 @@ function AddFriend() {
     )
 }
 
-export default AddFriend;
+export default AddParticipant;

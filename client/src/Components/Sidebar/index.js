@@ -4,6 +4,7 @@ import { QUERY_USER } from '../../utils/queries';
 import { ADD_CHANNEL } from '../../utils/mutations'
 import { useStoreContext } from '../../utils/GlobalState';
 import AddChat from '../AddChat';
+import AddFriend from '../SearchFriend';
 import { UPDATE_CHANNEL, GET_USER, TOGGLE_CHAT } from '../../utils/actions';
 import { idbPromise } from '../../utils/helpers';
 import Auth from '../../utils/auth'
@@ -68,6 +69,9 @@ function Sidebar() {
                     <p className="text-lg font-bold text-gray-900" >{channel.name}</p>
                 </div>
             ))}
+            </div>
+            <div>
+                <AddFriend />
             </div>
             <div className="fixed container bottom-0 w-full border-t-4 border-black p-6 grid grid-cols-2">
                 <div className="col-auto">

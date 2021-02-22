@@ -3,7 +3,7 @@ import { useMutation, useQuery, useSubscription } from '@apollo/client';
 import { ADD_CHANNEL, ADD_MESSAGE } from '../../utils/mutations';
 import { QUERY_CHANNEL} from '../../utils/queries';
 import { MESSAGE_SUBSCRIPTION } from '../../utils/subscriptions';
-import AddFriend from '../AddFriend';
+import AddParticipant from '../AddParticipant';
 import { useStoreContext } from '../../utils/GlobalState';
 import { UPDATE_MESSAGES } from '../../utils/actions';
 import { idbPromise } from '../../utils/helpers';
@@ -38,10 +38,10 @@ function Conversation() {
         } 
          else if (!loading) {
             idbPromise('messages', 'get').then((messages) => {
-                dispatch({
-                    type: UPDATE_MESSAGES,
-                    messages: messages
-                })
+                // dispatch({
+                //     type: UPDATE_MESSAGES,
+                //     messages: messages
+                // })
             })
         }
         // Error throwing from this line down
@@ -120,7 +120,7 @@ function Conversation() {
                         Send
                     </button>
                     <div>
-                        <AddFriend />
+                        <AddParticipant />
                     </div>
                 </div>
             </div>
