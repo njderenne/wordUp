@@ -73,7 +73,7 @@ function Sidebar() {
             <div>
                 <AddFriend />
             </div>
-            <div className="fixed container bottom-0 w-full border-t-4 border-black p-6 grid grid-cols-2">
+            <div className="fixed container bottom-0 w-full border-t-4 border-black bg-yellow-200 p-6 grid grid-cols-2">
                 <div className="col-auto">
                     <p className="text-lg font-bold text-gray-900">{state.firstName} {state.lastName}</p>
                     <p className="text-lg font-bold text-gray-900">Status: Online</p>
