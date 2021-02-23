@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useQuery, useMutation } from '@apollo/client';
+import { useQuery, useMutation, useSubscription } from '@apollo/client';
 import { QUERY_USER } from '../../utils/queries';
 import { ADD_CHANNEL } from '../../utils/mutations'
 import { useStoreContext } from '../../utils/GlobalState';
@@ -8,6 +8,7 @@ import AddFriend from '../SearchFriend';
 import { UPDATE_CHANNEL, GET_USER, TOGGLE_CHAT } from '../../utils/actions';
 import { idbPromise } from '../../utils/helpers';
 import Auth from '../../utils/auth'
+import { CHANNEL_SUBSCRIPTION } from '../../utils/subscriptions';
 
 
 function Sidebar() {
@@ -15,7 +16,15 @@ function Sidebar() {
 
     const [addChat, { error }] = useMutation(ADD_CHANNEL) 
 
-    const { loading, data } = useQuery(QUERY_USER);
+    const { loading, data: queryData } = useQuery(QUERY_USER);
+
+    const userData = Auth.getProfile();
+
+    const {data} = useSubscription(CHANNEL_SUBSCRIPTION, {
+        variables: {
+            userId: userData.data._id
+        }
+    })
 
     const newConversation = async event => {
         event.preventDefault();
@@ -28,12 +37,12 @@ function Sidebar() {
     }
 
     useEffect(() => {
-        if(data) {
+        if(queryData) {
             dispatch({
                 type: UPDATE_CHANNEL,
-                channels: data.user.channels
+                channels: queryData.user.channels
             });
-            data.user.channels.forEach((channel) => {
+            queryData.user.channels.forEach((channel) => {
                 idbPromise('channels', 'put', channel);
             });
         } else if (!loading) {
@@ -44,7 +53,21 @@ function Sidebar() {
                 });
             });
         }
-    }, [data, loading, dispatch]);
+    }, [queryData, loading, dispatch]);
+
+    // subscription useEffect
+    useEffect(() => {
+        if (data) {
+            dispatch({
+                type: UPDATE_CHANNEL,
+                channels: data.channelAdded.channels
+            });
+            data.channelAdded.channels.forEach((channel) => {
+                idbPromise('channels', 'put', channel)
+            });
+        } 
+    }, [data, dispatch]);
+
 
     function selectChat(id) {
         dispatch({ type: TOGGLE_CHAT, currentChat: id });
@@ -73,7 +96,7 @@ function Sidebar() {
             <div>
                 <AddFriend />
             </div>
-            <div className="fixed container bottom-0 w-full border-t-4 border-black p-6 grid grid-cols-2">
+            <div className="fixed container bottom-0 w-full border-t-4 border-black bg-yellow-200 p-6 grid grid-cols-2">
                 <div className="col-auto">
                     <p className="text-lg font-bold text-gray-900">{state.firstName} {state.lastName}</p>
                     <p className="text-lg font-bold text-gray-900">Status: Online</p>
