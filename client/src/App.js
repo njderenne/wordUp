@@ -4,15 +4,6 @@ import { ApolloClient, InMemoryCache, ApolloProvider, HttpLink, split } from '@a
 import { getMainDefinition } from '@apollo/client/utilities';
 import { WebSocketLink } from '@apollo/client/link/ws';
 
-<<<<<<< HEAD
-
-// import { ApolloLink } from 'apollo-link';
-// import { ApolloProvider } from '@apollo/react-hooks';
-//import ApolloClient from 'apollo-boost';
-// import { HttpLink } from 'apollo-link-http';
-//import { InMemoryCache } from 'apollo-cache-inmemory';
-=======
->>>>>>> feature/implementUseSub
 import Dashboard from './pages/Dashboard';
 import Login from './pages/Login';
 import Signup from "./pages/Signup";
@@ -46,24 +37,6 @@ const link = split(
   httpLink,
 );
 
-<<<<<<< HEAD
-const link = ApolloLink.from([terminatingLink]);
-
-// const cache = new InMemoryCache();
-// const client = new ApolloClient({
-//   request: (operation) => {
-//     const token = localStorage.getItem('id_token')
-//     operation.setContext({
-//       headers: {
-//         authorization: token ? `Bearer ${token}` : ''
-//       }
-//     })
-//   },
-//   link,
-//   cache,
-// });
-=======
->>>>>>> feature/implementUseSub
 const client = new ApolloClient({
   link,
   cache: new InMemoryCache(),
@@ -72,11 +45,8 @@ const client = new ApolloClient({
   },
   link
 })
-<<<<<<< HEAD
-=======
 
 
->>>>>>> feature/implementUseSub
 function App() {
   return (
     <ApolloProvider client={client}>
