@@ -27,6 +27,10 @@ const resolvers = {
                 .populate('friends')
                 .populate('channels');
         },
+        userEmail: async (parent, args) => {
+            return User.findOne({ email: args.user.email })
+                .select('__v -password')
+        },
         channels: async () => {
             return Channel.find()
                 .select('-__v -password');

@@ -6,7 +6,8 @@ import {
     TOGGLE_FRIENDS,
     TOGGLE_CHAT,
     UPDATE_MESSAGES,
-    TOGGLE_NEWCHAT
+    TOGGLE_NEWCHAT,
+    GET_USERS
 } from './actions';
 
 export const reducer = (state, action) => {
@@ -46,6 +47,11 @@ export const reducer = (state, action) => {
             return {
                 ...state,
                 newChatOpen: !state.newChatOpen
+            }
+        case GET_USERS:
+            return {
+                ...state,
+                users: [...action.users]
             }
 
         default:

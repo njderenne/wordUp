@@ -62,6 +62,17 @@ export const QUERY_USER = gql`
     }
 `;
 
+export const QUERY_USERS = gql`
+    query GetUser ($userEmail: email!) {
+        user(userEmail: $userEmail) {
+            _id
+            firstName
+            lastName
+            email
+        }
+    }
+`
+
 export const QUERY_CHANNELS = gql`
     query GetChannels{
         channels {

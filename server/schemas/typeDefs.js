@@ -36,6 +36,7 @@ const typeDefs = gql`
         me: User
         user: User
         users: [User]
+        userEmail: User
         channels: [Channel]
         channel(channelId: ID!): Channel
     }

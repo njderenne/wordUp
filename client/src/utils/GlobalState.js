@@ -9,6 +9,7 @@ const ChannelProvider = ({ value = [], ...props}) => {
         channels: [],
         messages: [],
         friends: [],
+        users: [],
         loggedUser: '',
         currentChat: '',
         firstName: '',
