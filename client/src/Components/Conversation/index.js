@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useMutation, useQuery, useSubscription } from '@apollo/client';
-import { ADD_CHANNEL, ADD_MESSAGE } from '../../utils/mutations';
+import { ADD_MESSAGE } from '../../utils/mutations';
 import { QUERY_CHANNEL} from '../../utils/queries';
 import { MESSAGE_SUBSCRIPTION } from '../../utils/subscriptions';
 import AddParticipant from '../AddParticipant';
@@ -13,26 +13,30 @@ function Conversation() {
     const [state, dispatch] = useStoreContext();
     const [messageField, setMessage] = useState('');
     const {currentChat} = state;
-    const {loading, data, subscribeToMore} = useQuery(QUERY_CHANNEL, {
+    const {data} = useSubscription(MESSAGE_SUBSCRIPTION, {
         variables: {
             channelId: currentChat
         }
     });
-    // const {
-    //     data: { messageAdded },
-    //     loading 
-    // } = useSubscription(MESSAGE_SUBSCRIPTION, { variables: { channelId: currentChat } });
+
+    const {loading, data: queryData} = useQuery(QUERY_CHANNEL, {
+        variables: {
+            channelId: currentChat
+        }
+    });
 
     const [addMessage] = useMutation(ADD_MESSAGE);
     const [convoState, setConvoState] = useState()
-    
+
+
+    // query useEffect
     useEffect(() => {
-        if (data) {
+        if (queryData) {
             dispatch({
                 type: UPDATE_MESSAGES,
-                messages: data.channel.messages
+                messages: queryData.channel.messages
             });
-            data.channel.messages.forEach((message) => {
+            queryData.channel.messages.forEach((message) => {
                 idbPromise('messages', 'put', message)
             });
         } 
@@ -44,25 +48,20 @@ function Conversation() {
                 // })
             })
         }
-        // Error throwing from this line down
-        // let unsubscribe = subscribeToMore ({
-        //     document: MESSAGE_SUBSCRIPTION,
-        //     variables: { channelId: currentChat },
-        //     updateQuery: (prev, { subscriptionData }) => {
-        //         if(!subscriptionData.data) return prev;
-        //         const newFeedItem = subscriptionData.data.messageAdded;
-        //         return Object.assign({}, prev, {
-        //             channel: {
-        //                 messages: [newFeedItem, ...prev.channel.messages]
-        //             }
-        //         })
-        //     }
-        // });
-        // return () => {
-        //     unsubscribe();
-        // };
-        // TO HERE
-    }, [data, loading, dispatch, subscribeToMore]);
+    }, [queryData, loading, dispatch]);
+    
+    // subscription useEffect
+    useEffect(() => {
+        if (data) {
+            dispatch({
+                type: UPDATE_MESSAGES,
+                messages: data.messageAdded.messages
+            });
+            data.messageAdded.messages.forEach((message) => {
+                idbPromise('messages', 'put', message)
+            });
+        } 
+    }, [data, dispatch]);
 
     const userData = Auth.getProfile();
 
@@ -71,7 +70,8 @@ function Conversation() {
         try {
             await addMessage({
                 variables: {
-                    createdBy: convoState.createdBy, messageText: convoState.messageText,
+                    createdBy: convoState.createdBy, 
+                    messageText: convoState.messageText,
                     channelId: currentChat
                 }
             });
