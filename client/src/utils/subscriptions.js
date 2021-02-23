@@ -11,3 +11,14 @@ export const MESSAGE_SUBSCRIPTION = gql`
         }
     }
 `;
+
+export const CHANNEL_SUBSCRIPTION = gql `
+    subscription channelAdded($userId: ID) {
+        channelAdded(userId: $userId) {
+            _id
+            channels {
+                _id
+            }
+        }
+    }
+`;
