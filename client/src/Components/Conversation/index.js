@@ -102,19 +102,19 @@ function Conversation() {
     };
 
     return (
-        <div className="overflow-hidden bg-gray-700 h-screen">
+        <div className="overflow-hidden bg-gray-dark h-screen">
             <div className='overflow-scroll h-screen overflow-x-hidden'>
                     {(state.messages.map(message => (
                         <div key={message._id} className="grid">
                             {userData.data.email === message.email ? (
                                 <div className="grid flex flex-wrap justify-items-end">
-                                    <p className="max-w-sm md:max-w-4xl flex flex-wrap m-2 p-2 text-xl font-semibold rounded-2xl bg-gray-200 justify-items-end object-right">
+                                    <p className="max-w-sm md:max-w-4xl flex flex-wrap m-2 p-2 text-xl font-semibold rounded-2xl bg-blue justify-items-end object-right">
                                         {message.messageText}
                                     </p>
                                 </div> 
                             ) : (
                                 <div className="grid flex flex-wrap justify-items-start">
-                                    <p className="max-w-sm md:max-w-4xl flex flex-wrap m-2 p-2 text-xl font-semibold rounded-2xl bg-purple-600 text-gray-100 object-left">
+                                    <p className="max-w-sm md:max-w-4xl flex flex-wrap m-2 p-2 text-xl font-semibold rounded-2xl bg-gray-light object-left">
                                         {message.messageText}
                                     </p>
                                 </div>
@@ -126,8 +126,8 @@ function Conversation() {
             </div>
             <div className='bg-gray-700 overflow-hidden'>
                 <div className="m-2 flex fixed bottom-0 w-8/12">
-                    <input name="messageText" value={messageField} onChange={handleChange} className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border-2 border-black rounded-md" />
-                    <button type="submit" onClick={handleMessageSubmit} className="rounded-lg bg-green-500 border-black border-2 w-auto text-xl font-semibold p-2">
+                    <input name="messageText" value={messageField} onChange={handleChange} className="shadow-sm focus:ring-indigo-500 focus:border-blue-dark mt-1 block w-full sm:text-sm border-2 border-black rounded-md" />
+                    <button type="submit" onClick={handleMessageSubmit} className="rounded-lg bg-purple border-black border-2 w-auto text-xl font-bold hover:bg-purple-dark hover:text-gray-lightest p-2">
                         Send
                     </button>
                     <div>
