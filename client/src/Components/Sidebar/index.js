@@ -8,6 +8,7 @@ import { UPDATE_CHANNEL, GET_USER, TOGGLE_CHAT } from '../../utils/actions';
 import { idbPromise } from '../../utils/helpers';
 import Auth from '../../utils/auth'
 import { CHANNEL_SUBSCRIPTION } from '../../utils/subscriptions';
+import DeleteChat from '../DeleteChat';
 
 
 function Sidebar() {
@@ -75,6 +76,7 @@ function Sidebar() {
             </div>
             <AddChat />
             <AddFriend />
+            <DeleteChat />
             <div className="grid mx-auto justify-center grid-flow-row">
                 {state.channels.map(channel => (
                 <div key={channel._id}>
