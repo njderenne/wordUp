@@ -11,7 +11,7 @@ import Auth from '../../utils/auth'
 import { CHANNEL_SUBSCRIPTION } from '../../utils/subscriptions';
 
 
-function Sidebar() {
+function Hamburger() {
     const [state, dispatch] = useStoreContext();
 
     const [addChat, { error }] = useMutation(ADD_CHANNEL) 
@@ -79,46 +79,32 @@ function Sidebar() {
         console.log(id);
     }
 
-    let width = window.innerWidth;
-    console.log(width);
-    let mobileWidth = width <= 845;
-    console.log(mobileWidth);
-
     return (
-        <div>
-        {!mobileWidth ?
-            <div className="bg-gray bg-transparent relative">
-                <div className="border-b-4 border-black">
-                    <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Conversations</h2>
+        <div className="bg-gray bg-transparent relative">
+            <div className="border-b-4 border-black">
+                <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Conversations</h2>
+            </div>
+            <AddChat />
+            <div className="grid mx-auto justify-center grid-flow-row">
+            {state.channels.map(channel => (
+                <div onClick={() => {selectChat(channel._id)}} key={channel._id} className="flex border border-transparent hover:border-gray-lightest hover:bg-purple rounded-md my-1">
+                    <img src="../../assets/avatar.png" />
+                    <p className="text-lg font-bold text-gray-900" >{channel.name}</p>
                 </div>
-                <AddChat />
-                <div className="grid mx-auto justify-center grid-flow-row">
-                {state.channels.map(channel => (
-                    <div onClick={() => {selectChat(channel._id)}} key={channel._id} className="flex border border-transparent hover:border-gray-lightest hover:bg-purple rounded-md my-1">
-                        <img src="../../assets/avatar.png" />
-                        <p className="text-lg font-bold text-gray-900" >{channel.name}</p>
-                    </div>
-                ))}
-                </div>
-                <div>
-                    <AddFriend />
-                </div>
-                <div className="fixed container bottom-0 w-full border-t-4 border-black bg-gray p-6 grid grid-cols-2">
-                    <div className="col-auto">
-                        <p className="text-lg font-bold text-gray-900">{state.firstName} {state.lastName}</p>
-                        <p className="text-lg font-bold text-gray-900">Status: Online</p>
-                        <a href="/" onClick={() => Auth.logout()} className="text-lg font-bold text-gray-900 rounded-md border border-transparent hover:border-gray-lightest hover:bg-purple">Logout</a>
-                    </div>
+            ))}
+            </div>
+            <div>
+                <AddFriend />
+            </div>
+            <div className="fixed container bottom-0 w-full border-t-4 border-black bg-gray p-6 grid grid-cols-2">
+                <div className="col-auto">
+                    <p className="text-lg font-bold text-gray-900">{state.firstName} {state.lastName}</p>
+                    <p className="text-lg font-bold text-gray-900">Status: Online</p>
+                    <a href="/" onClick={() => Auth.logout()} className="text-lg font-bold text-gray-900 rounded-md border border-transparent hover:border-gray-lightest hover:bg-purple">Logout</a>
                 </div>
             </div>
-            :
-            // add styling for hamburger menu for sidebar when < 845px on load
-            <div className="justify-items-end text-right col-start-4 col-span-2">
-                Menu
-            </div>
-        }
         </div>
     )
 }
 
-export default Sidebar;
+export default Hamburger;
