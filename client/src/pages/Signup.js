@@ -21,56 +21,56 @@ function Signup(props) {
         console.log("You are now signed up for wordUp!");
     };
 
-    const validateData = async event => {
-        event.preventDefault();
+    // const validateData = async event => {
+    //     event.preventDefault();
 
-        let input = this.state.input;
-        let errors = {};
-        let isValid = true;
+    //     let input = this.state.input;
+    //     let errors = {};
+    //     let isValid = true;
 
-        if (!input["firstName"]) {
-            isValid = false;
-            errors["firstName"] = "Please enter your first name.";
-        }
+    //     if (!input["firstName"]) {
+    //         isValid = false;
+    //         errors["firstName"] = "Please enter your first name.";
+    //     }
 
-        if (!input["lastName"]) {
-            isValid = false;
-            errors["lastName"] = "Please enter your last name.";
-        }
+    //     if (!input["lastName"]) {
+    //         isValid = false;
+    //         errors["lastName"] = "Please enter your last name.";
+    //     }
 
-        if (typeof input ["email"] !== "undefined") {
+    //     if (typeof input ["email"] !== "undefined") {
 
-            let pattern = new RegExp(/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/);
-            if (!pattern.test(input["email"])) {
-                isValid = false;
-                errors["email"] = "Please enter valid email address.";
-            }
-        }
+    //         let pattern = new RegExp(/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/);
+    //         if (!pattern.test(input["email"])) {
+    //             isValid = false;
+    //             errors["email"] = "Please enter valid email address.";
+    //         }
+    //     }
 
-        if (!input["password"]) {
-            isValid = false;
-            errors["password"] = "Please enter your password";
-        }
+    //     if (!input["password"]) {
+    //         isValid = false;
+    //         errors["password"] = "Please enter your password";
+    //     }
 
-        if (!input["rePassword"]) {
-            isValid = false;
-            errors["rePassword"] = "Please re-enter your password";
-        }
+    //     if (!input["rePassword"]) {
+    //         isValid = false;
+    //         errors["rePassword"] = "Please re-enter your password";
+    //     }
 
-        if (typeof input["password"] !== "undefined" && typeof input["rePassword"] !== "undefined") {
+    //     if (typeof input["password"] !== "undefined" && typeof input["rePassword"] !== "undefined") {
 
-            if(input["password"] != input["rePassword"]) {
-                isValid = false;
-                errors["password"] = "Passwords do not match!";
-            }
-        }
+    //         if(input["password"] != input["rePassword"]) {
+    //             isValid = false;
+    //             errors["password"] = "Passwords do not match!";
+    //         }
+    //     }
 
-        this.setFormState({
-            errors: errors
-        })
+    //     this.setFormState({
+    //         errors: errors
+    //     })
 
-        return validateData;
-    };
+    //     return validateData;
+    // };
 
 
     const handleChange = event => {
