@@ -71,7 +71,7 @@ function Sidebar() {
     return (
         <div className="bg-gray bg-transparent relative">
             <div className="border-b-4 border-black">
-                <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Conversations</h2>
+                <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-darkest">Conversations</h2>
             </div>
             <AddChat />
             <div className="grid mx-auto justify-center grid-flow-row">
@@ -81,12 +81,12 @@ function Sidebar() {
                     (
                         <div onClick={() => {selectChat(channel._id)}} key={channel._id} className="bg-purple flex border border-transparent hover:border-gray-lightest hover:bg-purple-dark rounded-md my-1">
                             {/* <img src="../../assets/avatar.png" /> */}
-                            <p className="text-lg font-bold text-gray-900" >{channel.name}</p>
+                            <p className="text-lg font-bold text-gray-darkest" >{channel.name}</p>
                         </div>
                     ) : (
                         <div onClick={() => {selectChat(channel._id)}} key={channel._id} className="flex border border-transparent hover:border-gray-lightest hover:bg-purple-dark rounded-md my-1">
                             {/* <img src="../../assets/avatar.png" /> */}
-                            <p className="text-lg font-bold text-gray-900" >{channel.name}</p>
+                            <p className="text-lg font-bold text-gray-darkest" >{channel.name}</p>
                         </div>
                     )}
                 </div>
@@ -97,9 +97,9 @@ function Sidebar() {
             </div>
             <div className="fixed container bottom-0 w-full border-t-4 border-black bg-gray p-6 grid grid-cols-2">
                 <div className="col-auto">
-                    <p className="text-lg font-bold text-gray-900">{state.firstName} {state.lastName}</p>
-                    <p className="text-lg font-bold text-gray-900">Status: Online</p>
-                    <a href="/" onClick={() => Auth.logout()} className="text-lg font-bold text-gray-900 rounded-md border border-transparent hover:border-gray-lightest hover:bg-purple">Logout</a>
+                    <p className="text-lg font-bold text-gray-darkest">{state.firstName} {state.lastName}</p>
+                    <p className="text-lg font-bold text-gray-darkest">Status: Online</p>
+                    <a href="/" onClick={() => Auth.logout()} className="text-lg font-bold text-gray-darkest rounded-md border border-transparent hover:border-gray-lightest hover:bg-purple">Logout</a>
                 </div>
 
 
