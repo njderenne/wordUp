@@ -108,13 +108,13 @@ function Conversation() {
                         <div key={message._id} className="grid">
                             {userData.data.email === message.email ? (
                                 <div className="grid flex flex-wrap justify-items-end">
-                                    <p className="max-w-sm md:max-w-4xl flex flex-wrap m-2 p-2 text-xl font-semibold rounded-2xl bg-blue justify-items-end object-right">
+                                    <p className="max-w-sm md:max-w-4xl flex flex-wrap m-2 p-2 text-xl font-semibold rounded-2xl bg-blue justify-items-end object-right break-all">
                                         {message.messageText}
                                     </p>
                                 </div> 
                             ) : (
                                 <div className="grid flex flex-wrap justify-items-start">
-                                    <p className="max-w-sm md:max-w-4xl flex flex-wrap m-2 p-2 text-xl font-semibold rounded-2xl bg-gray-light object-left">
+                                    <p className="max-w-sm md:max-w-4xl flex flex-wrap m-2 p-2 text-xl font-semibold rounded-2xl bg-gray-light object-left break-all">
                                         {message.messageText}
                                     </p>
                                 </div>
