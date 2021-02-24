@@ -50,20 +50,21 @@ function AddChat() {
 
                 <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
 
-                <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full" role="dialog" aria-modal="true" aria-labelledby="modal-headline">
-                    <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                        <div className="sm:flex sm:items-start">
+                <div className="inline-block align-bottom border-4 bg-purple bg-transparent rounded-lg text-left overflow-hidden  shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full" role="dialog" aria-modal="true" aria-labelledby="modal-headline">
+                    <div className="bg-white container mx-auto px-4 pt-5 pb-4 align-center sm:p-6 sm:pb-4">
+                        <div className="justify-center items-center sm:flex sm:items-start">
                             <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                                <h3 className="text-lg leading-6 font-medium text-gray-900" id="modal-headline">
+                                <h3 className="container mx-auto text-lg leading-6 font-bold text-gray-900" id="modal-headline">
                                     Give your chat a name!
                                     </h3>
                                 <div className="mt-2">
-                                    <input id="chatName"></input>
+                                    <input id="chatName" className="container mx-auto my-2 border-2 border-black"></input>
                                 </div>
+                                <button onClick={handleNewChannel} className="container mx-auto shadow-sm focus:ring-indigo-500 focus:border-blue-dark mt-1 block sm:text-sm border-2 border-black rounded-md"> Add Chat </button>
+                                <button onClick={toggleNewChat} className="container mx-auto shadow-sm focus:ring-indigo-500 focus:border-blue-dark mt-1 block sm:text-sm border-2 border-black rounded-md">Close</button>
                             </div>
                         </div>
                     </div>
-                    <button onClick={handleNewChannel}> ➡️ </button>
                 </div>
             </div>
         </div>

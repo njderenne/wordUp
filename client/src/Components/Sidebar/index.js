@@ -14,8 +14,6 @@ import { CHANNEL_SUBSCRIPTION } from '../../utils/subscriptions';
 function Sidebar() {
     const [state, dispatch] = useStoreContext();
 
-    const [addChat, { error }] = useMutation(ADD_CHANNEL) 
-
     const { loading, data: queryData } = useQuery(QUERY_USER);
 
     const userData = Auth.getProfile();
@@ -25,16 +23,6 @@ function Sidebar() {
             userId: userData.data._id
         }
     })
-
-    const newConversation = async event => {
-        event.preventDefault();
-        try {
-
-        } catch (e) {
-            console.log(e)
-        }
-        console.log("Conversation Added")
-    }
 
     useEffect(() => {
         if(queryData) {
@@ -71,12 +59,6 @@ function Sidebar() {
 
     function selectChat(id) {
         dispatch({ type: TOGGLE_CHAT, currentChat: id });
-        //console.log(id)
-    }
-
-    function getChannelId(id) {
-        console.log("channel function");
-        console.log(id);
     }
 
     return (
@@ -85,21 +67,19 @@ function Sidebar() {
                 <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Conversations</h2>
             </div>
             <AddChat />
+            <AddFriend />
             <div className="grid mx-auto justify-center grid-flow-row">
             {state.channels.map(channel => (
                 <div onClick={() => {selectChat(channel._id)}} key={channel._id} className="flex border border-transparent hover:border-gray-lightest hover:bg-purple rounded-md my-1">
-                    {/* <img src="../../assets/avatar.png" /> */}
                     <p className="text-lg font-bold text-gray-900" >{channel.name}</p>
                 </div>
             ))}
             </div>
             <div>
-                <AddFriend />
             </div>
             <div className="fixed container bottom-0 w-full border-t-4 border-black bg-gray p-6 grid grid-cols-2">
                 <div className="col-auto">
-                    <p className="text-lg font-bold text-gray-900">{state.firstName} {state.lastName}</p>
-                    <p className="text-lg font-bold text-gray-900">Status: Online</p>
+                    <p className="text-lg font-bold text-gray-900">{userData.data.firstName} {userData.data.lastName}</p>
                     <a href="/" onClick={() => Auth.logout()} className="text-lg font-bold text-gray-900 rounded-md border border-transparent hover:border-gray-lightest hover:bg-purple">Logout</a>
                 </div>
 
