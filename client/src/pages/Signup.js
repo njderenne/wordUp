@@ -5,73 +5,36 @@ import Auth from '../utils/auth';
 import { ADD_USER } from '../utils/mutations';
 
 function Signup(props) {
-    const [formState, setFormState] = useState({ email: '', password: '' });
+    const [formState, setFormState] = useState({ email: '', password: '', rePassword: '' });
+    const [errorMessage, setErrorMessage] = useState('');
+    const { email, password, rePassword } = formState
     const [addUser] = useMutation(ADD_USER);
 
-    const handleFormSubmit = async event => {
+    const handleFormSubmit = async event => {       
         event.preventDefault();
-        const mutationResponse = await addUser({
-            variables: {
-                email: formState.email, password: formState.password,
-                firstName: formState.firstName, lastName: formState.lastName
+
+        if (formState.firstName && formState.lastName && formState.email && formState.password && formState.rePassword) {
+            if (validateEmail(formState.email)) {
+                if (formState.password === formState.rePassword) {
+                    const mutationResponse = await addUser({
+                        variables: {
+                            email: formState.email, password: formState.password,
+                            firstName: formState.firstName, lastName: formState.lastName
+                        }
+                    });
+                    const token = mutationResponse.data.addUser.token;
+                    Auth.login(token);
+                    console.log("You are now signed up for wordUp!");
+                } else {
+                    alert("Your passwords do not match")
+                }
+            } else {
+                alert("You need to enter a valid email")
             }
-        });
-        const token = mutationResponse.data.addUser.token;
-        Auth.login(token);
-        console.log("You are now signed up for wordUp!");
+        } else {
+            alert("You need to fill out all forms")
+        }
     };
-
-    // const validateData = async event => {
-    //     event.preventDefault();
-
-    //     let input = this.state.input;
-    //     let errors = {};
-    //     let isValid = true;
-
-    //     if (!input["firstName"]) {
-    //         isValid = false;
-    //         errors["firstName"] = "Please enter your first name.";
-    //     }
-
-    //     if (!input["lastName"]) {
-    //         isValid = false;
-    //         errors["lastName"] = "Please enter your last name.";
-    //     }
-
-    //     if (typeof input ["email"] !== "undefined") {
-
-    //         let pattern = new RegExp(/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/);
-    //         if (!pattern.test(input["email"])) {
-    //             isValid = false;
-    //             errors["email"] = "Please enter valid email address.";
-    //         }
-    //     }
-
-    //     if (!input["password"]) {
-    //         isValid = false;
-    //         errors["password"] = "Please enter your password";
-    //     }
-
-    //     if (!input["rePassword"]) {
-    //         isValid = false;
-    //         errors["rePassword"] = "Please re-enter your password";
-    //     }
-
-    //     if (typeof input["password"] !== "undefined" && typeof input["rePassword"] !== "undefined") {
-
-    //         if(input["password"] != input["rePassword"]) {
-    //             isValid = false;
-    //             errors["password"] = "Passwords do not match!";
-    //         }
-    //     }
-
-    //     this.setFormState({
-    //         errors: errors
-    //     })
-
-    //     return validateData;
-    // };
-
 
     const handleChange = event => {
         const { name, value } = event.target;
@@ -79,7 +42,54 @@ function Signup(props) {
             ...formState,
             [name]: value
         });
+
+        if (event.target.name === "firstName") {
+            if (event.target.value) {
+                console.log("first name entered");
+            } else {
+                console.log('enter a first name');
+            }
+        }
+
+        if (event.target.name === "lastName") {
+            if (event.target.value) {
+                console.log("last name entered");
+            } else {
+                console.log('enter a last name');
+            }
+        }
+
+        if (event.target.name === "email") {
+            const correctEmail = validateEmail(event.target.value);
+            if (correctEmail) {
+                console.log("email is valid");
+            } else {
+                console.log('enter valid email');
+            }
+        }
+
+        if (event.target.name === "password") {
+            if (event.target.value.length > 4) {
+                console.log("password is valid");
+            } else {
+                console.log('enter a password greater than 5 characters');
+            }
+        }
+
+        if (event.target.name === "rePassword") {
+            if (event.target.value === formState.password) {
+                console.log("passwords match");
+            } else {
+                console.log("passwords do not match")
+            }
+        }
+
     };
+
+    const validateEmail = (email) => {
+        let pattern = new RegExp(/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/);
+        return pattern.test(String(email).toLowerCase());
+    }
 
     return(
         <div className="min-h-screen items-center justify-center py-12 px-4 sm:px-6 lg:px-8 justify-center bg-gray">
@@ -89,25 +99,36 @@ function Signup(props) {
                 </h2>
                 <div className="">
                     <div>
-                        <input type="text" value= {formState.input.firstName} name="firstName" placeholder="First Name" onChange={handleChange} className="focus:ring-indigo-500 focus:border-indigo-500 mx-auto mb-1.5 flex-1 block w-5/6 rounded sm:text-sm border-gray-300" />
+                        <input type="text" 
+                         name="firstName" placeholder="First Name"
+                         onBlur={handleChange}
+                         className="focus:ring-indigo-500 focus:border-indigo-500 mx-auto mb-1.5 flex-1 block w-5/6 rounded sm:text-sm border-gray-300" />
                     </div>
                     <div>
-                        <input type="text" value= {formState.input.lastName} name="lastName" placeholder="Last Name" onChange={handleChange} className="focus:ring-indigo-500 focus: border-indigo-500 mx-auto mb-1.5 flex-1 block w-5/6 rounded sm:text-sm border-gray-300" />
+                        <input type="text"
+                        name="lastName" placeholder="Last Name" 
+                        onBlur={handleChange}
+                        className="focus:ring-indigo-500 focus: border-indigo-500 mx-auto mb-1.5 flex-1 block w-5/6 rounded sm:text-sm border-gray-300" />
                     </div>
                     <div>
-                        <input type="email" value= {formState.input.email} name="email" placeholder="Email" onChange={handleChange} className="focus:ring-indigo-500 focus: border-indigo-500 mx-auto mb-1.5 flex-1 block w-5/6 rounded sm:text-sm border-gray-300" />
+                        <input type="email" 
+                        name="email" placeholder="Email" 
+                        onBlur={handleChange} 
+                        className="focus:ring-indigo-500 focus: border-indigo-500 mx-auto mb-1.5 flex-1 block w-5/6 rounded sm:text-sm border-gray-300" />
                     </div>
                     <div>
-                        <input type="password" value= {formState.input.password} name="password" placeholder="Password" onChange={handleChange} className="focus:ring-indigo-500 focus: border-indigo-500 mx-auto mb-1.5 flex-1 block w-5/6 rounded sm:text-sm border-gray-300" />
+                        <input type="password"
+                        name="password" placeholder="Password" 
+                        onBlur={handleChange} 
+                        className="focus:ring-indigo-500 focus: border-indigo-500 mx-auto mb-1.5 flex-1 block w-5/6 rounded sm:text-sm border-gray-300" />
                     </div>
                     <div>
-                        <input type="password" value= {formState.input.rePassword} name="rePassword" placeholder="Confirm Password" onChange={handleChange} className="focus:ring-indigo-500 focus: border-indigo-500 mx-auto mb-1.5 flex-1 block w-5/6 rounded sm:text-sm border-gray-300" />
+                        <input type="password" 
+                        name="rePassword" placeholder="Confirm Password" 
+                        onChange={handleChange} 
+                        className="focus:ring-indigo-500 focus: border-indigo-500 mx-auto mb-1.5 flex-1 block w-5/6 rounded sm:text-sm border-gray-300" />
                     </div>
-<<<<<<< HEAD
-                    <button type="submit" value= "" className="w-10/12 mx-auto flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10">Sign Up!</button>
-=======
                     <button type="submit" className="w-10/12 mx-auto flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-purple-dark hover:bg-gray-lightest md:py-4 md:text-lg md:px-10">Sign Up!</button>
->>>>>>> 2cde0174dc580fa4c2d664b238b4391c37e2f6ce
                 </div>
             </form>
 
