@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useMutation, useQuery, useSubscription } from '@apollo/client';
 import { ADD_MESSAGE } from '../../utils/mutations';
 import { QUERY_CHANNEL} from '../../utils/queries';
@@ -27,6 +27,13 @@ function Conversation() {
 
     const [addMessage] = useMutation(ADD_MESSAGE);
     const [convoState, setConvoState] = useState()
+
+
+    const messagesEndRef = useRef(null);
+
+    const scrollToBottom = () => {
+        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
+    };
 
 
     // query useEffect
@@ -63,6 +70,10 @@ function Conversation() {
         } 
     }, [data, dispatch]);
 
+    useEffect(() => {
+        scrollToBottom()
+      }, [state.messages]);
+
     const userData = Auth.getProfile();
 
     const handleMessageSubmit = async event => {
@@ -91,20 +102,19 @@ function Conversation() {
     };
 
     return (
-        <div className="overflow-hidden bg-gray-700">
-            <div className=' h-screen overflow-scroll mb-24 overflow-x-hidden'>
-            {/* {loading ? (<p>loading...</p>) : ( */}
+        <div className="overflow-hidden bg-gray-700 h-screen">
+            <div className='overflow-scroll h-screen overflow-x-hidden'>
                     {(state.messages.map(message => (
                         <div key={message._id} className="grid">
                             {userData.data.email === message.email ? (
                                 <div className="grid flex flex-wrap justify-items-end">
-                                    <p className="max-w-3xl flex flex-wrap m-2 p-2 text-xl font-semibold rounded-2xl bg-gray-200 justify-items-end object-right">
+                                    <p className="max-w-sm md:max-w-4xl flex flex-wrap m-2 p-2 text-xl font-semibold rounded-2xl bg-gray-200 justify-items-end object-right">
                                         {message.messageText}
                                     </p>
                                 </div> 
                             ) : (
                                 <div className="grid flex flex-wrap justify-items-start">
-                                    <p className="max-w-3xl flex flex-wrap m-2 p-2 text-xl font-semibold rounded-2xl bg-purple-600 text-gray-100 text-right object-left">
+                                    <p className="max-w-sm md:max-w-4xl flex flex-wrap m-2 p-2 text-xl font-semibold rounded-2xl bg-purple-600 text-gray-100 object-left">
                                         {message.messageText}
                                     </p>
                                 </div>
@@ -112,8 +122,9 @@ function Conversation() {
                         </div>
                     ))
             )}
+            <div className='h-1/6' ref={messagesEndRef} />
             </div>
-            <div className='bg-gray-700'>
+            <div className='bg-gray-700 overflow-hidden'>
                 <div className="m-2 flex fixed bottom-0 w-8/12">
                     <input name="messageText" value={messageField} onChange={handleChange} className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border-2 border-black rounded-md" />
                     <button type="submit" onClick={handleMessageSubmit} className="rounded-lg bg-green-500 border-black border-2 w-auto text-xl font-semibold p-2">
