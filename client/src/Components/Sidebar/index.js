@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { useQuery, useMutation, useSubscription } from '@apollo/client';
+import React, { useEffect } from 'react';
+import { useQuery, useSubscription } from '@apollo/client';
 import { QUERY_USER } from '../../utils/queries';
-//import { ADD_CHANNEL } from '../../utils/mutations'
 import { useStoreContext } from '../../utils/GlobalState';
 import AddChat from '../AddChat';
 import AddFriend from '../SearchFriend';
@@ -13,8 +12,6 @@ import { CHANNEL_SUBSCRIPTION } from '../../utils/subscriptions';
 
 function Sidebar() {
     const [state, dispatch] = useStoreContext();
-
-    // const [addChat, { error }] = useMutation(ADD_CHANNEL) 
 
     const {currentChat} = state;
 
@@ -28,16 +25,6 @@ function Sidebar() {
         }
     })
 
-    // const newConversation = async event => {
-    //     event.preventDefault();
-    //     try {
-
-    //     } catch (e) {
-    //         console.log(e)
-    //     }
-    //     console.log("Conversation Added")
-    // }
-
     useEffect(() => {
         if (queryData) {
             dispatch({
@@ -46,6 +33,11 @@ function Sidebar() {
             });
             queryData.user.channels.forEach((channel) => {
                 idbPromise('channels', 'put', channel);
+            });
+            dispatch({
+                type: GET_USER,
+                firstName: queryData.user.firstName,
+                lastName: queryData.user.lastName
             });
         } else if (!loading) {
             idbPromise('channels', 'get').then((channels) => {
@@ -75,11 +67,6 @@ function Sidebar() {
         dispatch({ type: TOGGLE_CHAT, currentChat: id });
         return id;
     }
-
-    // function getChannelId(id) {
-    //     console.log("channel function");
-    //     console.log(id);
-    // }
 
     return (
         <div className="bg-gray bg-transparent relative">
