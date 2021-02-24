@@ -57,7 +57,7 @@ const typeDefs = gql`
 
     type Subscription {
         messageAdded(channelId: ID): Channel
-        channelAdded(userId: ID): Channel
+        channelAdded(userId: ID): User
     }
 `;
 

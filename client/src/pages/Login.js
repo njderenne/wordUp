@@ -29,10 +29,10 @@ function Login(props) {
     };
 
     return (
-        <div className="min-h-screen items-center justify-center py-12 px-4 sm:px-6 lg:px-8 justify-center bg-gray-700">
-            <form onSubmit= {handleFormSubmit} className="m-auto my-60 max-w-md w-full space-y-5 max-h-full bg-yellow-200 bg-transparent">
+        <div className="min-h-screen items-center justify-center py-12 px-4 sm:px-6 lg:px-8 justify-center bg-gray">
+            <form onSubmit= {handleFormSubmit} className="m-auto my-60 max-w-md w-full space-y-5 max-h-full bg-purple bg-transparent rounded-3xl">
                 <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-                    Login
+                    LOGIN
                 </h2>
                 <div>
                     <div>
@@ -53,10 +53,10 @@ function Login(props) {
                         <p> The provided credentials are incorrect</p>
                     </div> : null
                     }
-                    <button type="submit" className="w-10/12 mx-auto flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10">Login</button>
+                    <button type="submit" className="w-10/12 mx-auto flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-purple-dark hover:bg-gray-lightest md:py-4 md:text-lg md:px-10">Login</button>
                 </div>
                 <p className="mx-auto text-center">Don't have an account yet?
-                    <Link to="/signup"> Click here to sign up!</Link>
+                    <Link to="/signup" className='bg-gray-lightest rounded hover:bg-purple-dark hover:text-gray-lightest'> Click here to sign up!</Link>
                 </p>
             </form>
         </div>

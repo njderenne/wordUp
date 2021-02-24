@@ -11,8 +11,8 @@ const resolvers = {
         user: async (parent, args, context) => {
             if (context.user) {
                 const user = await User.findById(context.user._id)
-                .populate('friends')
-                .populate('channels');
+                    .populate('friends')
+                    .populate('channels');
 
                 return user;
             }
@@ -49,8 +49,8 @@ const resolvers = {
         channel: async (parent, { channelId }, context) => {
             if (context.user) {
                 const channel = await Channel.findById({ _id: channelId })
-                .populate('participants')
-                .populate('messages');
+                    .populate('participants')
+                    .populate('messages');
                 return channel;
             }
             throw new AuthenticationError('Not logged in');
@@ -120,10 +120,10 @@ const resolvers = {
             if (context.user) {
                 const updatedChannel = await Channel.findByIdAndUpdate(
                     { _id: channelId },
-                    { $push: { messages: { messageText, email: context.user.email, sender: context.user.firstName} } },
+                    { $push: { messages: { messageText, email: context.user.email, sender: context.user.firstName } } },
                     { new: true },
                 );
-                await pubsub.publish(MESSAGE_ADDED, {messageAdded: updatedChannel } );
+                await pubsub.publish(MESSAGE_ADDED, { messageAdded: updatedChannel });
                 return updatedChannel;
             }
             throw new AuthenticationError('You need to be logged in!');
@@ -145,13 +145,13 @@ const resolvers = {
                 const fullName = `${firstName} ${lastName}`;
                 const channel = await Channel.create({ ...args, createdBy: fullName, participants: context.user._id });
 
-                await pubsub.publish(CHANNEL_ADDED, {channelAdded: channel } );
 
                 const updatedUser = await User.findByIdAndUpdate(
                     { _id: context.user._id },
                     { $addToSet: { channels: channel._id } },
                     { new: true }
                 );
+                await pubsub.publish(CHANNEL_ADDED, { channelAdded: updatedUser });
                 return channel
             }
             throw new AuthenticationError('You need to be logged in!');
@@ -171,11 +171,14 @@ const resolvers = {
                     { $addToSet: { participants: args.participants } },
                     { new: true }
                 );
+
+
                 const updatedUser = await User.findByIdAndUpdate(
                     { _id: args.participants },
                     { $addToSet: { channels: args.channelId } },
                     { new: true }
                 );
+                await pubsub.publish(CHANNEL_ADDED, { channelAdded: updatedUser });
                 return updatedChannel;
             }
             throw new AuthenticationError('You need to be logged in!');
@@ -211,20 +214,20 @@ const resolvers = {
     Subscription: {
         messageAdded: {
 
-            subscribe: withFilter ( 
+            subscribe: withFilter(
                 () => pubsub.asyncIterator([MESSAGE_ADDED]),
-                    (payload, variables) => {
-                        return (String(payload.messageAdded._id) === variables.channelId);
-                    }
+                (payload, variables) => {
+                    return (String(payload.messageAdded._id) === variables.channelId);
+                }
             )
         },
         channelAdded: {
 
-            subscribe: withFilter (
+            subscribe: withFilter(
                 () => pubsub.asyncIterator([CHANNEL_ADDED]),
-                    (payload, variables) => {
-                        return (String(payload.channelAdded.participants[0]) === variables.userId);
-                    }
+                (payload, variables) => {
+                    return (String(payload.channelAdded._id) === variables.userId);
+                }
             )
         }
     }
