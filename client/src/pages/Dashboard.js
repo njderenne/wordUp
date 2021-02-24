@@ -16,7 +16,7 @@ const Dashboard = () => {
                     }}
                 </Conversation>
             </div>
-            <div className="col-span-1 col-start-4 col-end-5 border-l-2 border-black h-screen bg-yellow-200 bg-transparent">
+            <div className="col-span-1 col-start-4 col-end-5 border-l-2 border-black h-screen bg-gray bg-transparent">
                 <Sidebar />
             </div>
         </div>

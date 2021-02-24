@@ -80,14 +80,14 @@ function Sidebar() {
     }
 
     return (
-        <div className="bg-yellow-200 bg-transparent relative">
+        <div className="bg-gray bg-transparent relative">
             <div className="border-b-4 border-black">
                 <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Conversations</h2>
             </div>
             <AddChat />
             <div className="grid mx-auto justify-center grid-flow-row">
             {state.channels.map(channel => (
-                <div onClick={() => {selectChat(channel._id)}} key={channel._id} className="flex hover:bg-yellow-400 my-1">
+                <div onClick={() => {selectChat(channel._id)}} key={channel._id} className="flex border border-transparent hover:border-gray-lightest hover:bg-purple rounded-md my-1">
                     <img src="../../assets/avatar.png" />
                     <p className="text-lg font-bold text-gray-900" >{channel.name}</p>
                 </div>
@@ -96,11 +96,11 @@ function Sidebar() {
             <div>
                 <AddFriend />
             </div>
-            <div className="fixed container bottom-0 w-full border-t-4 border-black bg-yellow-200 p-6 grid grid-cols-2">
+            <div className="fixed container bottom-0 w-full border-t-4 border-black bg-gray p-6 grid grid-cols-2">
                 <div className="col-auto">
                     <p className="text-lg font-bold text-gray-900">{state.firstName} {state.lastName}</p>
                     <p className="text-lg font-bold text-gray-900">Status: Online</p>
-                    <a href="/" onClick={() => Auth.logout()} className="text-lg font-bold text-gray-900">Logout</a>
+                    <a href="/" onClick={() => Auth.logout()} className="text-lg font-bold text-gray-900 rounded-md border border-transparent hover:border-gray-lightest hover:bg-purple">Logout</a>
                 </div>
 
 

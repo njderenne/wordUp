@@ -31,7 +31,7 @@ function AddChat() {
     if (!state.newChatOpen) {
         return (
             <div className="">
-                <button onClick={toggleNewChat} className="w-10/12 mx-auto my-3 flex items-center justify-center px-8 border border-transparent text-base font-medium rounded-md text-white bg-green-500 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10">
+                <button onClick={toggleNewChat} className="w-10/12 mx-auto my-3 flex items-center justify-center px-8 border border-transparent text-base font-medium rounded-md text-white bg-blue hover:bg-purple md:py-4 md:text-lg md:px-10">
                     + New Conversation
                 </button>
             </div>
