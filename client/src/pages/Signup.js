@@ -10,29 +10,33 @@ function Signup(props) {
     const { email, password, rePassword } = formState
     const [addUser] = useMutation(ADD_USER);
 
-    const handleFormSubmit = async event => {       
+    const handleFormSubmit = async event => {
         event.preventDefault();
 
         if (formState.firstName && formState.lastName && formState.email && formState.password && formState.rePassword) {
             if (validateEmail(formState.email)) {
                 if (formState.password === formState.rePassword) {
-                    const mutationResponse = await addUser({
-                        variables: {
-                            email: formState.email, password: formState.password,
-                            firstName: formState.firstName, lastName: formState.lastName
-                        }
-                    });
-                    const token = mutationResponse.data.addUser.token;
-                    Auth.login(token);
-                    console.log("You are now signed up for wordUp!");
+                    if (formState.password.length > 4) {
+                        const mutationResponse = await addUser({
+                            variables: {
+                                email: formState.email, password: formState.password,
+                                firstName: formState.firstName, lastName: formState.lastName
+                            }
+                        });
+                        const token = mutationResponse.data.addUser.token;
+                        Auth.login(token);
+                        console.log("You are now signed up for wordUp!");
+                    } else {
+                        setErrorMessage("Your password needs to be at least 5 characters");
+                    }
                 } else {
-                    alert("Your passwords do not match")
+                    setErrorMessage("Your passwords do not match");
                 }
             } else {
-                alert("You need to enter a valid email")
+                setErrorMessage("You need to enter a valid email");
             }
         } else {
-            alert("You need to fill out all forms")
+            setErrorMessage("You need to fill out all forms");
         }
     };
 
@@ -129,7 +133,15 @@ function Signup(props) {
                         className="focus:ring-indigo-500 focus: border-indigo-500 mx-auto mb-1.5 flex-1 block w-5/6 rounded sm:text-sm border-gray-300" />
                     </div>
                     <button type="submit" className="w-10/12 mx-auto flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-purple-dark hover:bg-gray-lightest md:py-4 md:text-lg md:px-10">Sign Up!</button>
+                    {errorMessage && (
+                        <div>
+                            <p>{errorMessage}</p>
+                        </div>
+                    )}                    
                 </div>
+                <p className="mx-auto text-center">Already have an account? 
+                    <Link to="/" className='bg-gray-lightest rounded hover:bg-purple-dark hover:text-gray-lightest'> Click here to login!</Link>
+                </p>
             </form>
 
         </div>

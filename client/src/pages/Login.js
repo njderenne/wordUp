@@ -17,7 +17,6 @@ function Login() {
         } catch (e) {
             console.log(e);
         }
-        console.log("You are logged in")
     };
 
     const handleChange = event => {
@@ -29,7 +28,7 @@ function Login() {
     };
 
     return (
-        <div className="min-h-screen items-center justify-center py-12 px-4 sm:px-6 lg:px-8 justify-center bg-gray">
+        <div className="min-h-screen items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-gray">
             <form onSubmit= {handleFormSubmit} className="m-auto my-60 max-w-md w-full space-y-5 max-h-full bg-purple bg-transparent rounded-3xl">
                 <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
                     LOGIN

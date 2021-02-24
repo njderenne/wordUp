@@ -53,8 +53,9 @@ export const ADD_CHANNEL = gql`
     `;
 
 export const ADD_FRIEND = gql` 
-    mutation addFriend($id: ID!) {
-        addFriend(friendId:$id) {
+    mutation addFriend($friendId: ID!) {
+        addFriend(friendId: $friendId) {
+            _id
             firstName
         }
     }

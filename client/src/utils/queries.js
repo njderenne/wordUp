@@ -62,6 +62,23 @@ export const QUERY_USER = gql`
     }
 `;
 
+export const QUERY_USERS = gql`
+    query{
+        users{
+            firstName
+            lastName
+            _id
+            email
+            friends{
+                _id
+                firstName
+                lastName
+                email
+            }
+        }   
+    }
+`;
+
 export const QUERY_CHANNELS = gql`
     query GetChannels{
         channels {
