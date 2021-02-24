@@ -1,70 +1,31 @@
-# Getting Started with Create React App
+  # wordUp
+  [![License](https://img.shields.io/static/v1?label=License&message=MIT&color=blue)](https://img.shields.io/static/v1?label=License&message=MIT&color=blue)
+  
+  ## Description
+  wordUp is a real-time chat application for users to communicate with each other over the internet.  The user is able to signup or login to their profile for personalized chats with other users.  When on the dashboard of the application the user can select chats that they have to see messages that them and the other chat participants have made.  There is a input field for the user to add a message to submit to the current selected chat.  Any user can add a chat or conversation on the sidebar as well as add participants to a conversation.  There is also an add a friend button that will pop up a modal to add a friend to the users account and the friends list will populate the add participant modal when selected.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+  ## Table of Contents
+  * [Installation](#installation)
+  * [Usage](#usage)
+  * [License](#license)
+  * [Contributing](#contributing)
+  * [Questions](#questions)
+    
+  ## Installation
+  Go to THIS WEBSITE to use the application.
 
-## Available Scripts
+  ## Usage
+  To use signup or login then create a new conversation or select a conversation you are part of.  If you made a new conversation, add a participant and start chatting with each other.  Add friends to your profile by hitting the add friend button.
 
-In the project directory, you can run:
+  ## License
+  [MIT](https://opensource.org/licenses/MIT)
 
-### `npm start`
+  ## Contributing
+  We are currently closed to any contributions, but if you would like to talk about the application just contact us.
+  Current Contributors:  Duncan Marten, Nate Derenne, Brent Johnson, and Austin Price
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+  ## Tests
+  No
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+  ## Questions
+  * Contact us at [Github](http://www.github.com/DuncanMarten)
