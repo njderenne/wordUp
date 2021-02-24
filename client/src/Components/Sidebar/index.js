@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useQuery, useMutation, useSubscription } from '@apollo/client';
 import { QUERY_USER } from '../../utils/queries';
-import { ADD_CHANNEL } from '../../utils/mutations'
+//import { ADD_CHANNEL } from '../../utils/mutations'
 import { useStoreContext } from '../../utils/GlobalState';
 import AddChat from '../AddChat';
 import AddFriend from '../SearchFriend';
@@ -14,30 +14,32 @@ import { CHANNEL_SUBSCRIPTION } from '../../utils/subscriptions';
 function Sidebar() {
     const [state, dispatch] = useStoreContext();
 
-    const [addChat, { error }] = useMutation(ADD_CHANNEL) 
+    // const [addChat, { error }] = useMutation(ADD_CHANNEL) 
+
+    const {currentChat} = state;
 
     const { loading, data: queryData } = useQuery(QUERY_USER);
 
     const userData = Auth.getProfile();
 
-    const {data} = useSubscription(CHANNEL_SUBSCRIPTION, {
+    const { data } = useSubscription(CHANNEL_SUBSCRIPTION, {
         variables: {
             userId: userData.data._id
         }
     })
 
-    const newConversation = async event => {
-        event.preventDefault();
-        try {
+    // const newConversation = async event => {
+    //     event.preventDefault();
+    //     try {
 
-        } catch (e) {
-            console.log(e)
-        }
-        console.log("Conversation Added")
-    }
+    //     } catch (e) {
+    //         console.log(e)
+    //     }
+    //     console.log("Conversation Added")
+    // }
 
     useEffect(() => {
-        if(queryData) {
+        if (queryData) {
             dispatch({
                 type: UPDATE_CHANNEL,
                 channels: queryData.user.channels
@@ -65,19 +67,19 @@ function Sidebar() {
             data.channelAdded.channels.forEach((channel) => {
                 idbPromise('channels', 'put', channel)
             });
-        } 
+        }
     }, [data, dispatch]);
 
 
     function selectChat(id) {
         dispatch({ type: TOGGLE_CHAT, currentChat: id });
-        //console.log(id)
+        return id;
     }
 
-    function getChannelId(id) {
-        console.log("channel function");
-        console.log(id);
-    }
+    // function getChannelId(id) {
+    //     console.log("channel function");
+    //     console.log(id);
+    // }
 
     return (
         <div className="bg-gray bg-transparent relative">
@@ -86,10 +88,20 @@ function Sidebar() {
             </div>
             <AddChat />
             <div className="grid mx-auto justify-center grid-flow-row">
-            {state.channels.map(channel => (
-                <div onClick={() => {selectChat(channel._id)}} key={channel._id} className="flex border border-transparent hover:border-gray-lightest hover:bg-purple rounded-md my-1">
-                    {/* <img src="../../assets/avatar.png" /> */}
-                    <p className="text-lg font-bold text-gray-900" >{channel.name}</p>
+                {state.channels.map(channel => (
+                <div key={channel._id}>
+                    {currentChat === channel._id ?
+                    (
+                        <div onClick={() => {selectChat(channel._id)}} key={channel._id} className="bg-purple flex border border-transparent hover:border-gray-lightest hover:bg-purple-dark rounded-md my-1">
+                            {/* <img src="../../assets/avatar.png" /> */}
+                            <p className="text-lg font-bold text-gray-900" >{channel.name}</p>
+                        </div>
+                    ) : (
+                        <div onClick={() => {selectChat(channel._id)}} key={channel._id} className="flex border border-transparent hover:border-gray-lightest hover:bg-purple-dark rounded-md my-1">
+                            {/* <img src="../../assets/avatar.png" /> */}
+                            <p className="text-lg font-bold text-gray-900" >{channel.name}</p>
+                        </div>
+                    )}
                 </div>
             ))}
             </div>

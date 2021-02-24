@@ -1,6 +1,6 @@
 const { PubSub, withFilter } = require('apollo-server');
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Message, Channel } = require('../models');
+const { User, Channel } = require('../models');
 const { signToken } = require('../utils/auth');
 const pubsub = new PubSub();
 const MESSAGE_ADDED = 'MESSAGE_ADDED';
