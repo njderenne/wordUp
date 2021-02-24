@@ -130,6 +130,9 @@ function Signup(props) {
                     </div>
                     <button type="submit" className="w-10/12 mx-auto flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-purple-dark hover:bg-gray-lightest md:py-4 md:text-lg md:px-10">Sign Up!</button>
                 </div>
+                <p className="mx-auto text-center">Already have an account? 
+                    <Link to="/" className='bg-gray-lightest rounded hover:bg-purple-dark hover:text-gray-lightest'> Click here to login!</Link>
+                </p>
             </form>
 
         </div>
