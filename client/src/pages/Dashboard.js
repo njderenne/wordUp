@@ -1,7 +1,6 @@
 import React from 'react';
 import Sidebar from '../Components/Sidebar'
 import Conversation from '../Components/Conversation'
-import { MESSAGE_SUBSCRIPTION } from '../utils/subscriptions';
 
 
 

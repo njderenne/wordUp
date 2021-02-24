@@ -33,23 +33,21 @@ function AddFriend() {
     const handleNewFriend = async event => {
         event.preventDefault();
         const friend = document.querySelector('#searchBar').value;
-        console.log(friend)
         for (let i = 0; i < state.users.length; i++) {
             if (friend === state.users[i].email) {
                 let addFriendId = state.users[i]._id
-                console.log(addFriendId)
                 try {
                 await addFriend({
                 variables: {
                     friendId: addFriendId
                 }
                     });
-                    console.log("friend added" + friend)
                 } catch (e) {
                     console.error(e);
                 }
             }
         }
+        toggleNewFriend();
     };
 
     function toggleNewFriend() {

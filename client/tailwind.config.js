@@ -13,11 +13,6 @@ module.exports = {
         DEFAULT: '#93C5FD',
         dark: '#1E40AF',
       },
-      pink: {
-        light: '#ff7ce5',
-        DEFAULT: '#ff49db',
-        dark: '#ff16d1',
-      },
       gray: {
         darkest: '#1f2d3d',
         dark: '#3c4858',
