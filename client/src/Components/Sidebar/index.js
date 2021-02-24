@@ -97,14 +97,9 @@ function Sidebar() {
             </div>
             <div className="fixed container bottom-0 w-full border-t-4 border-black bg-gray p-6 grid grid-cols-2">
                 <div className="col-auto">
-<<<<<<< HEAD
                     <p className="text-lg font-bold text-gray-darkest">{state.firstName} {state.lastName}</p>
                     <p className="text-lg font-bold text-gray-darkest">Status: Online</p>
                     <a href="/" onClick={() => Auth.logout()} className="text-lg font-bold text-gray-darkest rounded-md border border-transparent hover:border-gray-lightest hover:bg-purple">Logout</a>
-=======
-                    <p className="text-lg font-bold text-gray-900">{state.firstName} {state.lastName}</p>
-                    <a href="/" onClick={() => Auth.logout()} className="text-lg font-bold text-gray-900 rounded-md border border-transparent hover:border-gray-lightest hover:bg-purple">Logout</a>
->>>>>>> 7ac9aff313008270cdce5718ac681db437951511
                 </div>
 
 
