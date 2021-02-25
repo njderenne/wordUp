@@ -61,7 +61,7 @@ function AddParticipant() {
     if(!state.friendsListOpen) {
         return (
             <button onClick={toggleFriendsList} className="rounded-lg bg-purple border-black border-2 w-auto sm:text-xl text-small font-bold hover:bg-purple-dark hover:text-gray-lightest p-2 sm:h-auto h-8">
-                Add Friend
+                Add To Chat
             </button>
         )
     }
