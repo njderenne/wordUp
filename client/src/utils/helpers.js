@@ -8,6 +8,7 @@ export function idbPromise(storeName, method, object) {
       db.createObjectStore('friends', { keyPath: '_id'});
       db.createObjectStore('messages', { keyPath: '_id'});
       db.createObjectStore('users', { keyPath: '_id'});
+      db.createObjectStore('participants', {keyPath: '_id'});
     };
 
     request.onerror = function (e) {

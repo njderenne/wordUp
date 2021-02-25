@@ -35,6 +35,13 @@ function DeleteChat() {
     //         idbPromise('channels', 'delete', currentChat);
     //     });
     // }
+    if(state.currentChat === '') {
+        return (
+            <div></div>
+        )
+    }
+
+
 
     return (
         <div className="">
