@@ -8,6 +8,7 @@ import { useStoreContext } from '../../utils/GlobalState';
 import { UPDATE_MESSAGES } from '../../utils/actions';
 import { idbPromise } from '../../utils/helpers';
 import Auth from '../../utils/auth';
+import ChatParticipants from '../ChatParticipants';
 
 function Conversation() {
     const [state, dispatch] = useStoreContext();
@@ -133,6 +134,9 @@ function Conversation() {
                     </button>
                     <div>
                         <AddParticipant />
+                    </div>
+                    <div>
+                        <ChatParticipants />
                     </div>
                 </div>
             </div>

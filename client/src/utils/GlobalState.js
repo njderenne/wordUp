@@ -9,6 +9,7 @@ const ChannelProvider = ({ value = [], ...props}) => {
         channels: [],
         messages: [],
         friends: [],
+        participants: [],
         users: [],
         loggedUser: '',
         currentChat: '',
@@ -17,6 +18,7 @@ const ChannelProvider = ({ value = [], ...props}) => {
         friendsListOpen: false,
         newChatOpen: false,
         newFriendOpen: false,
+        participantsListOpen: false
         })
     //console.log(state);
     return <Provider value={[state, dispatch]} {...props} />;
