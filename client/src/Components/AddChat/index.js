@@ -3,7 +3,7 @@ import { useMutation } from '@apollo/client';
 import { useStoreContext } from '../../utils/GlobalState';
 import { ADD_CHANNEL } from '../../utils/mutations';
 import { TOGGLE_NEWCHAT } from '../../utils/actions';
-import { idbPromise } from '../../utils/helpers';
+// import { idbPromise } from '../../utils/helpers';
 
 
 function AddChat() {
