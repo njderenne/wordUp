@@ -12,14 +12,6 @@ function ChatParticipants() {
             channelId: state.currentChat
         }
     });
-    console.log(state.currentChat)
-    if (state.currentChat === '') {
-        console.log('hey it works')
-    }
-
-    if (state.currentChat != '') {
-        console.log('chat selected')
-    }
 
     useEffect(() => {
         if (data) {
@@ -46,7 +38,6 @@ function ChatParticipants() {
     }
 
     if(state.currentChat === '') {
-        console.log('no chat selected')
         return(
             <div></div>
         )
