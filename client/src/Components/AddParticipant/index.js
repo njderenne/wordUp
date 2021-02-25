@@ -86,17 +86,17 @@ function AddParticipant() {
                                 </h3>
                                 <div className="mt-2">
                                     {state.friends.map(friend => (
-                                        <p onClick={() => {clickHandler(friend._id)}} key={friend._id} className="text-sm text-gray-500">{friend.firstName} {friend.lastName}</p>
+                                        <p onClick={() => {clickHandler(friend._id)}} key={friend._id} className="text-sm hover:bg-purple-dark cursor-pointer border hover:text-gray-lightest border-transparent hover:border-gray-lightest rounded-md text-gray-500">{friend.firstName} {friend.lastName}</p>
                                     ))}
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                        <button onClick={handleAddSubmit} type="button" className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm">
+                        <button onClick={handleAddSubmit} type="button" className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm  hover:bg-purple-dark border hover:text-gray-lightest border-transparent hover:border-gray-lightest">
                             Add
                         </button>
-                        <button type="button" onClick={toggleFriendsList} className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
+                        <button type="button" onClick={toggleFriendsList} className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm hover:bg-gray-lightest">
                             Cancel
                         </button>
                     </div>

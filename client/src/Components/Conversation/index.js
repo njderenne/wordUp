@@ -114,9 +114,10 @@ function Conversation() {
                                 </div> 
                             ) : (
                                 <div className="grid flex flex-wrap justify-items-start">
-                                    <p className="max-w-sm md:max-w-4xl flex flex-wrap m-2 p-2 text-xl font-semibold rounded-2xl bg-gray-light object-left break-all">
+                                    <p className="mb-0 max-w-sm md:max-w-4xl flex flex-wrap m-2 p-2 text-xl font-semibold rounded-2xl bg-gray-light object-left break-all">
                                         {message.messageText}
                                     </p>
+                                    <p className='pl-4 text-sm text-gray-lightest'>{message.sender}</p>
                                 </div>
                             )}
                         </div>

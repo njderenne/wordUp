@@ -16,6 +16,7 @@ const typeDefs = gql`
         createdAt: String
         email: String
         sender: String
+        name: String
     }
 
     type Channel {
