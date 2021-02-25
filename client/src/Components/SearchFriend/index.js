@@ -43,11 +43,12 @@ function AddFriend() {
                 }
                     });
                 } catch (e) {
-                    console.error(e);
+                    console.error("user not found");
                 }
             }
         }
         toggleNewFriend();
+        window.location.reload();
     };
 
     function toggleNewFriend() {
