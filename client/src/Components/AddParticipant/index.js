@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useQuery, useMutation } from '@apollo/client';
 import { useStoreContext } from '../../utils/GlobalState'
 import { TOGGLE_FRIENDS, GET_FRIENDS } from '../../utils/actions';
@@ -10,6 +10,7 @@ function AddParticipant() {
     const [state, dispatch] = useStoreContext();
     const [addParticipant] = useMutation(ADD_PARTICIPANT)
     const { loading, data } = useQuery(QUERY_USER)
+    const [tempArray, setTempArray] = useState();
 
     let tempFriendArray = []
 
@@ -47,11 +48,12 @@ function AddParticipant() {
         } catch (e) {
             console.error(e)
         }
+        toggleFriendsList()
     }
 
     function clickHandler(friend) {
         tempFriendArray.push(friend)
-        
+        setTempArray(tempFriendArray);
     }
 
     function toggleFriendsList() {

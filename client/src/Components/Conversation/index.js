@@ -102,6 +102,20 @@ function Conversation() {
         setMessage(event.target.value);
     };
 
+    if (state.currentChat === '') {
+        return (
+            <div className="overflow-hidden bg-gray-dark h-screen">
+                <div className='overflow-scroll h-screen overflow-x-hidden'>
+                    <div className='h-1/6' ref={messagesEndRef} />
+                </div>
+                <div className='bg-gray-darkest overflow-hidden'>
+                    <div className="m-2 flex fixed bottom-0 w-8/12">
+                    </div>
+                </div>
+            </div>
+        )
+    }
+
     return (
         <div className="overflow-hidden bg-gray-dark h-screen">
             <div className='overflow-scroll h-screen overflow-x-hidden'>
