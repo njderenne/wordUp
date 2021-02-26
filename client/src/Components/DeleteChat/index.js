@@ -13,7 +13,21 @@ function DeleteChat() {
 
     const handleDeleteChannel = async event => {
         event.preventDefault();
+
+        const removeChannel = channelToRemove => {
+            dispatch({
+                type: DELETE_CHANNEL,
+                _id: channelToRemove._id
+            });
+            state.channels.forEach((channel) => {
+                if(channel._id === currentChat) {
+                    idbPromise('channels', 'delete', { ...channel });
+                }
+
+            })
+        };
         try {
+            removeChannel(currentChat)
             await deleteChannel({
                 variables: {
                     channelId: currentChat
@@ -22,9 +36,14 @@ function DeleteChat() {
         } catch (e) {
             console.error(e);
         }
+
+
+        //removeChannel(currentChat)
         window.location.reload();
         // updateIDB();
     };
+
+    
 
     // function updateIDB() {
     //     dispatch({
