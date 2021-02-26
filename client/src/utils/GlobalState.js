@@ -20,7 +20,6 @@ const ChannelProvider = ({ value = [], ...props}) => {
         newFriendOpen: false,
         participantsListOpen: false
         })
-    //console.log(state);
     return <Provider value={[state, dispatch]} {...props} />;
     
 };

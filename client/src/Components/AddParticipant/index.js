@@ -34,7 +34,7 @@ function AddParticipant() {
 
     const handleAddSubmit = async event => {
         event.preventDefault();
-        console.log(tempFriendArray)
+        
         try {
             for(let i = 0; i < tempFriendArray.length; i++) {
                 addParticipant({
@@ -43,7 +43,7 @@ function AddParticipant() {
                         participants: tempFriendArray[i]
                     }
                 });
-                console.log("added")
+                
             }
         } catch (e) {
             console.error(e)
@@ -58,7 +58,7 @@ function AddParticipant() {
         tempHighlight.classList.add("text-gray-lightest")
         tempHighlight.classList.add("border-transparent")
         tempHighlight.classList.add("border-gray-lightest")
-        console.log(friend)
+        
         tempFriendArray.push(friend)
     }
 

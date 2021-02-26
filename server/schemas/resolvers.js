@@ -116,7 +116,7 @@ const resolvers = {
             throw new AuthenticationError('You need to be logged in!');
         },
         addMessage: async (parent, { channelId, messageText }, context) => {
-            // console.log(context.user);
+
             if (context.user) {
                 const updatedChannel = await Channel.findByIdAndUpdate(
                     { _id: channelId },

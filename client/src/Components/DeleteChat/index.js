@@ -2,7 +2,6 @@ import React from 'react';
 import { useMutation } from '@apollo/client';
 import { useStoreContext } from '../../utils/GlobalState';
 import { DELETE_CHANNEL } from '../../utils/mutations';
-import { UPDATE_CHANNEL } from '../../utils/actions';
 import { idbPromise } from '../../utils/helpers';
 
 function DeleteChat() {
@@ -15,15 +14,10 @@ function DeleteChat() {
         event.preventDefault();
 
         const removeChannel = channelToRemove => {
-            dispatch({
-                type: DELETE_CHANNEL,
-                _id: channelToRemove._id
-            });
             state.channels.forEach((channel) => {
                 if(channel._id === currentChat) {
                     idbPromise('channels', 'delete', { ...channel });
                 }
-
             })
         };
         try {
@@ -37,23 +31,11 @@ function DeleteChat() {
             console.error(e);
         }
 
-
-        //removeChannel(currentChat)
         window.location.reload();
-        // updateIDB();
+
     };
 
     
-
-    // function updateIDB() {
-    //     dispatch({
-    //         type: UPDATE_CHANNEL,
-    //         channels: currentChat
-    //     });
-    //     ((currentChat) => {
-    //         idbPromise('channels', 'delete', currentChat);
-    //     });
-    // }
     if(state.currentChat === '') {
         return (
             <div></div>

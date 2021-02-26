@@ -57,9 +57,6 @@ function Sidebar() {
                 type: UPDATE_CHANNEL,
                 channels: data.channelAdded.channels
             });
-            data.channelAdded.channels.forEach((channel) => {
-                idbPromise('channels', 'put', channel)
-            });
         }
     }, [data, dispatch]);
 

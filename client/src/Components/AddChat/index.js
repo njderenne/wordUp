@@ -17,11 +17,20 @@ function AddChat() {
         const chatName = document.querySelector('#chatName').value;
 
         try {
-            await addChannel({
+            const { data } = await addChannel({
                 variables: {
                     name: chatName
                 }
             });
+
+            const newChat = data.addChannel._id;
+
+            state.channels.forEach((channel) => {
+                if(channel._id === newChat) {
+                    idbPromise('channels', 'put', { ...channel });
+                }
+            })
+
             toggleNewChat();
             window.location.reload();
         } catch (e) {

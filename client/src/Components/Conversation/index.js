@@ -51,10 +51,10 @@ function Conversation() {
         } 
          else if (!loading) {
             idbPromise('messages', 'get').then((messages) => {
-                // dispatch({
-                //     type: UPDATE_MESSAGES,
-                //     messages: messages
-                // })
+                dispatch({
+                    type: UPDATE_MESSAGES,
+                    messages: messages
+                })
             })
         }
     }, [queryData, loading, dispatch]);
@@ -65,9 +65,6 @@ function Conversation() {
             dispatch({
                 type: UPDATE_MESSAGES,
                 messages: data.messageAdded.messages
-            });
-            data.messageAdded.messages.forEach((message) => {
-                idbPromise('messages', 'put', message)
             });
         } 
     }, [data, dispatch]);
