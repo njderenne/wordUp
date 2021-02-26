@@ -16,10 +16,10 @@ const httpLink = new HttpLink({
   }
 });
 
-const HOST = location.origin.replace(/^http/, 'ws')
+//const HOST = location.origin.replace(/^http/, 'ws')
 
 const wsLink = new WebSocketLink({
-  uri: HOST,
+  uri: '/graphql',
   options: {
     reconnect: true,
     connectionParams: {
