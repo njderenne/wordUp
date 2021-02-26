@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useQuery, useMutation } from '@apollo/client';
 import { useStoreContext } from '../../utils/GlobalState'
-import { TOGGLE_FRIENDS, GET_FRIENDS } from '../../utils/actions';
+import { TOGGLE_FRIENDS, GET_FRIENDS, UPDATE_CHANNEL } from '../../utils/actions';
 import { ADD_PARTICIPANT } from '../../utils/mutations';
 import { QUERY_USER } from '../../utils/queries';
 import { idbPromise } from '../../utils/helpers'
@@ -36,18 +36,19 @@ function AddParticipant() {
         event.preventDefault();
         try {
             for(let i = 0; i < tempFriendArray.length; i++) {
-            addParticipant({
-                variables: {
-                    channelId: state.currentChat,
-                    participants: tempFriendArray[i]
-                }
-            });
-            console.log("added")
-        }
+                addParticipant({
+                    variables: {
+                        channelId: state.currentChat,
+                        participants: tempFriendArray[i]
+                    }
+                });
+                console.log("added")
+            }
         } catch (e) {
             console.error(e)
         }
         toggleFriendsList()
+        window.location.reload();
     }
 
     function clickHandler(friend) {
