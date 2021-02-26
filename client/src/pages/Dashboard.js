@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react';
 import Sidebar from '../Components/Sidebar'
 import Conversation from '../Components/Conversation'
 import Menu from '../Components/Menu';
+import useWindowSize from '../utils/useWindowSize';
 
 
 const Dashboard = () => {
 
-    let width = window.innerWidth;
-    let mobileWidth = width <= 845;
+    const size = useWindowSize();
+    let mobileWidth = size.width <= 845;
 
     return (
         <div>
