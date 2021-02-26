@@ -145,8 +145,8 @@ function Conversation() {
                 {!mobileWidth ?
                     <div className="m-2 flex fixed bottom-0 h-12 w-8/12">
                         <input name="messageText" value={messageField} onChange={handleChange} className="shadow-sm border-2  mt-1 block w-full sm:text-sm rounded-md" />
-                        <button type="submit" onClick={handleMessageSubmit} className="rounded-lg bg-purple  border-2 w-auto sm:text-xl text-small font-bold hover:bg-purple-dark hover:text-gray-lightest p-2 sm:h-auto h-8">
-                            Send
+                        <button type="submit" onClick={handleMessageSubmit} className="rounded-lg bg-blue  border-2 w-auto sm:text-xl text-small font-bold hover:bg-purple-dark hover:text-gray-lightest p-2 sm:h-auto h-8">
+                            <img src='/images/send.PNG'className='h-10 p-0' />
                         </button>
                         <div>
                             <AddParticipant />
@@ -159,8 +159,8 @@ function Conversation() {
                     <div className="m-2 flex flex-wrap fixed bottom-0 w-11/12">
                         <div className="w-11/12 flex">
                             <input name="messageText" value={messageField} onChange={handleChange} className="shadow-sm border-2  mt-1 block w-full sm:text-sm rounded-md sm:h-auto" />
-                            <button type="submit" onClick={handleMessageSubmit} className="rounded-lg bg-purple  border-2 w-auto sm:text-xl text-small font-bold hover:bg-purple-dark hover:text-gray-lightest p-2 sm:h-auto h-8">
-                                Send
+                            <button type="submit" onClick={handleMessageSubmit} className="rounded-lg bg-blue  border-2 w-auto sm:text-xl text-small font-bold hover:bg-purple-dark hover:text-gray-lightest p-2 sm:h-auto h-8">
+                                <img src='/images/send.PNG'className='h-10 p-0' />
                             </button>
                         </div>
                         <div className="flex">
