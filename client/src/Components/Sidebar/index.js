@@ -67,8 +67,8 @@ function Sidebar() {
     }
 
     return (
-        <div className="bg-gray bg-transparent relative">
-            <div className="border-b-4 border-black">
+        <div className="bg-gray relative">
+            <div className="border-b-4 ">
                 <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-darkest">Conversations</h2>
             </div>
             <AddChat />
@@ -80,11 +80,11 @@ function Sidebar() {
                         {currentChat === channel._id ?
                             (
                                 <div onClick={() => { selectChat(channel._id) }} key={channel._id} className="bg-purple cursor-pointer flex border border-transparent hover:border-gray-lightest hover:bg-purple-dark rounded-md my-1">
-                                    <p className="text-lg font-bold text-gray-darkest" >{channel.name}</p>
+                                    <p className="text-lg font-bold hover:text-gray-lightest" >{channel.name}</p>
                                 </div>
                             ) : (
                                 <div onClick={() => { selectChat(channel._id) }} key={channel._id} className="flex border cursor-pointer  border-transparent hover:border-gray-lightest hover:bg-purple-dark rounded-md my-1">
-                                    <p className="text-lg font-bold text-gray-darkest" >{channel.name}</p>
+                                    <p className="text-lg font-bold hover:text-gray-lightest" >{channel.name}</p>
                                 </div>
                             )}
                     </div>
@@ -92,15 +92,15 @@ function Sidebar() {
             </div>
             <div>
             </div>
-            <div className="fixed container bottom-0 w-full border-t-4 border-black bg-gray p-4 grid grid-cols-2">
+            <div className="fixed container bottom-0 w-full border-t-4  bg-gray p-4 grid grid-cols-2">
                 <div className="col-auto">
                     <div className="flex">
                         <h1 className="font-sans text-3xl">word</h1>
                         <h1 className="font-sans text-3xl text-purple justify-right text-right">U</h1>
                         <h1 className="font-sans text-3xl justify-right text-right">p</h1>
                     </div>
-                    <p className="text-lg font-bold text-gray-darkest">{state.firstName} {state.lastName}</p>
-                    <a href="/" onClick={() => Auth.logout()} className="text-lg font-bold text-gray-darkest rounded-md border border-transparent hover:border-gray-lightest hover:bg-purple">Logout</a>
+                    <p className="text-lg font-bold">{state.firstName} {state.lastName}</p>
+                    <a href="/" onClick={() => Auth.logout()} className="text-lg font-bold rounded-md border border-transparent hover:border-gray-lightest hover:bg-purple">Logout</a>
                 </div>
 
 

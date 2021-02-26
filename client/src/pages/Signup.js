@@ -102,8 +102,8 @@ function Signup(props) {
                 <h1 className="font-sans text-5xl text-purple justify-right text-right">U</h1>
                 <h1 className="font-sans text-5xl justify-right text-right">p</h1>
             </div>
-            <form onSubmit={handleFormSubmit} className="m-auto my-60 max-w-md w-full space-y-5 max-h-full bg-purple bg-transparent rounded-3xl">
-                <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+            <form onSubmit={handleFormSubmit} className="m-auto my-60 max-w-md w-full space-y-5 max-h-full bg-purple rounded-3xl">
+                <h2 className="mt-6 text-center text-3xl font-extrabold">
                     SIGN UP
                 </h2>
                 <div className="">
@@ -111,33 +111,33 @@ function Signup(props) {
                         <input type="text" 
                          name="firstName" placeholder="First Name"
                          onBlur={handleChange}
-                         className="focus:ring-indigo-500 focus:border-indigo-500 mx-auto mb-1.5 flex-1 block w-5/6 rounded sm:text-sm border-gray-300" />
+                         className="border-2 mx-auto mb-1.5 flex-1 block w-5/6 rounded sm:text-sm border-gray" />
                     </div>
                     <div>
                         <input type="text"
                         name="lastName" placeholder="Last Name" 
                         onBlur={handleChange}
-                        className="focus:ring-indigo-500 focus: border-indigo-500 mx-auto mb-1.5 flex-1 block w-5/6 rounded sm:text-sm border-gray-300" />
+                        className="border-2 mx-auto mb-1.5 flex-1 block w-5/6 rounded sm:text-sm border-gray" />
                     </div>
                     <div>
                         <input type="email" 
                         name="email" placeholder="Email" 
                         onBlur={handleChange} 
-                        className="focus:ring-indigo-500 focus: border-indigo-500 mx-auto mb-1.5 flex-1 block w-5/6 rounded sm:text-sm border-gray-300" />
+                        className="border-2 mx-auto mb-1.5 flex-1 block w-5/6 rounded sm:text-sm border-gray" />
                     </div>
                     <div>
                         <input type="password"
                         name="password" placeholder="Password" 
                         onBlur={handleChange} 
-                        className="focus:ring-indigo-500 focus: border-indigo-500 mx-auto mb-1.5 flex-1 block w-5/6 rounded sm:text-sm border-gray-300" />
+                        className="border-2 mx-auto mb-1.5 flex-1 block w-5/6 rounded sm:text-sm border-gray" />
                     </div>
                     <div>
                         <input type="password" 
                         name="rePassword" placeholder="Confirm Password" 
                         onChange={handleChange} 
-                        className="focus:ring-indigo-500 focus: border-indigo-500 mx-auto mb-1.5 flex-1 block w-5/6 rounded sm:text-sm border-gray-300" />
+                        className="border-2 mx-auto mb-1.5 flex-1 block w-5/6 rounded sm:text-sm border-gray" />
                     </div>
-                    <button type="submit" className="w-10/12 mx-auto flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-purple-dark hover:bg-gray-lightest md:py-4 md:text-lg md:px-10">Sign Up!</button>
+                    <button type="submit" className="w-10/12 mx-auto flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md bg-purple-dark hover:bg-gray-lightest md:py-4 md:text-lg md:px-10">Sign Up!</button>
                     {errorMessage && (
                         <div>
                             <p className="text-red text-center">{errorMessage}</p>

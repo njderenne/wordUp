@@ -65,7 +65,7 @@ function AddFriend() {
     if(mobileWidth && !state.newFriendOpen) {
         return (
             <div className="">
-                <button onClick={toggleNewFriend} className="w-10/12 mx-auto my-3 flex items-center justify-center px-8 border border-transparent text-base font-medium rounded-md text-white bg-blue hover:bg-purple md:py-4 md:text-lg md:px-10">+ Add Friend</button>
+                <button onClick={toggleNewFriend} className="w-10/12 mx-auto my-3 flex items-center justify-center px-8 border border-transparent text-base font-medium rounded-md bg-blue hover:bg-purple md:py-4 md:text-lg md:px-10">+ Add Friend</button>
             </div>
         )
     }
@@ -74,7 +74,7 @@ function AddFriend() {
     if (!state.newFriendOpen && !mobileWidth) {
         return (
             <div className="">
-                <button onClick={toggleNewFriend} className="w-10/12 mx-auto my-3 flex items-center justify-center px-8 border border-transparent text-base font-medium rounded-md text-white bg-blue hover:bg-purple md:py-4 md:text-lg md:px-10">+ Add Friend</button>
+                <button onClick={toggleNewFriend} className="w-10/12 mx-auto my-3 flex items-center justify-center px-8 border border-transparent text-base font-medium rounded-md bg-blue hover:bg-purple md:py-4 md:text-lg md:px-10">+ Add Friend</button>
             </div>
         )
     }
@@ -86,21 +86,21 @@ function AddFriend() {
                     <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
 
                         <div className="fixed inset-0 transition-opacity" aria-hidden="true">
-                            <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
+                            <div className="absolute inset-0 opacity-75"></div>
                         </div>
 
 
                         <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
 
                         <div className="inline-block align-bottom border-4 bg-purple bg-transparent rounded-lg text-left overflow-hidden  shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full" role="dialog" aria-modal="true" aria-labelledby="modal-headline">
-                            <div className="bg-white container mx-auto px-4 pt-5 pb-4 align-center sm:p-6 sm:pb-4">
+                            <div className="container mx-auto px-4 pt-5 pb-4 align-center sm:p-6 sm:pb-4">
                                 <div className="justify-center items-center sm:flex sm:items-start">
                                     <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
                                         <h3 className="container mx-auto text-lg leading-6 font-bold text-gray-900" id="modal-headline">
                                             Enter Friend's Email
                                         </h3>
                                         <div className="mt-2">
-                                            <input id="searchBar" className="container mx-auto my-2 border-2 border-black"></input>
+                                            <input id="searchBar" className="container mx-auto my-2 border-2 "></input>
 
                                             {errorMessage && (
                                                 <div>
@@ -108,8 +108,8 @@ function AddFriend() {
                                                 </div>
                                             )}
                                         </div>
-                                        <button onClick={handleNewFriend} className="container mx-auto shadow-sm focus:ring-indigo-500 focus:border-blue-dark mt-1 block sm:text-sm border-2 border-black rounded-md"> Add Friend </button>
-                                        <button onClick={toggleNewFriend} className="container mx-auto shadow-sm focus:ring-indigo-500 focus:border-blue-dark mt-1 block sm:text-sm border-2 border-black rounded-md">Close</button>
+                                        <button onClick={handleNewFriend} className="container mx-auto shadow-sm mt-1 block sm:text-sm border-2  rounded-md bg-blue hover:bg-purple-dark hover:text-gray-lightest hover:border-gray-lightest"> Add Friend </button>
+                                        <button onClick={toggleNewFriend} className="container mx-auto shadow-sm mt-1 block sm:text-sm border-2  rounded-md bg-gray-light hover:bg-gray-lightest">Close</button>
                                     </div>
                                 </div>
                             </div>
@@ -122,7 +122,7 @@ function AddFriend() {
                     Enter Friend's Email
                 </h3>
                 <div className="mt-2">
-                    <input id="searchBar" className="container mx-auto my-2 border-2 border-black"></input>
+                    <input id="searchBar" className="container mx-auto my-2 border-2 "></input>
 
                     {errorMessage && (
                         <div>
@@ -130,8 +130,8 @@ function AddFriend() {
                         </div>
                     )}
                 </div>
-                <button onClick={handleNewFriend} className="hover:bg-purple container mx-auto shadow-sm focus:ring-indigo-500 focus:border-blue-dark mt-1 block sm:text-sm border-2 border-black rounded-md"> Add Friend </button>
-                <button onClick={toggleNewFriend} className="hover:bg-purple container mx-auto shadow-sm focus:ring-indigo-500 focus:border-blue-dark mt-1 block sm:text-sm border-2 border-black rounded-md">Close</button>
+                <button onClick={handleNewFriend} className="bg-purple container mx-auto shadow-sm mt-1 block sm:text-sm border-2 font-bold  hover:bg-blue rounded-md"> Add Friend </button>
+                <button onClick={toggleNewFriend} className="bg-purple container mx-auto shadow-sm mt-1 block sm:text-sm font-bold  border-2 hover:bg-blue rounded-md">Close</button>
                 <div className='pt-4 border-b-4'></div>
             </div>
         }

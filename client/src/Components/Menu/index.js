@@ -104,7 +104,7 @@ function Menu() {
                     </div>
         <div className="col-start-3 w-full sm:w-9/12 md:w-4/12 px-4">
           <div className="">
-            <button className={"text-white font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 col-start-3 col-end-4 col-span-1"}
+            <button className={"font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none mr-1 mb-1 col-start-3 col-end-4 col-span-1"}
               style={{ transition: "all .15s ease" }}
               type="button"
               ref={btnDropdownRef}
@@ -147,11 +147,11 @@ function Menu() {
             </div>
             <div>
             </div>
-            <div className="w-full border-t-4 border-black bg-gray p-4 grid grid-cols-2">
+            <div className="w-full border-t-4 bg-gray p-4 grid grid-cols-2">
                 <div className="col-auto">
 
-                    <p className="pl-8 text-lg font-bold text-gray-darkest">{state.firstName} {state.lastName}</p>
-                    <a href="/" onClick={() => Auth.logout()} className="pl-8 text-lg font-bold text-gray-darkest rounded-md border border-transparent hover:border-gray-lightest hover:bg-purple">Logout</a>
+                    <p className="pl-8 text-lg font-bold">{state.firstName} {state.lastName}</p>
+                    <a href="/" onClick={() => Auth.logout()} className="pl-8 text-lg font-bold rounded-md border border-transparent hover:border-gray-lightest hover:bg-purple">Logout</a>
                 </div>
             </div>
             </div>
