@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useMutation, useQuery, useSubscription } from '@apollo/client';
 import { ADD_MESSAGE } from '../../utils/mutations';
-import { QUERY_CHANNEL} from '../../utils/queries';
+import { QUERY_CHANNEL } from '../../utils/queries';
 import { MESSAGE_SUBSCRIPTION } from '../../utils/subscriptions';
 import AddParticipant from '../AddParticipant';
 import { useStoreContext } from '../../utils/GlobalState';
@@ -14,14 +14,14 @@ import Menu from '../Menu';
 function Conversation() {
     const [state, dispatch] = useStoreContext();
     const [messageField, setMessage] = useState('');
-    const {currentChat} = state;
-    const {data} = useSubscription(MESSAGE_SUBSCRIPTION, {
+    const { currentChat } = state;
+    const { data } = useSubscription(MESSAGE_SUBSCRIPTION, {
         variables: {
             channelId: currentChat
         }
     });
 
-    const {loading, data: queryData} = useQuery(QUERY_CHANNEL, {
+    const { loading, data: queryData } = useQuery(QUERY_CHANNEL, {
         variables: {
             channelId: currentChat
         }
@@ -30,6 +30,8 @@ function Conversation() {
     const [addMessage] = useMutation(ADD_MESSAGE);
     const [convoState, setConvoState] = useState()
 
+    let width = window.innerWidth;
+    let mobileWidth = width <= 845;
 
     const messagesEndRef = useRef(null);
 
@@ -48,8 +50,8 @@ function Conversation() {
             queryData.channel.messages.forEach((message) => {
                 idbPromise('messages', 'put', message)
             });
-        } 
-         else if (!loading) {
+        }
+        else if (!loading) {
             idbPromise('messages', 'get').then((messages) => {
                 dispatch({
                     type: UPDATE_MESSAGES,
@@ -58,7 +60,7 @@ function Conversation() {
             })
         }
     }, [queryData, loading, dispatch]);
-    
+
     // subscription useEffect
     useEffect(() => {
         if (data) {
@@ -66,12 +68,12 @@ function Conversation() {
                 type: UPDATE_MESSAGES,
                 messages: data.messageAdded.messages
             });
-        } 
+        }
     }, [data, dispatch]);
 
     useEffect(() => {
         scrollToBottom()
-      }, [state.messages]);
+    }, [state.messages]);
 
     const userData = Auth.getProfile();
 
@@ -80,13 +82,13 @@ function Conversation() {
         try {
             await addMessage({
                 variables: {
-                    createdBy: convoState.createdBy, 
+                    createdBy: convoState.createdBy,
                     messageText: convoState.messageText,
                     channelId: currentChat
                 }
             });
             setMessage('');
-            
+
         } catch (e) {
             console.error(e);
         }
@@ -112,21 +114,21 @@ function Conversation() {
                 </div>
             </div>
         )
-    }    
+    }
 
     return (
         <div className="overflow-hidden bg-gray-dark h-screen">
             <div className='overflow-scroll h-screen overflow-x-hidden'>
-            <div className='h-14' ref={messagesEndRef} />
-                    {(state.messages.map(message => (
-                        <div key={message._id} className="grid">
-                            {userData.data.email === message.email ? (
-                                <div className="grid flex flex-wrap justify-items-end">
-                                    <p className="max-w-sm md:max-w-4xl flex flex-wrap m-2 p-2 text-xl font-semibold rounded-2xl bg-blue justify-items-end object-right break-all">
-                                        {message.messageText}
-                                    </p>
-                                </div> 
-                            ) : (
+                <div className='h-14' ref={messagesEndRef} />
+                {(state.messages.map(message => (
+                    <div key={message._id} className="grid">
+                        {userData.data.email === message.email ? (
+                            <div className="grid flex flex-wrap justify-items-end">
+                                <p className="max-w-sm md:max-w-4xl flex flex-wrap m-2 p-2 text-xl font-semibold rounded-2xl bg-blue justify-items-end object-right break-all">
+                                    {message.messageText}
+                                </p>
+                            </div>
+                        ) : (
                                 <div className="grid flex flex-wrap justify-items-start">
                                     <p className="mb-0 max-w-sm md:max-w-4xl flex flex-wrap m-2 p-2 text-xl font-semibold rounded-2xl bg-gray-light object-left break-all">
                                         {message.messageText}
@@ -134,24 +136,43 @@ function Conversation() {
                                     <p className='pl-4 text-sm text-gray-lightest'>{message.sender}</p>
                                 </div>
                             )}
-                        </div>
-                    ))
-            )}
-            <div className='h-1/6' ref={messagesEndRef} />
+                    </div>
+                ))
+                )}
+                <div className='h-1/6' ref={messagesEndRef} />
             </div>
             <div className='bg-gray-darkest overflow-hidden'>
-                <div className="m-2 flex fixed bottom-0 w-8/12">
-                    <input name="messageText" value={messageField} onChange={handleChange} className="shadow-sm border-2  mt-1 block w-2/3 sm:text-sm rounded-md sm:h-auto" />
-                    <button type="submit" onClick={handleMessageSubmit} className="rounded-lg bg-purple  border-2 w-auto sm:text-xl text-small font-bold hover:bg-purple-dark hover:text-gray-lightest p-2 sm:h-auto h-8">
-                        Send
-                    </button>
-                    <div>
-                        <AddParticipant />
+                {!mobileWidth ?
+                    <div className="m-2 flex fixed bottom-0 h-12 w-8/12">
+                        <input name="messageText" value={messageField} onChange={handleChange} className="shadow-sm border-2  mt-1 block w-full sm:text-sm rounded-md" />
+                        <button type="submit" onClick={handleMessageSubmit} className="rounded-lg bg-purple  border-2 w-auto sm:text-xl text-small font-bold hover:bg-purple-dark hover:text-gray-lightest p-2 sm:h-auto h-8">
+                            Send
+                        </button>
+                        <div>
+                            <AddParticipant />
+                        </div>
+                        <div>
+                            <ChatParticipants />
+                        </div>
                     </div>
-                    <div>
-                        <ChatParticipants />
+                :
+                    <div className="m-2 flex flex-wrap fixed bottom-0 w-11/12">
+                        <div className="w-11/12 flex">
+                            <input name="messageText" value={messageField} onChange={handleChange} className="shadow-sm border-2  mt-1 block w-full sm:text-sm rounded-md sm:h-auto" />
+                            <button type="submit" onClick={handleMessageSubmit} className="rounded-lg bg-purple  border-2 w-auto sm:text-xl text-small font-bold hover:bg-purple-dark hover:text-gray-lightest p-2 sm:h-auto h-8">
+                                Send
+                            </button>
+                        </div>
+                        <div className="flex">
+                            <div>
+                                <AddParticipant />
+                            </div>
+                            <div>
+                                <ChatParticipants />
+                            </div>
+                        </div>
                     </div>
-                </div>
+                }
             </div>
         </div>
     )
