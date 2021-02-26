@@ -115,6 +115,8 @@ export const QUERY_CHANNEL = gql`
                 messageText
                 createdAt
                 email
+                sender
+                
             }
             
         }

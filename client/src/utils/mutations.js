@@ -73,3 +73,16 @@ export const ADD_PARTICIPANT = gql`
         }
     }
     `;
+
+export const DELETE_CHANNEL = gql`
+    mutation removeChannel($channelId: ID!) {
+        removeChannel(channelId:$channelId) {
+            _id
+            name
+            createdBy
+            participants {
+                _id
+            }
+        }
+    }
+`;

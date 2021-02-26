@@ -3,6 +3,7 @@ import { useMutation } from '@apollo/client';
 import { useStoreContext } from '../../utils/GlobalState';
 import { ADD_CHANNEL } from '../../utils/mutations';
 import { TOGGLE_NEWCHAT } from '../../utils/actions';
+// import { idbPromise } from '../../utils/helpers';
 
 
 function AddChat() {
@@ -26,6 +27,13 @@ function AddChat() {
 
     function toggleNewChat() {
         dispatch({ type: TOGGLE_NEWCHAT });
+        // dispatch({
+        //     type: UPDATE_CHANNEL,
+        //     channels: queryData.user.channels
+        // });
+        // queryData.user.channels.forEach((channel) => {
+        //     idbPromise('channels', 'put', channel);
+        // });
     }
 
     if (!state.newChatOpen) {

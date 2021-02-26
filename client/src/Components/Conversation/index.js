@@ -8,6 +8,7 @@ import { useStoreContext } from '../../utils/GlobalState';
 import { UPDATE_MESSAGES } from '../../utils/actions';
 import { idbPromise } from '../../utils/helpers';
 import Auth from '../../utils/auth';
+import ChatParticipants from '../ChatParticipants';
 
 function Conversation() {
     const [state, dispatch] = useStoreContext();
@@ -101,6 +102,20 @@ function Conversation() {
         setMessage(event.target.value);
     };
 
+    if (state.currentChat === '') {
+        return (
+            <div className="overflow-hidden bg-gray-dark h-screen">
+                <div className='overflow-scroll h-screen overflow-x-hidden'>
+                    <div className='h-1/6' ref={messagesEndRef} />
+                </div>
+                <div className='bg-gray-darkest overflow-hidden'>
+                    <div className="m-2 flex fixed bottom-0 w-8/12">
+                    </div>
+                </div>
+            </div>
+        )
+    }
+
     return (
         <div className="overflow-hidden bg-gray-dark h-screen">
             <div className='overflow-scroll h-screen overflow-x-hidden'>
@@ -114,9 +129,10 @@ function Conversation() {
                                 </div> 
                             ) : (
                                 <div className="grid flex flex-wrap justify-items-start">
-                                    <p className="max-w-sm md:max-w-4xl flex flex-wrap m-2 p-2 text-xl font-semibold rounded-2xl bg-gray-light object-left break-all">
+                                    <p className="mb-0 max-w-sm md:max-w-4xl flex flex-wrap m-2 p-2 text-xl font-semibold rounded-2xl bg-gray-light object-left break-all">
                                         {message.messageText}
                                     </p>
+                                    <p className='pl-4 text-sm text-gray-lightest'>{message.sender}</p>
                                 </div>
                             )}
                         </div>
@@ -132,6 +148,9 @@ function Conversation() {
                     </button>
                     <div>
                         <AddParticipant />
+                    </div>
+                    <div>
+                        <ChatParticipants />
                     </div>
                 </div>
             </div>

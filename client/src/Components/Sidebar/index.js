@@ -8,6 +8,7 @@ import { UPDATE_CHANNEL, GET_USER, TOGGLE_CHAT } from '../../utils/actions';
 import { idbPromise } from '../../utils/helpers';
 import Auth from '../../utils/auth'
 import { CHANNEL_SUBSCRIPTION } from '../../utils/subscriptions';
+import DeleteChat from '../DeleteChat';
 
 
 function Sidebar() {
@@ -75,16 +76,19 @@ function Sidebar() {
             </div>
             <AddChat />
             <AddFriend />
+            <DeleteChat />
             <div className="grid mx-auto justify-center grid-flow-row">
                 {state.channels.map(channel => (
                 <div key={channel._id}>
                     {currentChat === channel._id ?
                     (
-                        <div onClick={() => {selectChat(channel._id)}} key={channel._id} className="bg-purple flex border border-transparent hover:border-gray-lightest hover:bg-purple-dark rounded-md my-1">
+                        <div onClick={() => {selectChat(channel._id)}} key={channel._id} className="bg-purple cursor-pointer flex border border-transparent hover:border-gray-lightest hover:bg-purple-dark rounded-md my-1">
+                            {/* <img src="../../assets/avatar.png" /> */}
                             <p className="text-lg font-bold text-gray-darkest" >{channel.name}</p>
                         </div>
                     ) : (
-                        <div onClick={() => {selectChat(channel._id)}} key={channel._id} className="flex border border-transparent hover:border-gray-lightest hover:bg-purple-dark rounded-md my-1">
+                        <div onClick={() => {selectChat(channel._id)}} key={channel._id} className="flex border cursor-pointer  border-transparent hover:border-gray-lightest hover:bg-purple-dark rounded-md my-1">
+                            {/* <img src="../../assets/avatar.png" /> */}
                             <p className="text-lg font-bold text-gray-darkest" >{channel.name}</p>
                         </div>
                     )}
