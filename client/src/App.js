@@ -20,7 +20,7 @@ const httpLink = new HttpLink({
 // const HOST = location.origin.replace(/^http/, 'ws')
 
 const wsLink = new WebSocketLink({
-  uri: 'ws://fast-shelf-56121.herokuapp.com/graphql',
+  uri: 'wss://fast-shelf-56121.herokuapp.com/graphql',
   options: {
     reconnect: true,
     connectionParams: {

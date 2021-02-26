@@ -8,7 +8,7 @@ const { SubscriptionServer } = require('subscriptions-transport-ws');
 
 const { makeExecutableSchema } = require('graphql-tools');
 const { execute, subscribe } = require('graphql');
-const { createServer } = require('http');
+const { createServer } = require('https');
 const schema = makeExecutableSchema({
     typeDefs: typeDefs,
     resolvers: resolvers,
