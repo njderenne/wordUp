@@ -142,7 +142,7 @@ function Conversation() {
             </div>
             <div className='bg-gray-darkest overflow-hidden'>
                 <div className="m-2 flex fixed bottom-0 w-8/12">
-                    <input name="messageText" value={messageField} onChange={handleChange} className="shadow-sm focus:ring-indigo-500 focus:border-blue-dark mt-1 block w-full sm:text-sm border-2 border-black rounded-md sm:h-auto h-8" />
+                    <input name="messageText" value={messageField} onChange={handleChange} className="shadow-sm focus:ring-indigo-500 focus:border-blue-dark mt-1 block w-2/3 sm:text-sm border-2 border-black rounded-md sm:h-auto" />
                     <button type="submit" onClick={handleMessageSubmit} className="rounded-lg bg-purple border-black border-2 w-auto sm:text-xl text-small font-bold hover:bg-purple-dark hover:text-gray-lightest p-2 sm:h-auto h-8">
                         Send
                     </button>

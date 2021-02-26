@@ -10,7 +10,6 @@ function AddParticipant() {
     const [state, dispatch] = useStoreContext();
     const [addParticipant] = useMutation(ADD_PARTICIPANT)
     const { loading, data } = useQuery(QUERY_USER)
-    const [tempArray, setTempArray] = useState();
 
     let tempFriendArray = []
 
@@ -35,6 +34,7 @@ function AddParticipant() {
 
     const handleAddSubmit = async event => {
         event.preventDefault();
+        console.log(tempFriendArray)
         try {
             for(let i = 0; i < tempFriendArray.length; i++) {
             addParticipant({
@@ -48,16 +48,17 @@ function AddParticipant() {
         } catch (e) {
             console.error(e)
         }
-<<<<<<< HEAD
-        toggleFriendsList();
-=======
         toggleFriendsList()
->>>>>>> 713d5b5320570b8fea1dc2fe4375bbf9083255bd
     }
 
     function clickHandler(friend) {
+        let tempHighlight = document.getElementById(friend)
+        tempHighlight.classList.add("bg-purple-dark")
+        tempHighlight.classList.add("text-gray-lightest")
+        tempHighlight.classList.add("border-transparent")
+        tempHighlight.classList.add("border-gray-lightest")
+        console.log(friend)
         tempFriendArray.push(friend)
-        setTempArray(tempFriendArray);
     }
 
     function toggleFriendsList() {
@@ -66,8 +67,8 @@ function AddParticipant() {
 
     if(!state.friendsListOpen) {
         return (
-            <button onClick={toggleFriendsList} className="rounded-lg bg-purple border-black border-2 w-auto sm:text-xl text-small font-bold hover:bg-purple-dark hover:text-gray-lightest p-2 sm:h-auto h-8">
-                Add To Chat
+            <button onClick={toggleFriendsList} className="rounded-lg bg-purple border-black border-2 sm:text-xl text-small font-bold hover:bg-purple-dark hover:text-gray-lightest p-2 sm:h-auto h-8">
+                Add Member
             </button>
         )
     }
@@ -92,11 +93,7 @@ function AddParticipant() {
                                 </h3>
                                 <ul className="mt-2">
                                     {state.friends.map(friend => (
-<<<<<<< HEAD
-                                        <li onClick={() => {clickHandler(friend._id)}} key={friend._id} className="text-sm text-black">{friend.firstName} {friend.lastName}</li>
-=======
-                                        <p onClick={() => {clickHandler(friend._id)}} key={friend._id} className="text-sm hover:bg-purple-dark cursor-pointer border hover:text-gray-lightest border-transparent hover:border-gray-lightest rounded-md text-gray-500">{friend.firstName} {friend.lastName}</p>
->>>>>>> 713d5b5320570b8fea1dc2fe4375bbf9083255bd
+                                        <p onClick={() => {clickHandler(friend._id)}} key={friend._id} id={friend._id} className="text-sm hover:bg-purple-dark cursor-pointer border hover:text-gray-lightest border-transparent hover:border-gray-lightest rounded-md text-gray-500">{friend.firstName} {friend.lastName}</p>
                                     ))}
                                 </ul>
                             </div>
@@ -116,17 +113,10 @@ function AddParticipant() {
                     </div>
                     </div>
                     <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-<<<<<<< HEAD
-                        <button onClick={handleAddSubmit} type="button" className="w-full inline-flex justify-center rounded-md border border-black shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm">
-                            Add
-                        </button>
-                        <button type="button" onClick={toggleFriendsList} className="mt-3 w-full inline-flex justify-center rounded-md border border-black shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
-=======
                         <button onClick={handleAddSubmit} type="button" className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm  hover:bg-purple-dark border hover:text-gray-lightest border-transparent hover:border-gray-lightest">
                             Add
                         </button>
                         <button type="button" onClick={toggleFriendsList} className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm hover:bg-gray-lightest">
->>>>>>> 713d5b5320570b8fea1dc2fe4375bbf9083255bd
                             Cancel
                         </button>
                     </div>

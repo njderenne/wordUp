@@ -83,12 +83,10 @@ function Sidebar() {
                     {currentChat === channel._id ?
                     (
                         <div onClick={() => {selectChat(channel._id)}} key={channel._id} className="bg-purple cursor-pointer flex border border-transparent hover:border-gray-lightest hover:bg-purple-dark rounded-md my-1">
-                            {/* <img src="../../assets/avatar.png" /> */}
                             <p className="text-lg font-bold text-gray-darkest" >{channel.name}</p>
                         </div>
                     ) : (
                         <div onClick={() => {selectChat(channel._id)}} key={channel._id} className="flex border cursor-pointer  border-transparent hover:border-gray-lightest hover:bg-purple-dark rounded-md my-1">
-                            {/* <img src="../../assets/avatar.png" /> */}
                             <p className="text-lg font-bold text-gray-darkest" >{channel.name}</p>
                         </div>
                     )}
