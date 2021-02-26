@@ -16,10 +16,11 @@ const httpLink = new HttpLink({
   }
 });
 
-//const HOST = location.origin.replace(/^http/, 'ws')
+// const deployedSite = 'ws://fast-shelf-56121.herokuapp.com/graphql'
+// const HOST = location.origin.replace(/^http/, 'ws')
 
 const wsLink = new WebSocketLink({
-  uri: '/graphql',
+  uri: 'ws://fast-shelf-56121.herokuapp.com/graphql',
   options: {
     reconnect: true,
     connectionParams: {
