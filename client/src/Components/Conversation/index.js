@@ -142,8 +142,8 @@ function Conversation() {
             <div className='bg-gray-darkest overflow-hidden'>
                 <div className="m-2 flex fixed bottom-0 w-8/12">
                     <input name="messageText" value={messageField} onChange={handleChange} className="shadow-sm border-2  mt-1 block w-2/3 sm:text-sm rounded-md sm:h-auto" />
-                    <button type="submit" onClick={handleMessageSubmit} className="rounded-lg bg-purple  border-2 w-auto sm:text-xl text-small font-bold hover:bg-purple-dark hover:text-gray-lightest p-2 sm:h-auto h-8">
-                        Send
+                    <button type="submit" onClick={handleMessageSubmit} className="rounded-lg bg-blue  border-2 w-auto sm:text-xl text-small font-bold hover:bg-purple-dark hover:text-gray-lightest p-2 sm:h-auto h-8">
+                        <img src='/images/send.PNG'className='h-10 p-0' />
                     </button>
                     <div>
                         <AddParticipant />
