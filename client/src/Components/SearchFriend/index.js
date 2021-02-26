@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useQuery, useMutation } from '@apollo/client';
 import { useStoreContext } from '../../utils/GlobalState';
 import { QUERY_USERS } from '../../utils/queries';
@@ -10,6 +10,7 @@ function AddFriend() {
     const [state, dispatch] = useStoreContext();
     const [addFriend] = useMutation(ADD_FRIEND);
     const { loading, data } = useQuery(QUERY_USERS);
+    const [errorMessage, setErrorMessage] = useState('');
 
     useEffect(() => {
         if (data) {
@@ -30,6 +31,11 @@ function AddFriend() {
         }
     }, [data, loading, dispatch]);
 
+
+    function toggleNewFriend() {
+        dispatch({ type: TOGGLE_NEWFRIEND });
+    };
+
     const handleNewFriend = async event => {
         event.preventDefault();
         const friend = document.querySelector('#searchBar').value;
@@ -42,18 +48,17 @@ function AddFriend() {
                     friendId: addFriendId
                 }
                     });
+                    toggleNewFriend();
+                    window.location.reload();
                 } catch (e) {
-                    console.error("user not found");
+                    setErrorMessage("No user found with that email");
                 }
+            } else {
+                setErrorMessage("No user found with that email!");               
             }
         }
-        toggleNewFriend();
-        window.location.reload();
     };
 
-    function toggleNewFriend() {
-        dispatch({ type: TOGGLE_NEWFRIEND });
-    };
 
     if (!state.newFriendOpen) {
         return (
@@ -83,6 +88,12 @@ function AddFriend() {
                                     </h3>
                                 <div className="mt-2">
                                     <input id="searchBar" className="container mx-auto my-2 border-2 border-black"></input>
+                                
+                                {errorMessage && (
+                                    <div>
+                                        <p className="text-red text-center">{errorMessage}</p>
+                                    </div>
+                                    )} 
                                 </div>
                                 <button onClick={handleNewFriend} className="container mx-auto shadow-sm focus:ring-indigo-500 focus:border-blue-dark mt-1 block sm:text-sm border-2 border-black rounded-md"> Add Friend </button>
                                 <button onClick={toggleNewFriend} className="container mx-auto shadow-sm focus:ring-indigo-500 focus:border-blue-dark mt-1 block sm:text-sm border-2 border-black rounded-md">Close</button>
