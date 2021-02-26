@@ -54,7 +54,7 @@ function Login() {
                             className="focus:ring-indigo-500 focus: border-indigo-500 mx-auto mb-1.5 flex-1 block w-5/6 rounded sm:text-sm border-gray-300"/>
                     </div>
                     { error ? <div>
-                        <p> The provided credentials are incorrect</p>
+                        <p className="text-red text-center"> The provided credentials are incorrect</p>
                     </div> : null
                     }
                     <button type="submit" className="w-10/12 mx-auto flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-purple-dark hover:bg-gray-lightest md:py-4 md:text-lg md:px-10">Login</button>

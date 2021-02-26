@@ -10,6 +10,10 @@ function AddChat() {
     const [state, dispatch] = useStoreContext();
     const [addChannel] = useMutation(ADD_CHANNEL);
 
+    function toggleNewChat() {
+        dispatch({ type: TOGGLE_NEWCHAT });
+    };
+
     const handleNewChannel = async event => {
         event.preventDefault();
         const chatName = document.querySelector('#chatName').value;
@@ -19,22 +23,12 @@ function AddChat() {
                     name: chatName
                 }
             });
+            toggleNewChat();
+            window.location.reload();
         } catch (e) {
             console.error(e);
         }
-        toggleNewChat();
     };
-
-    function toggleNewChat() {
-        dispatch({ type: TOGGLE_NEWCHAT });
-        // dispatch({
-        //     type: UPDATE_CHANNEL,
-        //     channels: queryData.user.channels
-        // });
-        // queryData.user.channels.forEach((channel) => {
-        //     idbPromise('channels', 'put', channel);
-        // });
-    }
 
     let width = window.innerWidth;
     let mobileWidth = width <= 845;
