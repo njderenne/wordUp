@@ -115,16 +115,7 @@ function Conversation() {
                 </div>
             </div>
         )
-    }
-
-
-
-
-    let width = window.innerWidth;
-    console.log(width);
-    let mobileWidth = width <= 845;
-    console.log(mobileWidth);
-    
+    }    
 
     return (
         <div className="overflow-hidden bg-gray-dark h-screen">
