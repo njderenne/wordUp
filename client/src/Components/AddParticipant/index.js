@@ -51,7 +51,7 @@ function AddParticipant() {
     }
 
     function clickHandler(friend) {
-        tempFriendArray.push(friend)
+        tempFriendArray.push(friend);
     }
 
     function toggleFriendsList() {
