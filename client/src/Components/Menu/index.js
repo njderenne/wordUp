@@ -3,9 +3,6 @@ import Popper from "popper.js";
 import AddChat from "../AddChat";
 import DeleteChat from "../DeleteChat";
 import AddFriend from "../SearchFriend";
-
-
-
 import { useQuery, useSubscription } from '@apollo/client';
 import { QUERY_USER } from '../../utils/queries';
 import { useStoreContext } from '../../utils/GlobalState';

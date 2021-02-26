@@ -9,7 +9,6 @@ import { UPDATE_MESSAGES } from '../../utils/actions';
 import { idbPromise } from '../../utils/helpers';
 import Auth from '../../utils/auth';
 import ChatParticipants from '../ChatParticipants';
-import Menu from '../Menu';
 
 function Conversation() {
     const [state, dispatch] = useStoreContext();
