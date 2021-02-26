@@ -10,7 +10,6 @@ function AddParticipant() {
     const [state, dispatch] = useStoreContext();
     const [addParticipant] = useMutation(ADD_PARTICIPANT)
     const { loading, data } = useQuery(QUERY_USER)
-    const [tempArray, setTempArray] = useState();
 
     let tempFriendArray = []
 
@@ -53,7 +52,6 @@ function AddParticipant() {
 
     function clickHandler(friend) {
         tempFriendArray.push(friend)
-        setTempArray(tempFriendArray);
     }
 
     function toggleFriendsList() {

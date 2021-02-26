@@ -9,6 +9,7 @@ import { UPDATE_MESSAGES } from '../../utils/actions';
 import { idbPromise } from '../../utils/helpers';
 import Auth from '../../utils/auth';
 import ChatParticipants from '../ChatParticipants';
+import Menu from '../Menu';
 
 function Conversation() {
     const [state, dispatch] = useStoreContext();
@@ -116,9 +117,19 @@ function Conversation() {
         )
     }
 
+
+
+
+    let width = window.innerWidth;
+    console.log(width);
+    let mobileWidth = width <= 845;
+    console.log(mobileWidth);
+    
+
     return (
         <div className="overflow-hidden bg-gray-dark h-screen">
             <div className='overflow-scroll h-screen overflow-x-hidden'>
+            <div className='h-14' ref={messagesEndRef} />
                     {(state.messages.map(message => (
                         <div key={message._id} className="grid">
                             {userData.data.email === message.email ? (
