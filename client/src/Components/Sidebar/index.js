@@ -81,12 +81,10 @@ function Sidebar() {
                     {currentChat === channel._id ?
                     (
                         <div onClick={() => {selectChat(channel._id)}} key={channel._id} className="bg-purple flex border border-transparent hover:border-gray-lightest hover:bg-purple-dark rounded-md my-1">
-                            {/* <img src="../../assets/avatar.png" /> */}
                             <p className="text-lg font-bold text-gray-darkest" >{channel.name}</p>
                         </div>
                     ) : (
                         <div onClick={() => {selectChat(channel._id)}} key={channel._id} className="flex border border-transparent hover:border-gray-lightest hover:bg-purple-dark rounded-md my-1">
-                            {/* <img src="../../assets/avatar.png" /> */}
                             <p className="text-lg font-bold text-gray-darkest" >{channel.name}</p>
                         </div>
                     )}
@@ -98,7 +96,6 @@ function Sidebar() {
             <div className="fixed container bottom-0 w-full border-t-4 border-black bg-gray p-6 grid grid-cols-2">
                 <div className="col-auto">
                     <p className="text-lg font-bold text-gray-darkest">{state.firstName} {state.lastName}</p>
-                    <p className="text-lg font-bold text-gray-darkest">Status: Online</p>
                     <a href="/" onClick={() => Auth.logout()} className="text-lg font-bold text-gray-darkest rounded-md border border-transparent hover:border-gray-lightest hover:bg-purple">Logout</a>
                 </div>
 
