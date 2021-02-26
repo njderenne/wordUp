@@ -7,9 +7,7 @@ import Menu from '../Components/Menu';
 const Dashboard = () => {
 
     let width = window.innerWidth;
-    console.log(width);
     let mobileWidth = width <= 845;
-    console.log(mobileWidth);
 
     return (
         <div>
