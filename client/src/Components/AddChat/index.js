@@ -1,22 +1,21 @@
 import React from 'react';
-import { useMutation } from '@apollo/client';
+import { useMutation, useQuery } from '@apollo/client';
 import { useStoreContext } from '../../utils/GlobalState';
 import { ADD_CHANNEL } from '../../utils/mutations';
-import { TOGGLE_NEWCHAT } from '../../utils/actions';
-// import { idbPromise } from '../../utils/helpers';
+import { TOGGLE_NEWCHAT, UPDATE_CHANNEL } from '../../utils/actions';
+import { idbPromise } from '../../utils/helpers';
+import { QUERY_USER } from '../../utils/queries';
 
 
 function AddChat() {
     const [state, dispatch] = useStoreContext();
     const [addChannel] = useMutation(ADD_CHANNEL);
-
-    function toggleNewChat() {
-        dispatch({ type: TOGGLE_NEWCHAT });
-    };
+    const { loading, data: queryData } = useQuery(QUERY_USER);
 
     const handleNewChannel = async event => {
         event.preventDefault();
         const chatName = document.querySelector('#chatName').value;
+
         try {
             await addChannel({
                 variables: {
@@ -29,6 +28,17 @@ function AddChat() {
             console.error(e);
         }
     };
+
+    function toggleNewChat() {
+        dispatch({ type: TOGGLE_NEWCHAT });
+        dispatch({
+            type: UPDATE_CHANNEL,
+            channels: queryData.user.channels
+        });
+        queryData.user.channels.forEach((channel) => {
+            idbPromise('channels', 'put', channel);
+        });
+    }
 
     let width = window.innerWidth;
     let mobileWidth = width <= 845;
