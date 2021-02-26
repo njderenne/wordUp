@@ -138,7 +138,7 @@ function Conversation() {
                     </div>
                 ))
                 )}
-                <div className='h-1/6' ref={messagesEndRef} />
+                <div className='h-24' ref={messagesEndRef} />
             </div>
             <div className='bg-gray-darkest overflow-hidden'>
                 {!mobileWidth ?
@@ -158,10 +158,8 @@ function Conversation() {
                     <div className="m-2 flex flex-wrap fixed bottom-0 w-11/12">
                         <div className="w-full flex">
                             <input name="messageText" value={messageField} onChange={handleChange} className="shadow-sm border-2  mt-1 block w-full sm:text-sm rounded-md sm:h-auto" />
-                            <button type="submit" onClick={handleMessageSubmit} className="rounded-lg bg-purple border-2 w-auto sm:text-xl text-small font-bold hover:bg-purple-dark hover:text-gray-lightest p-2 sm:h-auto h-8 items-center">
-                                <div>
-                                    Send
-                                </div>
+                            <button type="submit" onClick={handleMessageSubmit} className="rounded-lg bg-purple border-2 w-auto sm:text-xl text-small font-bold hover:bg-purple-dark hover:text-gray-lightest sm:h-auto h-8 items-center sm:p-2 px-2">
+                                Send
                             </button>
                         </div>
                         <div className="flex w-full items-center">

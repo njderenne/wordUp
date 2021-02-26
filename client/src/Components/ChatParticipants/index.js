@@ -45,7 +45,7 @@ function ChatParticipants() {
 
     if(!state.participantsListOpen ) {
         return (
-            <button onClick={toggleParticipantsList} className="rounded-lg bg-purple  border-2 w-auto sm:text-xl text-small font-bold hover:bg-purple-dark hover:text-gray-lightest p-2 sm:h-auto h-8">
+            <button onClick={toggleParticipantsList} className="rounded-lg bg-purple  border-2 w-auto sm:text-xl text-small font-bold hover:bg-purple-dark hover:text-gray-lightest sm:p-2 px-2 sm:h-auto h-8">
             Members
             </button>
         )

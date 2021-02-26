@@ -69,7 +69,7 @@ function Sidebar() {
     return (
         <div className="bg-gray relative">
             <div className="border-b-4 ">
-                <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-darkest">Conversations</h2>
+                <h2 className="mt-6 text-center text-3xl font-extrabold">Conversations</h2>
             </div>
             <AddChat />
             <AddFriend />

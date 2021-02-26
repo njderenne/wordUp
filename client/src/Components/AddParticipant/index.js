@@ -68,7 +68,7 @@ function AddParticipant() {
 
     if(!state.friendsListOpen) {
         return (
-            <button onClick={toggleFriendsList} className="rounded-lg bg-purple  border-2 sm:text-xl text-small font-bold hover:bg-purple-dark hover:text-gray-lightest p-2 sm:h-auto h-8">
+            <button onClick={toggleFriendsList} className="rounded-lg bg-purple  border-2 sm:text-xl text-small font-bold hover:bg-purple-dark hover:text-gray-lightest sm:p-2 px-2 sm:h-auto h-8">
                 +Member
             </button>
         )
