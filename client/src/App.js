@@ -26,6 +26,21 @@ const wsLink = new WebSocketLink({
   },
 });
 
+const cache = new InMemoryCache({
+  typePolicies: {
+    User: {
+      fields: {
+        channels: {
+          merge(existing, incoming){
+            return incoming
+          }
+        },
+      },
+    },
+  },
+});
+
+
 const link = split(
   ({ query }) => {
     const { kind, operation } = getMainDefinition(query);
@@ -39,7 +54,7 @@ const link = split(
 
 const client = new ApolloClient({
   link,
-  cache: new InMemoryCache(),
+  cache,
   headers: {
     authorization: localStorage.getItem('id_token')
   },
