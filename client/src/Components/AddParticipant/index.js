@@ -52,7 +52,6 @@ function AddParticipant() {
     }
 
     function clickHandler(friend) {
-<<<<<<< HEAD
         let tempHighlight = document.getElementById(friend)
         tempHighlight.classList.add("bg-purple-dark")
         tempHighlight.classList.add("text-gray-lightest")
@@ -60,9 +59,6 @@ function AddParticipant() {
         tempHighlight.classList.add("border-gray-lightest")
         console.log(friend)
         tempFriendArray.push(friend)
-=======
-        tempFriendArray.push(friend);
->>>>>>> ce33dc21ed1ac555515b7aed8a9e6e29551128c7
     }
 
     function toggleFriendsList() {

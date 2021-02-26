@@ -27,6 +27,9 @@ module.exports = {
       red: {
         DEFAULT: '#D13A37'
       }
+    },
+    fontFamily: {
+      sans: ['Krona One', 'sans-serif'],
     }
   },
   variants: {

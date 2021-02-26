@@ -14,7 +14,7 @@ import DeleteChat from '../DeleteChat';
 function Sidebar() {
     const [state, dispatch] = useStoreContext();
 
-    const {currentChat} = state;
+    const { currentChat } = state;
 
     const { loading, data: queryData } = useQuery(QUERY_USER);
 
@@ -79,24 +79,29 @@ function Sidebar() {
             <DeleteChat />
             <div className="grid mx-auto justify-center grid-flow-row">
                 {state.channels.map(channel => (
-                <div key={channel._id}>
-                    {currentChat === channel._id ?
-                    (
-                        <div onClick={() => {selectChat(channel._id)}} key={channel._id} className="bg-purple cursor-pointer flex border border-transparent hover:border-gray-lightest hover:bg-purple-dark rounded-md my-1">
-                            <p className="text-lg font-bold text-gray-darkest" >{channel.name}</p>
-                        </div>
-                    ) : (
-                        <div onClick={() => {selectChat(channel._id)}} key={channel._id} className="flex border cursor-pointer  border-transparent hover:border-gray-lightest hover:bg-purple-dark rounded-md my-1">
-                            <p className="text-lg font-bold text-gray-darkest" >{channel.name}</p>
-                        </div>
-                    )}
-                </div>
-            ))}
+                    <div key={channel._id}>
+                        {currentChat === channel._id ?
+                            (
+                                <div onClick={() => { selectChat(channel._id) }} key={channel._id} className="bg-purple cursor-pointer flex border border-transparent hover:border-gray-lightest hover:bg-purple-dark rounded-md my-1">
+                                    <p className="text-lg font-bold text-gray-darkest" >{channel.name}</p>
+                                </div>
+                            ) : (
+                                <div onClick={() => { selectChat(channel._id) }} key={channel._id} className="flex border cursor-pointer  border-transparent hover:border-gray-lightest hover:bg-purple-dark rounded-md my-1">
+                                    <p className="text-lg font-bold text-gray-darkest" >{channel.name}</p>
+                                </div>
+                            )}
+                    </div>
+                ))}
             </div>
             <div>
             </div>
-            <div className="fixed container bottom-0 w-full border-t-4 border-black bg-gray p-6 grid grid-cols-2">
+            <div className="fixed container bottom-0 w-full border-t-4 border-black bg-gray p-4 grid grid-cols-2">
                 <div className="col-auto">
+                    <div className="flex">
+                        <h1 className="font-sans text-3xl">word</h1>
+                        <h1 className="font-sans text-3xl text-purple justify-right text-right">U</h1>
+                        <h1 className="font-sans text-3xl justify-right text-right">p</h1>
+                    </div>
                     <p className="text-lg font-bold text-gray-darkest">{state.firstName} {state.lastName}</p>
                     <a href="/" onClick={() => Auth.logout()} className="text-lg font-bold text-gray-darkest rounded-md border border-transparent hover:border-gray-lightest hover:bg-purple">Logout</a>
                 </div>

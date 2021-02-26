@@ -97,8 +97,10 @@ function Signup(props) {
 
     return(
         <div className="min-h-screen items-center justify-center py-12 px-4 sm:px-6 lg:px-8 justify-center bg-gray">
-            <div>
-                <h1 className="title">wordUp</h1>
+            <div className="absolute inset-y-0 right-0 p-14">
+                <h1 className="font-sans text-5xl mx-auto mr-5">word</h1>
+                <h1 className="font-sans text-5xl text-purple justify-right text-right">U</h1>
+                <h1 className="font-sans text-5xl justify-right text-right">p</h1>
             </div>
             <form onSubmit={handleFormSubmit} className="m-auto my-60 max-w-md w-full space-y-5 max-h-full bg-purple bg-transparent rounded-3xl">
                 <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">

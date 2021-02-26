@@ -97,6 +97,11 @@ function Menu() {
   return (
     <>
       <div className="col-span-3 col-start-1 col-end-5 fixed bg-gray-light w-screen grid-cols-4">
+      <div className="flex absolute top-0 right-0 mr-4 mt-1">
+                        <h1 className="font-sans text-3xl">word</h1>
+                        <h1 className="font-sans text-3xl text-purple justify-right text-right">U</h1>
+                        <h1 className="font-sans text-3xl justify-right text-right">p</h1>
+                    </div>
         <div className="col-start-3 w-full sm:w-9/12 md:w-4/12 px-4">
           <div className="">
             <button className={"text-white font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 col-start-3 col-end-4 col-span-1"}
@@ -144,6 +149,7 @@ function Menu() {
             </div>
             <div className="w-full border-t-4 border-black bg-gray p-4 grid grid-cols-2">
                 <div className="col-auto">
+
                     <p className="pl-8 text-lg font-bold text-gray-darkest">{state.firstName} {state.lastName}</p>
                     <a href="/" onClick={() => Auth.logout()} className="pl-8 text-lg font-bold text-gray-darkest rounded-md border border-transparent hover:border-gray-lightest hover:bg-purple">Logout</a>
                 </div>
