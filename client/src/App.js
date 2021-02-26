@@ -10,14 +10,16 @@ import Signup from "./pages/Signup";
 import { ChannelProvider } from "./utils/GlobalState";
 
 const httpLink = new HttpLink({
-  uri: 'http://localhost:3001/graphql',
+  uri: '/graphql',
   headers: {
     authorization: localStorage.getItem('id_token')
   }
 });
 
+const HOST = location.origin.replace(/^http/, 'ws')
+
 const wsLink = new WebSocketLink({
-  uri: `ws://localhost:3001/graphql`,
+  uri: HOST,
   options: {
     reconnect: true,
     connectionParams: {
