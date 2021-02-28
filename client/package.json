@@ -29,10 +29,12 @@
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.3"
   },
   "scripts": {
-    "start": "craco start",
-    "build": "craco build",
-    "test": "craco test",
-    "eject": "react-scripts eject"
+    "build:tailwind": "postcss src/tailwind.css -o src/tailwind.generated.css",
+    "watch:tailwind": "postcss -w src/tailwind.css -o src/tailwind.generated.css",
+    "start": "react-scripts start",
+    "dev": "run-p watch:tailwind start",
+    "prebuild": "npm run build:tailwind",
+    "build": "react-scripts build"
   },
   "eslintConfig": {
     "extends": [
