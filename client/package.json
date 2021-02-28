@@ -6,26 +6,22 @@
   "dependencies": {
     "@apollo/react-hooks": "^4.0.0",
     "@craco/craco": "^6.1.1",
-    "@tailwindcss/postcss7-compat": "^2.0.3",
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.5",
     "@testing-library/user-event": "^12.7.1",
     "apollo-boost": "^0.4.9",
     "apollo-link": "^1.2.14",
     "apollo-link-ws": "^1.0.20",
-    "autoprefixer": "^9.8.6",
     "graphql": "^15.5.0",
     "graphql-tag": "^2.11.0",
     "jwt-decode": "^3.1.2",
     "popper.js": "1.15.0",
-    "postcss": "^7.0.35",
     "react": "^17.0.1",
     "react-apollo": "^3.1.5",
     "react-dom": "^17.0.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.2",
     "subscriptions-transport-ws": "^0.9.18",
-    "tailwindcss": "^2.0.3-compat",
     "web-vitals": "^1.1.0"
   },
   "scripts": {
@@ -51,5 +47,11 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss7-compat": "^2.0.3",
+    "autoprefixer": "^9.8.6",
+    "postcss": "^7.0.35",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.3"
   }
 }
