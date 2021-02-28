@@ -8,7 +8,7 @@ const isLocalhost = Boolean(
   )
 );
   
-export default function register(config) {
+export function register(config) {
   if (
     process.env.NODE_ENV === 'production' &&
     'serviceWorker' in navigator) {
