@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* :root {
+:root {
   --primary-color: #0A0A0B;
   --secondary-color: #F4E23E;
   --tertiary-color: #EBEBEB;
@@ -20,4 +20,4 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
-} */
+}
