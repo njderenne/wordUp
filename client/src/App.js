@@ -1,5 +1,4 @@
 import React from "react";
-import "./tailwind.generated.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { ApolloClient, InMemoryCache, ApolloProvider, HttpLink, split } from '@apollo/client';
 import { getMainDefinition } from '@apollo/client/utilities';
