@@ -4,7 +4,7 @@
   ![Dashboard](client/public/images/message.JPG)
   
   ## Description
-  wordUp is a real-time chat application for users to communicate with each other over the internet.  The user is able to signup or login to their profile for personalized chats with other users.  When on the dashboard of the application the user can select chats that they have to see messages that they or the other chat participants have sent.  There is a input field for the user to add a message to submit to the current selected chat.  Any user can add a chat or conversation on the sidebar as well as add participants to a conversation.  There is also an add a friend button that will pop up a modal to add a friend to the users account. Multiple users can be added to a single chat as long as they are in your friends list. This application was created as a PWA allowing for seamless offline functionality.
+  wordUp is a real-time chat application for users to communicate with each other over the internet.  The user is able to sign up or login to their profile for personalized chats with other users.  When on the dashboard of the application the user can select current chats that they have, add a new chat, or delete one.  There is an input field along the bottom for the user to send a message as well as add participants and view participants in the selected chat.  There is also an add a friend button that will pop up a modal to add a friend to the user's account. Multiple users can be added to a single chat as long as they are in your friends list. This application was created as a PWA allowing for seamless offline functionality.
 
   ## Table of Contents
   * [Technologies](#technologies)
