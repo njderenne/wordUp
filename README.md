@@ -40,7 +40,9 @@
 
   ## Images
 
-  Mobile Friendly Application
+  ### Mobile Friendly Application
+
+
   ![MobileView](client/public/images/mobile-message.JPG)
 
   ![MobileMenu](client/public/images/mobile-message-menu.JPG)
