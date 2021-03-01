@@ -1,7 +1,7 @@
   # wordUp
   [![License](https://img.shields.io/static/v1?label=License&message=MIT&color=blue)](https://img.shields.io/static/v1?label=License&message=MIT&color=blue)
 
-  ![Dashboard](public/images/message.JPG)
+  ![Dashboard](client/public/images/message.JPG)
   
   ## Description
   wordUp is a real-time chat application for users to communicate with each other over the internet.  The user is able to signup or login to their profile for personalized chats with other users.  When on the dashboard of the application the user can select chats that they have to see messages that them and the other chat participants have made.  There is a input field for the user to add a message to submit to the current selected chat.  Any user can add a chat or conversation on the sidebar as well as add participants to a conversation.  There is also an add a friend button that will pop up a modal to add a friend to the users account and the friends list will populate the add participant modal when selected. This application was created as a PWA allowing for seamless offline functionality.
@@ -16,10 +16,10 @@
 
   ## Technologies
 
-  Stack
+  **Stack**
   * MERN
 
-  ** Front End **
+  **Front End**
   * React
   * Tailwind CSS
   * Apollo
@@ -28,7 +28,7 @@
   * IndexedDB
   * Service Worker
 
-  ** Back End **
+  **Back End**
   * Node.js
   * Express.js
   * GraphQL
@@ -41,9 +41,9 @@
   ## Images
 
   Mobile Friendly Application
-  ![MobileView](public/images/mobile-message.JPG)
+  ![MobileView](client/public/images/mobile-message.JPG)
 
-  ![MobileMenu](public/images/mobile-message-menu.JPG)
+  ![MobileMenu](client/public/images/mobile-message-menu.JPG)
   
 
   ## Usage
